@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:scrollbarTrackHorizontal="@drawable/background"
     android:scrollbarTrackVertical="@drawable/background"
-    tools:context=".MainActivity">
+    tools:context=".sing_in">
 
     <ImageView
         android:id="@+id/background"
@@ -131,12 +131,14 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/white"
+        android:onClick="openCreateAccountPage"
         android:textSize="50px"
         android:textColorLink="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="OnClick" />
 
     <TextView
         android:id="@+id/tv_forget_password"
