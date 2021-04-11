@@ -16,13 +16,14 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="367dp"
-            android:layout_height="592dp"
-            android:layout_marginStart="96dp"
-            android:layout_marginTop="276dp"
+            android:layout_width="409dp"
+            android:layout_height="964dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_gender"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/doctor" />
+            app:srcCompat="@drawable/blood" />
 
         <EditText
             android:id="@+id/et_mobile_phone2"
@@ -39,16 +40,16 @@
             android:id="@+id/imageView"
             android:layout_width="186dp"
             android:layout_height="136dp"
-            android:layout_marginTop="96dp"
+            android:layout_marginTop="80dp"
             android:contentDescription="TODO"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/user" />
+            app:srcCompat="@drawable/user34535" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/createaccount"
@@ -100,7 +101,6 @@
             app:layout_constraintHorizontal_bias="0.356"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
         <EditText
             android:id="@+id/et_last_name"
             android:layout_width="124dp"
@@ -328,19 +328,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_gender2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="772dp"
-            android:text="القدرة على تلبية \n الاستجابة المزلية"
-            android:textColor="@color/black"
-            android:textSize="50px"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.143"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <RadioGroup
             android:layout_width="147dp"
             android:layout_height="54dp"
@@ -500,77 +487,15 @@
             tools:layout_editor_absoluteX="228dp"
             tools:layout_editor_absoluteY="767dp" />
 
-        <RadioGroup
-            android:layout_width="147dp"
-            android:layout_height="54dp"
-            android:layout_marginTop="832dp"
-            android:checkedButton="@id/rb_male"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.128"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints">
-
-            <RadioButton
-                android:id="@+id/rb_able"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="غير قادر"
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textDirection="rtl"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.414"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <RadioButton
-                android:id="@+id/rb_unable"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="قادر"
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textDirection="rtl"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.201"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </RadioGroup>
-
         <Button
             android:id="@+id/btn_create_account"
             android:layout_width="146dp"
             android:layout_height="47dp"
-            android:layout_marginTop="888dp"
+            android:layout_marginTop="804dp"
             android:backgroundTint="@color/Aqua"
             android:text="إنشاء الحساب"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.132"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Spinner
-            android:id="@+id/sp_subscription"
-            android:layout_width="128dp"
-            android:layout_height="38dp"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="227dp"
-            tools:layout_editor_absoluteY="850dp" />
-
-        <TextView
-            android:id="@+id/tv_subscription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="812dp"
-            android:text="اللإختصاص"
-            android:textColor="@color/black"
-            android:textSize="50px"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.948"
+            app:layout_constraintHorizontal_bias="0.143"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

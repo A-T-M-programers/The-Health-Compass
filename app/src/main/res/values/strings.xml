@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">The-Health-Compass</string>
     <string name="createaccount">إنشاء حساب</string>
+    <string name="todo">TODO</string>
 </resources>

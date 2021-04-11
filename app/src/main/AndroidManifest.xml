@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TheHealthCompass">
-        <activity android:name=".sign_up"></activity>
+        <activity android:name=".sing_up_sick"></activity>
+        <activity android:name=".medical_advice" />
+        <activity android:name=".sign_up" />
         <activity android:name=".sing_in">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

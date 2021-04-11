@@ -14,8 +14,9 @@ public class sing_in extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_sing_in_sick);
         create_account =(TextView)findViewById(R.id.tv_create_account);
+
         create_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
