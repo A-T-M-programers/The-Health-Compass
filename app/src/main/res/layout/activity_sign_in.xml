@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:scrollbarTrackHorizontal="@drawable/background"
     android:scrollbarTrackVertical="@drawable/background"
-    tools:context=".sing_in">
+    tools:context=".main_activity">
 
     <ImageView
         android:id="@+id/background"

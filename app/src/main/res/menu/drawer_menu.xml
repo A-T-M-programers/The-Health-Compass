@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home_page"
+            android:icon="@drawable/home_icon"
+            android:title="الصفحة الرئيسية" />
+        <item
+            android:id="@+id/medical_advice"
+            android:icon="@drawable/medical_advance_icon"
+            android:title="الاستشارة الطبية" />
+
+        <item
+            android:id="@+id/consult_house"
+            android:icon="@drawable/medical_advance_icon"
+            android:title="الاستشارة المنزلية" />
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/account_icon"
+            android:title="الملف الشخصي" />
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/settings_icon"
+            android:title="إعدادات" />
+        <item android:id="@+id/logout"
+            android:title="تسجيل الخروج"
+            android:icon="@drawable/sign_out_icon"
+            />
+    </group>
+</menu>
