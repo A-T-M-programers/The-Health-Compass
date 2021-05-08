@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="horizontal"
         android:scrollbarThumbHorizontal="@color/teal_200"
@@ -16,14 +16,14 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="416dp"
-            android:layout_height="870dp"
+            android:layout_width="409dp"
+            android:layout_height="964dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@+id/tv_gender"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/img" />
+            app:srcCompat="@drawable/blood" />
 
         <EditText
             android:id="@+id/et_mobile_phone2"
@@ -38,12 +38,12 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="169dp"
-            android:layout_height="121dp"
-            android:layout_marginTop="84dp"
+            android:layout_width="186dp"
+            android:layout_height="136dp"
+            android:layout_marginTop="80dp"
             android:contentDescription="TODO"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.968"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/user34535" />
@@ -52,15 +52,13 @@
             android:id="@+id/tv_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:text="@string/createٍِِِِAccount"
+            android:text="@string/createaccount"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="120px"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.061"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

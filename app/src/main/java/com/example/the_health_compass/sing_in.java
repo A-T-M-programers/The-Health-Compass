@@ -1,46 +1,32 @@
 package com.example.the_health_compass;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class sing_in extends AppCompatActivity {
-    private TextView create_account;
-    private Button sing_in_btn;
 
+    private TextView create_account ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
-        create_account = (TextView) findViewById(R.id.tv_create_account);
-        sing_in_btn = (Button) findViewById(R.id.btn_sign_in);
-        loading_screen loadingScreen = new loading_screen(sing_in.this);
-
+        setContentView(R.layout.activity_sing_in_sick);
+        create_account =(TextView)findViewById(R.id.tv_create_account);
 
         create_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingScreen.startLoadingDialog();
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadingScreen.dismissDialog();
-                    }
-                }, 5000);
+                openCreateAccountPage();
             }
         });
-        loadingScreen.startLoadingDialog();
     }
-
-    public void openCreateAccountPage() {
-        Intent intent = new Intent(this, sign_up.class);
+    public void openCreateAccountPage()
+    {
+        Intent intent = new Intent(this,sign_up.class);
         startActivity(intent);
     }
 }
