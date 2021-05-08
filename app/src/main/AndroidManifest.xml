@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.the_health_compass">
 
     <application
@@ -9,10 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TheHealthCompass">
-        <activity android:name=".sing_up_sick"></activity>
-        <activity android:name=".medical_advice" />
+        <activity android:name=".sick_profile"
+            tools:ignore="Instantiatable" />
+        <activity android:name=".consult_house"
+            tools:ignore="Instantiatable" />
+        <activity android:name=".sing_up_sick" />
+        <activity android:name=".medical_advice"
+            tools:ignore="Instantiatable" />
         <activity android:name=".sign_up" />
-        <activity android:name=".sing_in">
+        <activity android:name=".main_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
