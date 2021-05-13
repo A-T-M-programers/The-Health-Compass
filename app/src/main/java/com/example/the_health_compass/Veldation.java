@@ -5,7 +5,7 @@ import android.widget.TextView;
 public class Veldation {
     public static boolean veldation_text(TextView textView){
         boolean result = true;
-        String val = textView.getText();
+        String val = textView.getText().toString();
         if (val==""||val==null){
             result = false;
         }
