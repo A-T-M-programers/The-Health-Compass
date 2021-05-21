@@ -24,7 +24,7 @@ public class sing_up_sick extends AppCompatActivity {
         editTexts[0] = (EditText) findViewById(R.id.et_first_name);
         editTexts[1] = (EditText) findViewById(R.id.et_last_name);
         editTexts[2] = (EditText) findViewById(R.id.et_email);
-        editTexts[3] = (EditText) findViewById(R.id.ed_password);
+        editTexts[3] = (EditText) findViewById(R.id.et_password);
         editTexts[4] = (EditText) findViewById(R.id.et_check_email);
         editTexts[5] = (EditText) findViewById(R.id.et_mobile_phone);
         editTexts[6] = (EditText)findViewById(R.id.et_mobile_phone2);
@@ -48,6 +48,9 @@ public class sing_up_sick extends AppCompatActivity {
                 }else {
                     sickmap.put("S_Gender",radioButton[1].getText().toString());
                 }
+            Sick s = new Sick();
+            s.InPutSick(sickmap);
+            s.InputShare(sickmap,false);
             }
         });
     }
