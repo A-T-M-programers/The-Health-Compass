@@ -23,12 +23,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/blood" />
+            app:srcCompat="@drawable/img" />
 
         <EditText
             android:id="@+id/et_mobile_phone2"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
             android:layout_marginTop="672dp"
             android:ems="10"
@@ -78,7 +78,7 @@
         <EditText
             android:id="@+id/et_first_name"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="292dp"
             android:ems="10"
             android:inputType="textPersonName"
@@ -101,10 +101,11 @@
             app:layout_constraintHorizontal_bias="0.356"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
             android:id="@+id/et_last_name"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="292dp"
             android:ems="10"
             android:inputType="textPersonName"
@@ -130,7 +131,7 @@
         <EditText
             android:id="@+id/et_email"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="388dp"
             android:ems="10"
             android:inputType="textPersonName"
@@ -155,7 +156,7 @@
         <EditText
             android:id="@+id/et_check_email"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="388dp"
             android:ems="10"
             android:inputType="textPersonName"
@@ -180,7 +181,7 @@
         <EditText
             android:id="@+id/et_password"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="488dp"
             android:ems="10"
             android:inputType="textPassword"
@@ -205,7 +206,7 @@
         <EditText
             android:id="@+id/ed_birthday"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="488dp"
             android:ems="10"
             android:inputType="date"
@@ -215,7 +216,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_config_passowrd"
+            android:id="@+id/tv_config_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="540dp"
@@ -228,9 +229,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/ed_config_passowrd"
+            android:id="@+id/ed_config_password"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="580dp"
             android:ems="10"
             android:inputType="textPassword"
@@ -255,7 +256,7 @@
         <EditText
             android:id="@+id/et_location"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="580dp"
             android:ems="10"
             android:inputType="textPersonName"
@@ -281,7 +282,7 @@
         <EditText
             android:id="@+id/et_mobile_phone"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="228dp"
             android:layout_marginTop="672dp"
             android:ems="10"
@@ -319,12 +320,12 @@
             android:id="@+id/tv_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="720dp"
+            android:layout_marginTop="732dp"
             android:text="الجنس"
             android:textColor="@color/black"
             android:textSize="50px"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -482,7 +483,7 @@
         <Spinner
             android:id="@+id/sp_nationality"
             android:layout_width="128dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="228dp"
             tools:layout_editor_absoluteY="767dp" />

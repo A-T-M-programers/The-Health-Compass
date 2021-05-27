@@ -21,7 +21,7 @@
                 android:id="@+id/imageView11"
                 android:layout_width="589dp"
                 android:layout_height="965dp"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +58,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.059"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="LabelFor" />
 
             <TextView
                 android:id="@+id/TextView7"
@@ -66,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="480dp"
                 android:layout_marginBottom="240dp"
-                android:text="معدل الضغط"
+                android:text="@string/pressure_rate"
                 android:textColor="@color/black"
                 android:textSize="50px"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -89,7 +90,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.058"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="LabelFor" />
 
             <TextView
                 android:id="@+id/TextView5"
@@ -97,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="392dp"
                 android:layout_marginBottom="328dp"
-                android:text="رقم الهاتف الأرضي"
+                android:text="@string/earth_number"
                 android:textColor="@color/black"
                 android:textSize="50px"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -112,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="576dp"
                 android:layout_marginBottom="144dp"
-                android:text="وصف الحالة المرضية"
+                android:text="@string/discreption"
                 android:textColor="@color/black"
                 android:textSize="50px"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -136,7 +138,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.446"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="LabelFor" />
 
             <EditText
                 android:id="@+id/et_temperature"
@@ -151,7 +154,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.047"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="LabelFor" />
 
             <TextView
                 android:id="@+id/TextView4"
@@ -159,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="348dp"
                 android:layout_marginBottom="372dp"
-                android:text="رقم الهاتف الجوال"
+                android:text="@string/phone_number"
                 android:textColor="@color/black"
                 android:textSize="50px"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -174,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="436dp"
                 android:layout_marginBottom="284dp"
-                android:text="معدل السكر في الدم"
+                android:text="@string/sugger_rate"
                 android:textColor="@color/black"
                 android:textSize="50px"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -189,7 +193,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="520dp"
                 android:layout_marginBottom="200dp"
-                android:text="درجة الحرارة"
+                android:text="@string/tempriture"
                 android:textColor="@color/black"
                 android:textSize="50px"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -204,7 +208,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="304dp"
                 android:layout_marginBottom="416dp"
-                android:text="اسم الطبيب"
+                android:text="@string/doctor_name"
                 android:textColor="@color/black"
                 android:textSize="50px"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -220,7 +224,7 @@
                 android:layout_marginTop="696dp"
                 android:layout_marginBottom="2dp"
                 android:backgroundTint="@color/Aqua"
-                android:text="إرسال"
+                android:text="@string/send"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -232,15 +236,15 @@
                 android:id="@+id/TextView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="اسم المريض"
+                android:text="@string/sick_name"
                 android:textColor="@color/black"
                 android:textSize="50px"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.67"
+                app:layout_constraintHorizontal_bias="0.655"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.306" />
+                app:layout_constraintVertical_bias="0.342" />
 
             <TextView
                 android:id="@+id/TextView"
@@ -253,9 +257,10 @@
                 android:textSize="50px"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.946"
+                app:layout_constraintHorizontal_bias="0.949"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.453" />
 
             <TextView
                 android:id="@+id/tv_disease_name"
@@ -323,7 +328,7 @@
                 android:layout_height="38dp"
                 android:layout_marginTop="100dp"
                 android:layout_marginBottom="608dp"
-                android:hint="بحث"
+                android:hint="@string/search"
                 android:textAlignment="textEnd"
                 android:textDirection="rtl"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -373,9 +378,10 @@
                 android:scaleType="centerInside"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.812"
+                app:layout_constraintHorizontal_bias="0.828"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.502"
                 app:srcCompat="@drawable/search" />
 
             <androidx.recyclerview.widget.RecyclerView

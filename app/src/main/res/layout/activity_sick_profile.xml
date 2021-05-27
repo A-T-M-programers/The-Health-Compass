@@ -4,19 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_profile"
     tools:context=".sick_profile">
 
     <Button
-        android:id="@+id/btn_sign_in3"
+        android:id="@+id/btn_edit_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="632dp"
         android:backgroundTint="@color/Aqua"
+        android:onClick="OpenEdit_Profile"
         android:text="تعديل الملف الشخصي"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.878"
+        tools:ignore="OnClick" />
 
     <TextView
         android:id="@+id/tv_create_date"
@@ -142,7 +146,7 @@
         android:id="@+id/tv_first_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/First_name"
+        android:text="@string/FirstName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.651"
@@ -250,7 +254,7 @@
         android:id="@+id/tv_last_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Last_name"
+        android:text="@string/Last_Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.356"

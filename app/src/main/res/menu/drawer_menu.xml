@@ -4,26 +4,26 @@
         <item
             android:id="@+id/home_page"
             android:icon="@drawable/home_icon"
-            android:title="الصفحة الرئيسية" />
+            android:title="@string/home_page" />
         <item
             android:id="@+id/medical_advice"
             android:icon="@drawable/medical_advance_icon"
-            android:title="الاستشارة الطبية" />
+            android:title="@string/medical_advise" />
 
         <item
             android:id="@+id/consult_house"
             android:icon="@drawable/medical_advance_icon"
-            android:title="الاستشارة المنزلية" />
+            android:title="@string/home_request" />
         <item
             android:id="@+id/profile"
             android:icon="@drawable/account_icon"
-            android:title="الملف الشخصي" />
+            android:title="@string/profile" />
         <item
             android:id="@+id/settings"
             android:icon="@drawable/settings_icon"
-            android:title="إعدادات" />
+            android:title="@string/settings" />
         <item android:id="@+id/logout"
-            android:title="تسجيل الخروج"
+            android:title="@string/logout"
             android:icon="@drawable/sign_out_icon"
             />
     </group>

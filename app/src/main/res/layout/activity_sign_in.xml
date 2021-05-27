@@ -98,7 +98,7 @@
     <EditText
         android:id="@+id/ed_user_name"
         android:layout_width="287dp"
-        android:layout_height="100px"
+        android:layout_height="wrap_content"
         android:layout_marginTop="372dp"
         android:ems="10"
         android:inputType="textEmailAddress"
@@ -111,7 +111,7 @@
     <EditText
         android:id="@+id/ed_password"
         android:layout_width="287dp"
-        android:layout_height="100px"
+        android:layout_height="wrap_content"
         android:layout_marginTop="448dp"
         android:ems="10"
         android:inputType="textPassword"

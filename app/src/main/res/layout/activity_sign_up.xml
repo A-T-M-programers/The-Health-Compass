@@ -30,7 +30,7 @@
         <EditText
             android:id="@+id/et_mobile_phone2"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
             android:layout_marginTop="672dp"
             android:layout_marginBottom="228dp"
@@ -87,7 +87,7 @@
         <EditText
             android:id="@+id/et_first_name"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
             android:textDirection="rtl"
@@ -116,7 +116,7 @@
         <EditText
             android:id="@+id/et_last_name"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
             android:textDirection="rtl"
@@ -144,7 +144,7 @@
         <EditText
             android:id="@+id/et_email"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="388dp"
             android:layout_marginBottom="512dp"
             android:ems="10"
@@ -159,7 +159,7 @@
             android:id="@+id/tv_check_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="352dp"
+            android:layout_marginTop="372dp"
             android:text="الإيميل التحقق"
             android:textColor="@color/black"
             android:textSize="50px"
@@ -171,7 +171,7 @@
         <EditText
             android:id="@+id/et_check_email"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="388dp"
             android:layout_marginBottom="512dp"
             android:ems="10"
@@ -186,7 +186,7 @@
             android:id="@+id/tv_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="448dp"
+            android:layout_marginTop="476dp"
             android:text="كلمة المرور"
             android:textColor="@color/black"
             android:textSize="50px"
@@ -198,7 +198,7 @@
         <EditText
             android:id="@+id/et_password"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="488dp"
             android:layout_marginBottom="412dp"
             android:ems="10"
@@ -227,8 +227,8 @@
         <EditText
             android:id="@+id/ed_birthday"
             android:layout_width="124dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="488dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="524dp"
             android:ems="10"
             android:inputType="date"
             app:layout_constraintEnd_toEndOf="parent"
@@ -254,7 +254,7 @@
         <EditText
             android:id="@+id/ed_config_passowrd"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="580dp"
             android:layout_marginBottom="320dp"
             android:ems="10"
@@ -269,7 +269,7 @@
             android:id="@+id/tv_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="540dp"
+            android:layout_marginTop="568dp"
             android:text="الموقع الثابت"
             android:textColor="@color/black"
             android:textSize="50px"
@@ -281,7 +281,7 @@
         <EditText
             android:id="@+id/et_location"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="580dp"
             android:layout_marginBottom="320dp"
             android:ems="10"
@@ -311,13 +311,14 @@
         <EditText
             android:id="@+id/et_mobile_phone"
             android:layout_width="124dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="228dp"
-            android:layout_marginTop="672dp"
             android:ems="10"
             android:inputType="numberSigned"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.733" />
 
         <TextView
             android:id="@+id/tv_phone_earth"
@@ -338,7 +339,7 @@
             android:id="@+id/tv_nationality"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="732dp"
+            android:layout_marginTop="748dp"
             android:text="الجنسية"
             android:textColor="@color/black"
             android:textSize="50px"
@@ -488,9 +489,9 @@
             android:id="@+id/imageView13"
             android:layout_width="100px"
             android:layout_height="100px"
-            android:layout_marginTop="488dp"
+            android:layout_marginTop="524dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.431"
+            app:layout_constraintHorizontal_bias="0.426"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/calendar" />
@@ -550,15 +551,17 @@
         <Spinner
             android:id="@+id/sp_nationality"
             android:layout_width="128dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="264dp"
             android:layout_marginTop="767dp"
             android:layout_marginEnd="19dp"
             android:layout_marginBottom="134dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.28"
             tools:ignore="MissingConstraints" />
 
         <RadioGroup
@@ -622,7 +625,7 @@
         <Spinner
             android:id="@+id/sp_subscription"
             android:layout_width="128dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="267dp"
             android:layout_marginTop="850dp"
             android:layout_marginEnd="16dp"
@@ -637,7 +640,7 @@
             android:id="@+id/tv_subscription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="812dp"
+            android:layout_marginTop="844dp"
             android:text="@string/sectionity"
             android:textColor="@color/black"
             android:textSize="50px"

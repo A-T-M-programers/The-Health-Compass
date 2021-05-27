@@ -16,13 +16,10 @@ import android.widget.Button;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.nio.file.OpenOption;
-
 public class main_activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private Button sing_in_button;
-    Button Sign_In;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +41,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new home_page()).commit();
             navigationView.setCheckedItem(R.id.home_page);
         }
-        Sign_In = (Button)findViewById(R.id.Sign_In);
-        Sign_In.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OpenSickIn();
-            }
-        });
+
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -80,8 +71,5 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             super.onBackPressed();
         }
     }
-    public void OpenSickIn(){
-        Intent intent = new Intent(this,sing_up_sick.class);
-        startActivity(intent);
-    }
+
 }

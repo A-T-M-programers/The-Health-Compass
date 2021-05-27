@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/background_profile"
     android:layout_height="match_parent"
     tools:context=".sick_profile">
 
@@ -18,18 +19,6 @@
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/doctor_sectionity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.84"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.789" />
 
     <TextView
         android:id="@+id/tv_sectionity"
@@ -167,7 +156,7 @@
         android:id="@+id/tv_first_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/First_name"
+        android:text="@string/FirstName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.651"
@@ -275,7 +264,7 @@
         android:id="@+id/tv_last_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Last_name"
+        android:text="@string/Last_Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.356"
@@ -284,7 +273,8 @@
         app:layout_constraintVertical_bias="0.271" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/doctor_image"
+        android:src="@drawable/account_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/todo"

@@ -13,12 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheHealthCompass"
         tools:ignore="HardcodedDebugMode">
-        <activity android:name=".sick_profile"
+        <activity android:name=".consult_house_doctor"></activity>
+        <activity android:name=".Edit_Profile_Sick" />
+        <activity
+            android:name=".sick_profile"
             tools:ignore="Instantiatable" />
-        <activity android:name=".consult_house"
+        <activity
+            android:name=".consult_house"
             tools:ignore="Instantiatable" />
         <activity android:name=".sing_up_sick" />
-        <activity android:name=".medical_advice"
+        <activity
+            android:name=".medical_advice"
             tools:ignore="Instantiatable" />
         <activity android:name=".sign_up" />
         <activity android:name=".main_activity">

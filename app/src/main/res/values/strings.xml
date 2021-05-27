@@ -1,14 +1,10 @@
 <resources>
     <string name="app_name">The-Health-Compass</string>
     <string name="createٍِِِِAccount">إنشاء حساب</string>
-    <string name="todo">TODO</string>
     <string name="username">اسم المستخدم</string>
     <string name="FirstName">[اسم المستخدم]</string>
     <string name="First_Name">الاسم الأول</string>
     <string name="Last_Name">الاسم الأخير</string>
-    <string name="First_Name_">[الاسم الأول]</string>
-    <string name="Last_name">[الاسم الأخير]</string>
-    <string name="First_name">[الاسم الأول]</string>
     <string name="Birthday">تاريخ الميلاد</string>
     <string name="birthday">[تاريخ الميلاد]</string>
     <string name="Nationality">الجنسية</string>
@@ -35,6 +31,23 @@
     <string name="subcription_doctor">[الإشتراكات]</string>
     <string name="check_email_doctor">[إيميل الحقق]</string>
     <string name="create_date_doctor">تاريخ إنشاء الحساب</string>
-    <string name="doctor_sectionity">الإختصاص</string>
-    <string name="Sectionity">[الإختصاص]</string>
+    <string name="Sectionity_doctor">الإختصاص</string>
+    <string name="Sectionity">الإختصاص</string>
+    <string name="todo">TODO</string>
+    <string name="pressure_rate">معدل الضغط</string>
+    <string name="earth_number">رقم الهاتف الأرضي</string>
+    <string name="discreption">وصف الحالة المرضية</string>
+    <string name="phone_number">رقم الهاتف الجوال</string>
+    <string name="sugger_rate">معدل السكر في الدم</string>
+    <string name="tempriture">درجة الحرارة</string>
+    <string name="doctor_name">اسم الطبيب</string>
+    <string name="send">إرسال</string>
+    <string name="sick_name">اسم المريض</string>
+    <string name="search">بحث</string>
+    <string name="home_page">الصفحة الرئيسية</string>
+    <string name="home_request">الاستشارة المنزلية</string>
+    <string name="medical_advise">الاستشارة الطبية</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="settings">إعدادات</string>
+    <string name="logout">تسجيل الخروج</string>
 </resources>
