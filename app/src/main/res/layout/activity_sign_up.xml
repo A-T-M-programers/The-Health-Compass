@@ -4,28 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00638F">
+    android:background="@drawable/img">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:orientation="horizontal"
         android:scrollbarThumbHorizontal="@color/teal_200"
         android:scrollbarThumbVertical="@color/teal_200">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="659dp"
-            android:layout_height="996dp"
-            android:contentDescription="TODO"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.435"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/img" />
 
         <EditText
             android:id="@+id/et_mobile_phone2"
@@ -33,125 +19,112 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
             android:layout_marginTop="672dp"
-            android:layout_marginBottom="228dp"
-            android:autofillHints=""
             android:ems="10"
             android:inputType="numberSigned"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="163dp"
-            android:layout_height="177dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="186dp"
+            android:layout_height="136dp"
+            android:layout_marginTop="80dp"
+            android:contentDescription="TODO"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.929"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.034"
-            app:srcCompat="@drawable/user" />
+            app:srcCompat="@drawable/user34535" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/createٍِِِِAccount"
+            android:text="@string/create_account"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="120px"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.082"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.05" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_first_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="252dp"
             android:text="الاسم الأول"
             android:textColor="@color/black"
             android:textSize="50px"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.952"
+            app:layout_constraintHorizontal_bias="0.943"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.276" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/et_first_name"
             android:layout_width="124dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="292dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:textDirection="rtl"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.811"
+            app:layout_constraintHorizontal_bias="0.801"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.324" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_last_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="252dp"
             android:text="الاسم الأخير"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="50px"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.356"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.276" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/et_last_name"
             android:layout_width="124dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="292dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:textDirection="rtl"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.121"
+            app:layout_constraintHorizontal_bias="0.132"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.323" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="348dp"
             android:text="الإيميل"
             android:textColor="@color/black"
             android:textSize="50px"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.956"
+            app:layout_constraintHorizontal_bias="0.947"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.385" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/et_email"
             android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="388dp"
-            android:layout_marginBottom="512dp"
             android:ems="10"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.811"
+            app:layout_constraintHorizontal_bias="0.801"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -159,12 +132,12 @@
             android:id="@+id/tv_check_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="372dp"
+            android:layout_marginTop="348dp"
             android:text="الإيميل التحقق"
             android:textColor="@color/black"
             android:textSize="50px"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.323"
+            app:layout_constraintHorizontal_bias="0.314"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -173,10 +146,8 @@
             android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="388dp"
-            android:layout_marginBottom="512dp"
             android:ems="10"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.132"
             app:layout_constraintStart_toStartOf="parent"
@@ -186,7 +157,7 @@
             android:id="@+id/tv_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="476dp"
+            android:layout_marginTop="448dp"
             android:text="كلمة المرور"
             android:textColor="@color/black"
             android:textSize="50px"
@@ -200,10 +171,8 @@
             android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="488dp"
-            android:layout_marginBottom="412dp"
             android:ems="10"
             android:inputType="textPassword"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.801"
             app:layout_constraintStart_toStartOf="parent"
@@ -214,11 +183,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="448dp"
-            android:layout_marginBottom="464dp"
-            android:text="@string/sick_birthday"
+            android:text="تاريخ الميلاد"
             android:textColor="@color/black"
             android:textSize="50px"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.343"
             app:layout_constraintStart_toStartOf="parent"
@@ -228,7 +195,7 @@
             android:id="@+id/ed_birthday"
             android:layout_width="124dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="524dp"
+            android:layout_marginTop="488dp"
             android:ems="10"
             android:inputType="date"
             app:layout_constraintEnd_toEndOf="parent"
@@ -237,29 +204,25 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_config_passowrd"
+            android:id="@+id/tv_config_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="540dp"
-            android:layout_marginBottom="372dp"
             android:text="تأكيد كلمة المرور"
             android:textColor="@color/black"
             android:textSize="50px"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.936"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/ed_config_passowrd"
+            android:id="@+id/ed_config_password"
             android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="580dp"
-            android:layout_marginBottom="320dp"
             android:ems="10"
             android:inputType="textPassword"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.804"
             app:layout_constraintStart_toStartOf="parent"
@@ -269,7 +232,7 @@
             android:id="@+id/tv_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="568dp"
+            android:layout_marginTop="540dp"
             android:text="الموقع الثابت"
             android:textColor="@color/black"
             android:textSize="50px"
@@ -283,11 +246,9 @@
             android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="580dp"
-            android:layout_marginBottom="320dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:textDirection="rtl"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.132"
             app:layout_constraintStart_toStartOf="parent"
@@ -298,11 +259,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="636dp"
-            android:layout_marginBottom="276dp"
             android:text="رقم الجوال"
             android:textColor="@color/black"
             android:textSize="50px"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.943"
             app:layout_constraintStart_toStartOf="parent"
@@ -313,23 +272,20 @@
             android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="228dp"
+            android:layout_marginTop="672dp"
             android:ems="10"
             android:inputType="numberSigned"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.733" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_phone_earth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="636dp"
-            android:layout_marginBottom="276dp"
             android:text="رقم الهاتف الأرضي"
             android:textColor="@color/black"
             android:textSize="50px"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.249"
             app:layout_constraintStart_toStartOf="parent"
@@ -339,7 +295,7 @@
             android:id="@+id/tv_nationality"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="748dp"
+            android:layout_marginTop="732dp"
             android:text="الجنسية"
             android:textColor="@color/black"
             android:textSize="50px"
@@ -352,44 +308,23 @@
             android:id="@+id/tv_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="720dp"
-            android:layout_marginBottom="192dp"
+            android:layout_marginTop="732dp"
             android:text="الجنس"
             android:textColor="@color/black"
             android:textSize="50px"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_gender2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="772dp"
-            android:layout_marginBottom="115dp"
-            android:text="القدرة على تلبية \n الاستجابة المزلية"
-            android:textColor="@color/black"
-            android:textSize="50px"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.143"
+            app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
-            android:id="@+id/radioGroup"
             android:layout_width="147dp"
             android:layout_height="54dp"
-            android:layout_marginTop="712dp"
-            android:layout_marginBottom="172dp"
+            android:layout_marginTop="728dp"
             android:checkedButton="@id/rb_male"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.128"
+            app:layout_constraintHorizontal_bias="0.098"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints">
@@ -427,24 +362,22 @@
             android:id="@+id/imageView5"
             android:layout_width="100px"
             android:layout_height="100px"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="292dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.434"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.324"
             app:srcCompat="@drawable/user34535" />
 
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="100px"
             android:layout_height="100px"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="292dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.957"
+            app:layout_constraintHorizontal_bias="0.949"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.324"
             app:srcCompat="@drawable/user34535" />
 
         <ImageView
@@ -452,8 +385,6 @@
             android:layout_width="100px"
             android:layout_height="100px"
             android:layout_marginTop="488dp"
-            android:layout_marginBottom="412dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.949"
             app:layout_constraintStart_toStartOf="parent"
@@ -464,12 +395,11 @@
             android:id="@+id/imageView10"
             android:layout_width="100px"
             android:layout_height="100px"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="388dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.957"
+            app:layout_constraintHorizontal_bias="0.951"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.43"
             app:srcCompat="@drawable/email" />
 
         <ImageView
@@ -477,8 +407,6 @@
             android:layout_width="100px"
             android:layout_height="100px"
             android:layout_marginTop="388dp"
-            android:layout_marginBottom="512dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.434"
             app:layout_constraintStart_toStartOf="parent"
@@ -489,9 +417,9 @@
             android:id="@+id/imageView13"
             android:layout_width="100px"
             android:layout_height="100px"
-            android:layout_marginTop="524dp"
+            android:layout_marginTop="488dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.426"
+            app:layout_constraintHorizontal_bias="0.431"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/calendar" />
@@ -501,8 +429,6 @@
             android:layout_width="100px"
             android:layout_height="100px"
             android:layout_marginTop="672dp"
-            android:layout_marginBottom="228dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.951"
             app:layout_constraintStart_toStartOf="parent"
@@ -514,8 +440,6 @@
             android:layout_width="100px"
             android:layout_height="100px"
             android:layout_marginTop="672dp"
-            android:layout_marginBottom="228dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.426"
             app:layout_constraintStart_toStartOf="parent"
@@ -527,8 +451,6 @@
             android:layout_width="100px"
             android:layout_height="100px"
             android:layout_marginTop="580dp"
-            android:layout_marginBottom="320dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.951"
             app:layout_constraintStart_toStartOf="parent"
@@ -540,8 +462,6 @@
             android:layout_width="100px"
             android:layout_height="100px"
             android:layout_marginTop="580dp"
-            android:layout_marginBottom="320dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.434"
             app:layout_constraintStart_toStartOf="parent"
@@ -552,30 +472,51 @@
             android:id="@+id/sp_nationality"
             android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="264dp"
-            android:layout_marginTop="767dp"
-            android:layout_marginEnd="19dp"
-            android:layout_marginBottom="134dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="264dp"
+            tools:layout_editor_absoluteY="773dp" />
+
+        <Button
+            android:id="@+id/btn_create_account"
+            android:layout_width="146dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="916dp"
+            android:backgroundTint="@color/Aqua"
+            android:text="إنشاء الحساب"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.928"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_able"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="772dp"
+            android:layout_marginBottom="115dp"
+            android:text="القدرة على تلبية \n الاستجابة المزلية"
+            android:textColor="@color/black"
+            android:textSize="50px"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.004"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.28"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="147dp"
             android:layout_height="54dp"
-            android:layout_marginTop="832dp"
-            android:layout_marginBottom="53dp"
             android:checkedButton="@id/rb_male"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.128"
+            app:layout_constraintHorizontal_bias="0.162"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.965"
             tools:ignore="MissingConstraints">
 
             <RadioButton
@@ -605,22 +546,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </RadioGroup>
+            <TextView
+                android:id="@+id/tv_gender2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="772dp"
+                android:layout_marginBottom="115dp"
+                android:text="القدرة على تلبية \n الاستجابة المزلية"
+                android:textColor="@color/black"
+                android:textSize="50px" />
 
-        <Button
-            android:id="@+id/btn_create_account"
-            android:layout_width="146dp"
-            android:layout_height="47dp"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="888dp"
-            android:layout_marginBottom="4dp"
-            android:backgroundTint="@color/Aqua"
-            android:text="@string/create_account"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.132"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        </RadioGroup>
 
         <Spinner
             android:id="@+id/sp_subscription"
@@ -632,23 +569,25 @@
             android:layout_marginBottom="51dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.736"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tv_subscription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="844dp"
             android:text="@string/sectionity"
             android:textColor="@color/black"
             android:textSize="50px"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.948"
+            app:layout_constraintHorizontal_bias="0.945"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.877" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
