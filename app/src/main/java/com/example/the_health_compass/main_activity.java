@@ -13,14 +13,18 @@ import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.nio.file.OpenOption;
 
 public class main_activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private Button sing_in_button;
-
+    Button Sign_In;
+    static TextView UserName,UserEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,9 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setActivated(true);
+        UserName = (TextView)findViewById(R.id.tv_nav_UserName);
+        UserEmail = (TextView)findViewById(R.id.tv_nav_UserEmail);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -41,7 +48,6 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new home_page()).commit();
             navigationView.setCheckedItem(R.id.home_page);
         }
-
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -71,5 +77,12 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             super.onBackPressed();
         }
     }
-
+    public void OpenSickIn(){
+        Intent intent = new Intent(this,sing_up_sick.class);
+        startActivity(intent);
+    }
+    public static void Stored(Sick YourSick){
+        UserName.setText(YourSick.S_First_Name+" "+YourSick.S_Last_Name);
+        UserEmail.setText(YourSick.Email);
+    }
 }

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.the_health_compass">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
         android:debuggable="true"
         android:allowBackup="true"
@@ -21,17 +20,19 @@
         <activity
             android:name=".consult_house"
             tools:ignore="Instantiatable" />
-        <activity android:name=".sing_up_sick" />
-        <activity
-            android:name=".medical_advice"
-            tools:ignore="Instantiatable" />
-        <activity android:name=".sign_up" />
-        <activity android:name=".main_activity">
+        <activity android:name=".sing_up_sick" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".medical_advice"
+            tools:ignore="Instantiatable" />
+        <activity android:name=".sign_up" />
+        <activity android:name=".main_activity">
+
         </activity>
     </application>
 

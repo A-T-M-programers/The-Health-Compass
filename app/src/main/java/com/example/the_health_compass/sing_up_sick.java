@@ -15,6 +15,7 @@ import java.util.HashMap;
 public class sing_up_sick extends AppCompatActivity {
     HashMap<String,String> sickmap = new HashMap<String,String>();
     Button CreatAccount ;
+    Sick s = new Sick();
     EditText[] editTexts = new EditText[8];
     RadioButton[] radioButton = new RadioButton[2];
     @Override
@@ -48,10 +49,14 @@ public class sing_up_sick extends AppCompatActivity {
                 }else {
                     sickmap.put("S_Gender",radioButton[1].getText().toString());
                 }
-            Sick s = new Sick();
             s.InPutSick(sickmap);
             s.InputShare(sickmap,false);
+            main_activity.Stored(s);
+            OpenHome();
             }
         });
+    }
+    public void OpenHome(){
+        getSupportFragmentManager().beginTransaction().replace(R.id.btn_create_account,new home_page()).commit();
     }
 }
