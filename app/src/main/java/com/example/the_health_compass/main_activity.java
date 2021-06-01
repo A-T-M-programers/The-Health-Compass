@@ -54,7 +54,7 @@ import javax.xml.parsers.ParserConfigurationException;
 public class main_activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private int counttouch = 0;
     private DrawerLayout drawer;
-    private Button sing_in_button;
+    private Button open_;
     static TextView UserName,UserEmail;
     String UserNameX,UserEmailX;
     ArrayList<String> rolev;
@@ -143,9 +143,9 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
 
             Element doc = dom.getDocumentElement();
 
-            UserNameX = getTextValue(UserNameX, doc, "S_First_Name");
+            UserNameX = getTextValue(UserNameX, doc, "S_Full_Name");
 
-            UserNameX += " " + getTextValue(UserNameX, doc, "S_Last_Name");
+            //UserNameX += " " + getTextValue(UserNameX, doc, "S_Last_Name");
 
             if (UserNameX != null) {
                 if (!UserNameX.isEmpty())

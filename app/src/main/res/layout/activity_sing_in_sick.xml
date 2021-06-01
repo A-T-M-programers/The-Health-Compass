@@ -4,37 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00638F">
+    android:background="@drawable/img">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         android:orientation="horizontal"
         android:scrollbarThumbHorizontal="@color/teal_200"
         android:scrollbarThumbVertical="@color/teal_200">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="409dp"
-            android:layout_height="964dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_gender"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/img" />
-
-        <EditText
-            android:id="@+id/et_mobile_phone2"
-            android:layout_width="124dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="672dp"
-            android:ems="10"
-            android:inputType="numberSigned"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -62,257 +39,97 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_first_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="252dp"
-            android:text="الاسم الأول"
-            android:textColor="@color/black"
-            android:textSize="50px"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.943"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <EditText
-            android:id="@+id/et_first_name"
-            android:layout_width="124dp"
+            android:id="@+id/et_full_name"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="292dp"
+            android:layout_marginTop="256dp"
             android:ems="10"
+            android:hint="الاسم الكامل"
             android:inputType="textPersonName"
             android:textDirection="rtl"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.801"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_last_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="252dp"
-            android:text="الاسم الأخير"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="50px"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.356"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/et_last_name"
-            android:layout_width="124dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="292dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textDirection="rtl"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.132"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="348dp"
-            android:text="الإيميل"
-            android:textColor="@color/black"
-            android:textSize="50px"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.947"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/et_email"
-            android:layout_width="124dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="388dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.801"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_check_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="348dp"
-            android:text="الإيميل التحقق"
-            android:textColor="@color/black"
-            android:textSize="50px"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.314"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/et_check_email"
-            android:layout_width="124dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="388dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.132"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="448dp"
-            android:text="كلمة المرور"
-            android:textColor="@color/black"
-            android:textSize="50px"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.952"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/et_password"
-            android:layout_width="124dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="488dp"
-            android:ems="10"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.801"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_birthday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="448dp"
-            android:text="تاريخ الميلاد"
-            android:textColor="@color/black"
-            android:textSize="50px"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.343"
+            app:layout_constraintHorizontal_bias="0.405"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/ed_birthday"
-            android:layout_width="124dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="488dp"
+            android:layout_marginTop="588dp"
             android:ems="10"
+            android:hint="تاريخ الميلاد"
             android:inputType="date"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.132"
+            app:layout_constraintHorizontal_bias="0.405"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_config_password"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/et_check_email"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="540dp"
-            android:text="تأكيد كلمة المرور"
-            android:textColor="@color/black"
-            android:textSize="50px"
+            android:layout_marginTop="372dp"
+            android:ems="10"
+            android:hint="بريد التحقق الإلكتروني"
+            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.936"
+            app:layout_constraintHorizontal_bias="0.405"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="428dp"
+            android:ems="10"
+            android:hint="كلمة المرور"
+            android:inputType="textPassword"
+            android:textDirection="rtl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.405"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/ed_config_password"
-            android:layout_width="124dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="580dp"
+            android:layout_marginTop="476dp"
             android:ems="10"
+            android:hint="تأكيد كلمة المرور"
             android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.804"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="540dp"
-            android:text="الموقع الثابت"
-            android:textColor="@color/black"
-            android:textSize="50px"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.335"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/et_location"
-            android:layout_width="124dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="580dp"
-            android:ems="10"
-            android:inputType="textPersonName"
             android:textDirection="rtl"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.132"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_mobile_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="636dp"
-            android:text="رقم الجوال"
-            android:textColor="@color/black"
-            android:textSize="50px"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.943"
+            app:layout_constraintHorizontal_bias="0.405"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/et_mobile_phone"
-            android:layout_width="124dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="228dp"
-            android:layout_marginTop="672dp"
+            android:layout_marginTop="536dp"
             android:ems="10"
+            android:hint="رقم الهاتف الجوال"
             android:inputType="numberSigned"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.405"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_phone_earth"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="636dp"
-            android:text="رقم الهاتف الأرضي"
-            android:textColor="@color/black"
-            android:textSize="50px"
+            android:layout_marginTop="320dp"
+            android:ems="10"
+            android:hint="البريد الإلكتروني"
+            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.249"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_nationality"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="732dp"
-            android:text="الجنسية"
-            android:textColor="@color/black"
-            android:textSize="50px"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.946"
+            app:layout_constraintHorizontal_bias="0.405"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -320,23 +137,23 @@
             android:id="@+id/tv_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="732dp"
+            android:layout_marginTop="672dp"
             android:text="الجنس"
             android:textColor="@color/black"
             android:textSize="50px"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintHorizontal_bias="0.936"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
             android:layout_width="147dp"
             android:layout_height="54dp"
-            android:layout_marginTop="712dp"
+            android:layout_marginTop="664dp"
             android:checkedButton="@id/rb_male"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.128"
+            app:layout_constraintHorizontal_bias="0.768"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints">
@@ -371,132 +188,91 @@
         </RadioGroup>
 
         <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="100px"
-            android:layout_height="100px"
-            android:layout_marginTop="292dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.434"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/user34535" />
-
-        <ImageView
             android:id="@+id/imageView6"
             android:layout_width="100px"
             android:layout_height="100px"
-            android:layout_marginTop="292dp"
+            android:layout_marginTop="260dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.949"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.214"
+            app:layout_constraintStart_toEndOf="@+id/et_full_name"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/user34535" />
-
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="100px"
-            android:layout_height="100px"
-            android:layout_marginTop="488dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.949"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/lock" />
-
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="100px"
-            android:layout_height="100px"
-            android:layout_marginTop="388dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.951"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/email" />
 
         <ImageView
             android:id="@+id/imageView12"
             android:layout_width="100px"
             android:layout_height="100px"
-            android:layout_marginTop="388dp"
+            android:layout_marginTop="372dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.434"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.214"
+            app:layout_constraintStart_toEndOf="@+id/et_check_email"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/check" />
-
-        <ImageView
-            android:id="@+id/imageView13"
-            android:layout_width="100px"
-            android:layout_height="100px"
-            android:layout_marginTop="488dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.431"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/calendar" />
 
         <ImageView
             android:id="@+id/imageView14"
             android:layout_width="100px"
             android:layout_height="100px"
-            android:layout_marginTop="672dp"
+            android:layout_marginTop="536dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.951"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.214"
+            app:layout_constraintStart_toEndOf="@+id/et_mobile_phone"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/mobile" />
-
-        <ImageView
-            android:id="@+id/imageView15"
-            android:layout_width="100px"
-            android:layout_height="100px"
-            android:layout_marginTop="672dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.426"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/phone" />
 
         <ImageView
             android:id="@+id/imageView16"
             android:layout_width="100px"
             android:layout_height="100px"
-            android:layout_marginTop="580dp"
+            android:layout_marginTop="476dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.951"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.214"
+            app:layout_constraintStart_toEndOf="@+id/ed_config_password"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/shield" />
 
         <ImageView
-            android:id="@+id/imageView17"
+            android:id="@+id/imageView13"
             android:layout_width="100px"
             android:layout_height="100px"
-            android:layout_marginTop="580dp"
+            android:layout_marginTop="588dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.434"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.214"
+            app:layout_constraintStart_toEndOf="@+id/ed_birthday"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/location" />
+            app:srcCompat="@drawable/calendar" />
 
-        <Spinner
-            android:id="@+id/sp_nationality"
-            android:layout_width="128dp"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="228dp"
-            tools:layout_editor_absoluteY="767dp" />
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:layout_marginTop="320dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.214"
+            app:layout_constraintStart_toEndOf="@+id/et_email"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/email" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:layout_marginTop="428dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.214"
+            app:layout_constraintStart_toEndOf="@+id/et_password"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/lock" />
 
         <Button
             android:id="@+id/btn_create_account"
             android:layout_width="146dp"
             android:layout_height="47dp"
-            android:layout_marginTop="804dp"
+            android:layout_marginTop="688dp"
             android:backgroundTint="@color/Aqua"
             android:text="إنشاء الحساب"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.143"
+            app:layout_constraintHorizontal_bias="0.113"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
