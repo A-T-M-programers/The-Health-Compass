@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,7 @@ public class sing_up_sick extends AppCompatActivity {
     Sick s = new Sick();
     EditText[] editTexts = new EditText[6];
     RadioButton[] radioButton = new RadioButton[2];
+    loading_screen loading_screen = new loading_screen(sing_up_sick.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,14 @@ public class sing_up_sick extends AppCompatActivity {
                 s.InputShare(sickmap, false);
                 WriteToXml();
                 This();
+                loading_screen.startLoadingDialog();
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                    loading_screen.dismissDialog();
+                    }
+                },5000);
             }
         });
     }

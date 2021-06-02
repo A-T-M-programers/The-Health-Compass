@@ -67,34 +67,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="344dp"
-        android:text="اسم المستخدم"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="50px"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.879"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txt_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="416dp"
-        android:text="كلمة المرور"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="50px"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.891"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/ed_user_name"
         android:layout_width="287dp"
@@ -103,6 +75,9 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:singleLine="true"
+        android:textColorHint="@color/white"
+        android:hint="اسم المستخدم"
+        android:textDirection="rtl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.282"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,6 +89,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="448dp"
         android:ems="10"
+        android:textColorHint="@color/white"
+        android:hint="كلمة المرور"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.282"

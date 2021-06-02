@@ -132,7 +132,8 @@
                 android:layout_width="298dp"
                 android:layout_height="231dp"
                 tools:layout_editor_absoluteX="51dp"
-                tools:layout_editor_absoluteY="487dp" />
+                tools:layout_editor_absoluteY="487dp"
+                tools:ignore="MissingConstraints" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
