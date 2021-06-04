@@ -46,4 +46,5 @@ dependencies {
     implementation 'javax.inject:javax.inject:1'
     implementation 'org.codehaus.plexus:plexus-utils:3.3.0'
     implementation 'mysql:mysql-connector-java:8.0.25'
+    implementation 'com.basgeekball:awesome-validation:4.3'
 }
