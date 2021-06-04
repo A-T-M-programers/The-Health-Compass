@@ -112,6 +112,8 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             case R.id.profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new sick_profile()).commit();
                 break;
+            case R.id.settings:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Settings_page()).commit();
         }
         drawer.closeDrawer(GravityCompat.START);
 

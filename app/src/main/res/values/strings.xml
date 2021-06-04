@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">نظام البوصلة الصحية</string>
     <string name="createٍِِِِAccount">إنشاء حساب</string>
-    <string name="todo">TODO</string>
     <string name="username">اسم المستخدم</string>
     <string name="FirstName">[اسم المستخدم]</string>
     <string name="First_Name">الاسم الأول</string>
@@ -55,4 +54,12 @@
     <string name="settings">الأعدادات</string>
     <string name="logout">تسجيل خروج</string>
     <string name="home_request">أستشارة منزلية</string>
+    <string name="off">off</string>
+    <string name="setting">الإعدادات</string>
+    <string name="language">اللغة</string>
+    <string name="share">مشاركة</string>
+    <string name="help">المساعدة</string>
+    <string name="dark_mode">الوضع الليلي</string>
+    <string name="todo">TODO</string>
+    <string name="notification">الإشعارات</string>
 </resources>
