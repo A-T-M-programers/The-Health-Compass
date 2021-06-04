@@ -71,10 +71,10 @@
         app:layout_constraintVertical_bias="0.688" />
 
     <TextView
-        android:id="@+id/tv_subscription"
+        android:id="@+id/tv_Phone_Mobile_Sick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="[الإشتراكات]"
+        android:text="[رقم الموبايل]"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.953"
@@ -86,7 +86,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="الإشتراكات"
+        android:text="رقم الموبايل"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.931"
@@ -122,7 +122,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
+        android:text="الهاتف الأرضي"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.171"
@@ -131,10 +131,10 @@
         app:layout_constraintVertical_bias="0.467" />
 
     <TextView
-        android:id="@+id/tv_Password"
+        android:id="@+id/tv_Phone_Earth_Sick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="[Password]"
+        android:text="[الهاتف الأرضي]"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.175"

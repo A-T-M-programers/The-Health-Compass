@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Sick extends Share{
-    String S_Full_Name,S_Location,S_Nationality,S_Gender,S_Birthday;
+    String S_Full_Name,S_Location,S_Gender,S_Birthday;
 
     public void InPutSick(HashMap<String,String> sick){
         this.S_Full_Name = sick.get("S_Full_Name");

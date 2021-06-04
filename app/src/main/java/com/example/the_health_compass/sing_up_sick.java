@@ -29,7 +29,7 @@ public class sing_up_sick extends AppCompatActivity {
     EditText[] editTexts = new EditText[6];
     RadioButton[] radioButton = new RadioButton[2];
     loading_screen loading_screen = new loading_screen(sing_up_sick.this);
-
+    DataAccessLayer dataAccessLayer = new DataAccessLayer();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +62,14 @@ public class sing_up_sick extends AppCompatActivity {
                 }
                 s.InPutSick(sickmap);
                 s.InputShare(sickmap, false);
+                String CheckDataBase = dataAccessLayer.getsick(s.S_Full_Name,s.Email,s.Password);
+                switch (CheckDataBase){
+                    case "User":return;
+                    case "Email":return;
+                    case "Password":return;
+                    default:break;
+                }
+                boolean CheckSet = dataAccessLayer.SetSick(s);
                 WriteToXml();
                 This();
                 loading_screen.startLoadingDialog();
