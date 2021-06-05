@@ -1,5 +1,6 @@
 package com.example.the_health_compass;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -51,13 +52,14 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class main_activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class main_activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private int counttouch = 0;
     private DrawerLayout drawer;
-    private Button open_;
+    private Button open_,btn_Sign_in_3,btn_Sign_up_1;
     static TextView UserName,UserEmail;
     String UserNameX,UserEmailX;
     ArrayList<String> rolev;
+    View view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,9 +76,27 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new home_page()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new home_page()).commit();
             navigationView.setCheckedItem(R.id.home_page);
         }
+    }
+    @Override
+    public void onClick(View v) {
+        if (v.getId()==R.id.btn_Sign_IN_3){
+            OpenSignIn();
+        }
+        else if (v.getId()==R.id.btn_Sign_up_1){
+            OpenSignUp();
+        }
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        btn_Sign_in_3 = (Button)findViewById(R.id.btn_Sign_IN_3);
+        btn_Sign_in_3.setOnClickListener(this);
+        btn_Sign_up_1 = (Button) findViewById(R.id.btn_Sign_up_1);
+        btn_Sign_up_1.setOnClickListener(this);
     }
 
     @Override
@@ -116,8 +136,6 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Settings_page()).commit();
         }
         drawer.closeDrawer(GravityCompat.START);
-
-
         return true;
     }
 
@@ -178,5 +196,13 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             value = nl.item(0).getFirstChild().getNodeValue();
         }
         return value;
+    }
+    public void OpenSignIn(){
+        Intent intent = new Intent(this,sing_in.class);
+        startActivity(intent);
+    }
+    public void OpenSignUp(){
+        Intent intent = new Intent(this,sing_up_sick.class);
+        startActivity(intent);
     }
 }

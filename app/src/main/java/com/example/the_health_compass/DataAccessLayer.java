@@ -18,8 +18,10 @@ public class DataAccessLayer {
         ConnectionHelper connectionHelper = new ConnectionHelper();
         connect = connectionHelper.connections();
     }
+    //Set Sick By Prosedure Insert_Sick
     public boolean SetSick(Sick s){
         try {
+            //Check The Connection Successfull By Internet
             if (connect==null){
                 ConnectionResult="Check Your Internet Access!";
             }
@@ -47,12 +49,14 @@ public class DataAccessLayer {
         }
         return false;
     }
+    // Get Information Sick By UserName or Email or Password
     public String getsick(String UserName,String Email,String Password){
         try {
             if (connect==null){
                 ConnectionResult="Check Your Internet Access!";
             }
             else{
+                //Get Information Sick By UserName
                 String query = "select * from TBLSick where Sick_Full_Name='"+UserName+"';";
                 Statement stat = connect.createStatement();
                 ResultSet rs = stat.executeQuery(query);
@@ -62,6 +66,7 @@ public class DataAccessLayer {
                     connect.close();
                     return "User";
                 }
+                //Get Information Sick By Email
                 String query1 = "select * from TBLSick where Sick_Email='"+Email+"';";
                 stat = connect.createStatement();
                 rs = stat.executeQuery(query);
@@ -71,6 +76,7 @@ public class DataAccessLayer {
                     connect.close();
                     return "Email";
                 }
+                //Get Information Sick By Password
                 String query2 = "select * from TBLSick where Sick_Password='"+Password+"';";
                 stat = connect.createStatement();
                 rs = stat.executeQuery(query);

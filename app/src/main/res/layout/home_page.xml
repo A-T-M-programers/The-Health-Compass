@@ -15,7 +15,7 @@
         android:padding="10dp"
         app:layout_constraintTop_toTopOf="parent">
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_Sign_IN_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="تسجيل دخول"
@@ -27,7 +27,7 @@
             app:layout_constraintVertical_bias="0.155" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_Sign_up_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="إنشاء حساب"

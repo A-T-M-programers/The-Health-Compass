@@ -21,18 +21,21 @@
             android:name=".consult_house"
             tools:ignore="Instantiatable" />
         <activity android:name=".sing_up_sick" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".medical_advice"
             tools:ignore="Instantiatable" />
         <activity android:name=".sign_up" />
+        <activity
+            android:name=".sing_in"
+            tools:ignore="Instantiatable" />
         <activity android:name=".main_activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -11,7 +11,9 @@ import android.util.Log;
 public class ConnectionHelper {
     String IP,DB,DBUserName,DBPassword,port;
     @SuppressLint("NewApi")
+    //Found DataBase and Format the Connection
     public Connection connections(){
+        //Information the connection
         IP = "192.168.43.65";
         DB = "AndroidDataBase";
         DBUserName = "Tofiq";
@@ -24,6 +26,7 @@ public class ConnectionHelper {
         String Connectionurl = null;
 
         try {
+            //Format The Connection
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
             Connectionurl = "jdbc:jtds:sqlserver://" + IP + ":" + port+ ";databaseName=" + DB + ";user=" + DBUserName + ";password=" + DBPassword + ";";
             connection = DriverManager.getConnection(Connectionurl);
