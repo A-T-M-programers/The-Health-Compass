@@ -8,6 +8,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 import androidx.core.app.SharedElementCallback;
 import androidx.core.app.TaskStackBuilder;
 import androidx.core.view.GravityCompat;
@@ -15,6 +16,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.app.Application;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -204,5 +207,18 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
     public void OpenSignUp(){
         Intent intent = new Intent(this,sing_up_sick.class);
         startActivity(intent);
+    }
+    NotificationManager manager;
+    static  int notID=1;
+    public void buclick(View view) {
+        NotificationCompat.Builder rold = new NotificationCompat.Builder(this);
+        rold.setContentTitle("Danger");
+        rold.setContentTitle("تم الارسال بنجاح");
+        //rold.setSmallIcon();
+        manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notification = new Notification();
+        manager.notify(1, rold.build());
+        notID++;
+
     }
 }
