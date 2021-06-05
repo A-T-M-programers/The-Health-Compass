@@ -2,27 +2,33 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.the_health_compass">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
-        android:debuggable="true"
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@mipmap/ic_app"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_app"
         android:supportsRtl="true"
         android:theme="@style/Theme.TheHealthCompass"
         tools:ignore="HardcodedDebugMode">
-        <activity android:name=".consult_house_doctor"></activity>
+        <activity android:name=".Notification_Page"></activity>
+        <activity android:name=".Adivertisement_Management_Page" />
+        <activity android:name=".Medical_Advice_Management_Page" />
+        <activity android:name=".Doctor_Management_Page" />
+        <activity android:name=".Sick_Management_Page" />
+        <activity android:name=".Control_Panel_Page" />
+        <activity android:name=".consult_house_doctor" />
         <activity android:name=".Edit_Profile_Sick" />
         <activity
             android:name=".sick_profile"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".consult_house"
+            android:name="com.example.the_health_compass.consult_house"
             tools:ignore="Instantiatable" />
-        <activity android:name=".sing_up_sick" >
-
-        </activity>
+        <activity android:name=".sing_up_sick" />
         <activity
             android:name=".medical_advice"
             tools:ignore="Instantiatable" />

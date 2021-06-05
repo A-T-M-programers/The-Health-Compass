@@ -62,9 +62,10 @@
     <string name="dark_mode">الوضع الليلي</string>
     <string name="todo">TODO</string>
     <string name="notification">الإشعارات</string>
-    <string name="invalid_name">"Please Enter Valid Name "</string>
-    <string name="invalid_email">Please Enter Valid Email</string>
-    <string name="invalid_password">Please Enter Valid Password</string>
-    <string name="invalid_confirm_password">Password dose not match</string>
-    <string name="invalid_mobile_phone_number">Please Enter Valid Number</string>
+    <string name="invalid_name">"الرجاء إدخال اسم مستخدم صحيح"</string>
+    <string name="invalid_email">الرجاء إدخال بريد إلكتروني صحيح</string>
+    <string name="invalid_password">الرجاء إدخال كلمة مرور صحيحة</string>
+    <string name="invalid_confirm_password">عدم تطابق كلمة المرور</string>
+    <string name="invalid_mobile_phone_number">الرجاء إدخال رقم هاتف محمول صحيح</string>
+    <string name="invalid_birthday">الرجاء إدخال تاريخ ميلاد صحيح</string>
 </resources>

@@ -5,10 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
+
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -23,6 +29,7 @@ import javax.xml.transform.stream.*;
 import org.w3c.dom.*;
 
 public class sing_up_sick extends AppCompatActivity {
+    AwesomeValidation awesomeValidation;
     HashMap<String, String> sickmap = new HashMap<String, String>();
     Button CreatAccount;
     Sick s = new Sick();
@@ -30,11 +37,24 @@ public class sing_up_sick extends AppCompatActivity {
     RadioButton[] radioButton = new RadioButton[2];
     loading_screen loading_screen = new loading_screen(sing_up_sick.this);
     DataAccessLayer dataAccessLayer = new DataAccessLayer();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_in_sick);
+
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+        awesomeValidation.addValidation(this, R.id.et_full_name, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
+        awesomeValidation.addValidation(this, R.id.et_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
+        awesomeValidation.addValidation(this, R.id.et_check_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
+        awesomeValidation.addValidation(this, R.id.et_password, ".{6,}", R.string.invalid_password);
+        awesomeValidation.addValidation(this, R.id.ed_config_password, R.id.et_password, R.string.invalid_confirm_password);
+        awesomeValidation.addValidation(this, R.id.et_mobile_phone, Patterns.PHONE, R.string.invalid_mobile_phone_number);
+        awesomeValidation.addValidation(this, R.id.ed_birthday, "^(?:(?:31(\\\\/|-|\\\\.)(?:0?[13578]|1[02]))\\\\1|(?:(?:29|30)(\\\\/|-|\\\\.)(?:0?[1,3-9]|1[0-2])\\\\2))(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$|^(?:29(\\\\/|-|\\\\.)0?2\\\\3(?:(?:(?:1[6-9]|[2-9]\\\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\\\d|2[0-8])(\\\\/|-|\\\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\\\4(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$", R.string.invalid_birthday);
+
+
         //Get Controler to this class
+
         editTexts[0] = (EditText) findViewById(R.id.et_full_name);
         editTexts[1] = (EditText) findViewById(R.id.et_email);
         editTexts[2] = (EditText) findViewById(R.id.et_check_email);
@@ -48,50 +68,63 @@ public class sing_up_sick extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // Add The Data to HashMap
-                sickmap.put("S_Full_Name", editTexts[0].getText().toString());
-                sickmap.put("Email", editTexts[1].getText().toString());
-                sickmap.put("Check_Email", editTexts[2].getText().toString());
-                sickmap.put("Password", editTexts[3].getText().toString());
-                sickmap.put("Phone_Mobile", editTexts[4].getText().toString());
-                sickmap.put("S_Birthday", editTexts[5].getText().toString());
-                if (radioButton[0].isChecked()) {
-                    sickmap.put("S_Gender", radioButton[0].getText().toString());
-                } else {
-                    sickmap.put("S_Gender", radioButton[1].getText().toString());
-                }
-                //Add Information Sick to class sick
-                s.InPutSick(sickmap);
-                s.InputShare(sickmap, false);
-                String CheckDataBase = dataAccessLayer.getsick(s.S_Full_Name,s.Email,s.Password);
-                //Check if Sink Found in DataBase
-                switch (CheckDataBase){
-                    case "User":return;
-                    case "Email":return;
-                    case "Password":return;
-                    default:break;
-                }
-                //Add sick to database
-                boolean CheckSet = dataAccessLayer.SetSick(s);
-                //Add sick to File Xml
-                WriteToXml();
-                This();
-                loading_screen.startLoadingDialog();
-                Handler handler=new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                    loading_screen.dismissDialog();
+                if (awesomeValidation.validate()) {
+                    // Add The Data to HashMap
+                    sickmap.put("S_Full_Name", editTexts[0].getText().toString());
+                    sickmap.put("Email", editTexts[1].getText().toString());
+                    sickmap.put("Check_Email", editTexts[2].getText().toString());
+                    sickmap.put("Password", editTexts[3].getText().toString());
+                    sickmap.put("Phone_Mobile", editTexts[4].getText().toString());
+                    sickmap.put("S_Birthday", editTexts[5].getText().toString());
+                    if (radioButton[0].isChecked()) {
+                        sickmap.put("S_Gender", radioButton[0].getText().toString());
+                    } else {
+                        sickmap.put("S_Gender", radioButton[1].getText().toString());
                     }
-                },5000);
+                    //Add Information Sick to class sick
+                    s.InPutSick(sickmap);
+                    s.InputShare(sickmap, false);
+                    String CheckDataBase = dataAccessLayer.getsick(s.S_Full_Name, s.Email, s.Password);
+                    //Check if Sink Found in DataBase
+                    switch (CheckDataBase) {
+                        case "User":
+                            return;
+                        case "Email":
+                            return;
+                        case "Password":
+                            return;
+                        default:
+                            break;
+                    }
+                    //Add sick to database
+                    boolean CheckSet = dataAccessLayer.SetSick(s);
+                    //Add sick to File Xml
+                    WriteToXml();
+                    This();
+                    loading_screen.startLoadingDialog();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            loading_screen.dismissDialog();
+                        }
+                    }, 5000);
+                    Toast.makeText(getApplicationContext(),"بيانات صحيحة",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"بيانات خاطئة",Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
     }
+
     //Move to home page
     public void This() {
         Intent intent = new Intent(this, main_activity.class);
         startActivity(intent);
     }
+
     //Write data sick on file xml
     public void WriteToXml() {
         Document dom;

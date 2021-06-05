@@ -3,21 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:backgroundTint="@color/teal_700"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".consult_house">
+    tools:context="com.example.the_health_compass.consult_house">
 
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="571dp"
-        android:layout_height="849dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.048"
-        app:srcCompat="@drawable/backgroundimage"
-        android:contentDescription="TODO" />
+
 
     <TextView
         android:id="@+id/tv_consult_house"
