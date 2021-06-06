@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:backgroundTint="@color/teal_700"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context="com.example.the_health_compass.consult_house">
 
-
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:src="@drawable/backgroundimage"
+    android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/tv_consult_house"

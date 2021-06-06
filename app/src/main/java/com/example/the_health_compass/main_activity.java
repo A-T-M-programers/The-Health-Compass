@@ -132,6 +132,9 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             case R.id.consult_house:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new consult_house()).commit();
                 break;
+            case R.id.notification:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Notification_Page()).commit();
+                break;
             case R.id.profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new sick_profile()).commit();
                 break;
