@@ -40,6 +40,23 @@ public class sing_in extends AppCompatActivity {
         });
         create_account =(TextView)findViewById(R.id.tv_create_account);
 
+        btn_Sign_in = (Button)findViewById(R.id.btn_sign_in) ;
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+        awesomeValidation.addValidation(this,R.id.ed_user_name, RegexTemplate.NOT_EMPTY,R.string.invalid_name);
+        awesomeValidation.addValidation(this,R.id.ed_password,".{6,}", R.string.invalid_password);
+
+        btn_Sign_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(awesomeValidation.validate()){
+                    Toast.makeText(getApplicationContext(),"بيانات صحيحة",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"بيانات خاطئة",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         create_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

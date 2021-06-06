@@ -65,7 +65,7 @@
     <string name="invalid_name">"الرجاء إدخال اسم مستخدم صحيح"</string>
     <string name="invalid_email">الرجاء إدخال بريد إلكتروني صحيح</string>
     <string name="invalid_password">الرجاء إدخال كلمة مرور صحيحة</string>
-    <string name="invalid_confirm_password">عدم تطابق كلمة المرور</string>
-    <string name="invalid_mobile_phone_number">الرجاء إدخال رقم هاتف محمول صحيح</string>
+    <string name="invalid_confirm_password">الرجاء التأكد من كلمة المرور</string>
+    <string name="invalid_mobile_phone_number">الرجاء إدخال رقم هاتف صحيح</string>
     <string name="invalid_birthday">الرجاء إدخال تاريخ ميلاد صحيح</string>
 </resources>

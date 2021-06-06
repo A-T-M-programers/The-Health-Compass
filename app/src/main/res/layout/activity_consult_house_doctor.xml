@@ -7,6 +7,10 @@
     android:background="@drawable/background_medical_advice"
     tools:context=".consult_house_doctor">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="عمر المرض" />
 
     <LinearLayout
         android:orientation="vertical"

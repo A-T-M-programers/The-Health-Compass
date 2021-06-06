@@ -54,7 +54,6 @@ public class sing_up_sick extends AppCompatActivity {
 
 
         //Get Controler to this class
-
         editTexts[0] = (EditText) findViewById(R.id.et_full_name);
         editTexts[1] = (EditText) findViewById(R.id.et_email);
         editTexts[2] = (EditText) findViewById(R.id.et_check_email);
@@ -68,7 +67,10 @@ public class sing_up_sick extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 if (awesomeValidation.validate()) {
+
+
                     // Add The Data to HashMap
                     sickmap.put("S_Full_Name", editTexts[0].getText().toString());
                     sickmap.put("Email", editTexts[1].getText().toString());
@@ -110,13 +112,12 @@ public class sing_up_sick extends AppCompatActivity {
                         }
                     }, 5000);
                     Toast.makeText(getApplicationContext(),"بيانات صحيحة",Toast.LENGTH_SHORT).show();
-                }
-                else{
+
+                } else {
                     Toast.makeText(getApplicationContext(),"بيانات خاطئة",Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
 
     //Move to home page
