@@ -150,6 +150,28 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             super.onBackPressed();
         }
     }
+
+    public void OpenSignIn(){
+        Intent intent = new Intent(this,sing_in.class);
+        startActivity(intent);
+    }
+    public void OpenSignUp(){
+        Intent intent = new Intent(this,sing_up_sick.class);
+        startActivity(intent);
+    }
+    NotificationManager manager;
+    static  int notID=1;
+    public void buclick(View view) {
+        NotificationCompat.Builder rold = new NotificationCompat.Builder(this);
+        rold.setContentTitle("Danger");
+        rold.setContentTitle("تم الارسال بنجاح");
+        //rold.setSmallIcon();
+        manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notification = new Notification();
+        manager.notify(1, rold.build());
+        notID++;
+
+    }
     public boolean readXML() {
         rolev = new ArrayList<String>();
         Document dom;
@@ -157,7 +179,12 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         try {
             // use the factory to take an instance of the document builder
-            DocumentBuilder db = dbf.newDocumentBuilder();
+            DocumentBuilder db = null;
+            try {
+                db = dbf.newDocumentBuilder();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            }
             // parse using the builder to get the DOM mapping of the
             // XML file
             String filePath = this.getFilesDir().getPath().toString()+"/Sick.xml";
@@ -181,8 +208,6 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             }
             return true;
 
-        } catch (ParserConfigurationException pce) {
-            System.out.println(pce.getMessage());
         } catch (SAXException se) {
             System.out.println(se.getMessage());
         } catch (IOException ioe) {
@@ -191,7 +216,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
 
         return false;
     }
-    private String getTextValue(String def, Element doc, String tag) {
+    private static String getTextValue(String def, Element doc, String tag) {
         String value = def;
         NodeList nl;
         nl = doc.getElementsByTagName(tag);
@@ -199,26 +224,5 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             value = nl.item(0).getFirstChild().getNodeValue();
         }
         return value;
-    }
-    public void OpenSignIn(){
-        Intent intent = new Intent(this,sing_in.class);
-        startActivity(intent);
-    }
-    public void OpenSignUp(){
-        Intent intent = new Intent(this,sing_up_sick.class);
-        startActivity(intent);
-    }
-    NotificationManager manager;
-    static  int notID=1;
-    public void buclick(View view) {
-        NotificationCompat.Builder rold = new NotificationCompat.Builder(this);
-        rold.setContentTitle("Danger");
-        rold.setContentTitle("تم الارسال بنجاح");
-        //rold.setSmallIcon();
-        manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = new Notification();
-        manager.notify(1, rold.build());
-        notID++;
-
     }
 }

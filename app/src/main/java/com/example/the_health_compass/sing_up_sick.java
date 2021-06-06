@@ -17,6 +17,8 @@ import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
@@ -101,7 +103,7 @@ public class sing_up_sick extends AppCompatActivity {
                     //Add sick to database
                     boolean CheckSet = dataAccessLayer.SetSick(s);
                     //Add sick to File Xml
-                    WriteToXml();
+                    WriteToXml(s);
                     This();
                     loading_screen.startLoadingDialog();
                     Handler handler = new Handler();
@@ -116,6 +118,42 @@ public class sing_up_sick extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(),"بيانات خاطئة",Toast.LENGTH_SHORT).show();
                 }
+                // Add The Data to HashMap
+                sickmap.put("S_Full_Name", editTexts[0].getText().toString());
+                sickmap.put("Email", editTexts[1].getText().toString());
+                sickmap.put("Check_Email", editTexts[2].getText().toString());
+                sickmap.put("Password", editTexts[3].getText().toString());
+                sickmap.put("Phone_Mobile", editTexts[4].getText().toString());
+                sickmap.put("S_Birthday", editTexts[5].getText().toString());
+                if (radioButton[0].isChecked()) {
+                    sickmap.put("S_Gender", radioButton[0].getText().toString());
+                } else {
+                    sickmap.put("S_Gender", radioButton[1].getText().toString());
+                }
+                //Add Information Sick to class sick
+                s.InPutSick(sickmap);
+                s.InputShare(sickmap, false);
+                String CheckDataBase = dataAccessLayer.getsick(s.S_Full_Name,s.Email,s.Password);
+                //Check if Sink Found in DataBase
+                switch (CheckDataBase){
+                    case "User":return;
+                    case "Email":return;
+                    case "Password":return;
+                    default:break;
+                }
+                //Add sick to database
+                boolean CheckSet = dataAccessLayer.SetSick(s);
+                //Add sick to File Xml
+                WriteToXml(s);
+                This();
+                loading_screen.startLoadingDialog();
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                    loading_screen.dismissDialog();
+                    }
+                },5000);
             }
         });
     }
@@ -127,7 +165,8 @@ public class sing_up_sick extends AppCompatActivity {
     }
 
     //Write data sick on file xml
-    public void WriteToXml() {
+    public void WriteToXml(Sick s) {
+
         Document dom;
         Element e;
         // instance of a DocumentBuilderFactory
@@ -182,22 +221,31 @@ public class sing_up_sick extends AppCompatActivity {
                 tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
                 tr.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "Sick.dtd");
                 tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-                String filePath = this.getFilesDir().getPath().toString() + "/Sick.xml";
+                String filePath = this.getFilesDir().getPath().toString()+"/Sick.xml";
                 File f = new File(filePath);
-                StreamResult streamResult = new StreamResult(new FileWriter(f));
                 StreamResult streamResult1 = new StreamResult(System.out);
+                StreamResult streamResult = null;
+                try {
+                    streamResult = new StreamResult(new FileWriter(f));
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
+
                 // send DOM to file
                 //tr.transform(new DOMSource(dom),streamResult1);
                 tr.transform(new DOMSource(dom), streamResult);
 
             } catch (TransformerException te) {
                 System.out.println(te.getMessage());
-            } catch (IOException te) {
+            }catch (IOException te){
                 System.out.println(te.getMessage());
             }
         } catch (ParserConfigurationException pce) {
             System.out.println("UsersXML: Error trying to instantiate DocumentBuilder " + pce);
-        } finally {
+        }/*catch (IOException te){
+            System.out.println(te.getMessage());
+        }*/
+        finally {
 
         }
     }

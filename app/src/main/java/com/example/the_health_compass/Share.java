@@ -7,8 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Share {
-    protected String ID,Phone_Mobile,Password,Email,Check_Email,Subscription;
-    protected Image Personal_Image;
+    protected String ID,Phone_Mobile,Password,Email,Check_Email,Subscription,Creat_Date,Personal_Image;
     protected boolean Blocking;
     int id = 0;
     public void InputShare(HashMap<String,String> sick, boolean Blocking){
@@ -19,5 +18,16 @@ public class Share {
         this.Password = sick.get("Password");
         this.Phone_Mobile = sick.get("Phone_Mobile");
         id++;
+    }
+    public Share(){
+        this.ID = "";
+        this.Creat_Date = "";
+        this.Check_Email = "";
+        this.Email = "";
+        this.Password = "";
+        this.Personal_Image = "";
+        this.Phone_Mobile = "";
+        this.Subscription = "";
+        this.Blocking = false;
     }
 }

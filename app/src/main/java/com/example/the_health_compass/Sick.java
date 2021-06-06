@@ -13,4 +13,10 @@ public class Sick extends Share{
         this.S_Gender = sick.get("S_Gender");
         //this.S_Last_Name = sick.get("S_Last_Name");
     }
+    public Sick(){
+        this.S_Full_Name = "";
+        this.S_Gender = "";
+        this.S_Location = "";
+        this.S_Birthday = "";
+    }
 }

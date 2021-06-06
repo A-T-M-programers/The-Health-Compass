@@ -1,5 +1,7 @@
 package com.example.the_health_compass;
 
+import android.graphics.Path;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,23 +11,39 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.prefs.PreferenceChangeEvent;
 
 public class DataAccessLayer {
     Connection connect;
     String ConnectionResult = "";
     Boolean isSucces=false;
+    ConnectionHelper connectionHelper;
     public DataAccessLayer(){
-        ConnectionHelper connectionHelper = new ConnectionHelper();
+        connectionHelper = new ConnectionHelper();
         connect = connectionHelper.connections();
     }
+
+    public void Open(){
+        try {
+            if (connect.isClosed()){
+                connect = connectionHelper.connections();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     //Set Sick By Prosedure Insert_Sick
     public boolean SetSick(Sick s){
         try {
+            Open();
             //Check The Connection Successfull By Internet
             if (connect==null){
                 ConnectionResult="Check Your Internet Access!";
             }
             else{
+
                 PreparedStatement statement = connect.prepareStatement("EXEC Insert_Sick "+s.ID+",'"+s.S_Full_Name+"'," +
                         "'"+s.Email+"','"+s.Password+"','"+s.S_Location+"','"+s.Subscription+"',"+
                         "'"+s.Check_Email+"','"+s.Blocking+"','"+s.Personal_Image+"'," +
@@ -52,6 +70,7 @@ public class DataAccessLayer {
     // Get Information Sick By UserName or Email or Password
     public String getsick(String UserName,String Email,String Password){
         try {
+            Open();
             if (connect==null){
                 ConnectionResult="Check Your Internet Access!";
             }
@@ -97,5 +116,51 @@ public class DataAccessLayer {
             ConnectionResult=throwables.getMessage();
         }
         return "Not Found";
+    }
+    public String check_sick_sign_in(String UserName, String Password, AtomicReference<Sick> s){
+        try {
+            Open();
+            if (connect==null){
+                ConnectionResult="Check Your Internet Access!";
+            }
+            else{
+                //Get Information Sick By UserName
+                String query = "select * from TBLSick where Sick_Full_Name='"+UserName+"' and Sick_Password='"+Password+"';";
+                Statement stat = connect.createStatement();
+                ResultSet rs = stat.executeQuery(query);
+                if (rs.next()) {
+                    Sick sick = new Sick();
+                    try {
+                        sick.ID = rs.getString(1);
+                        sick.S_Full_Name = rs.getString(2);
+                        sick.Email = rs.getString(3);
+                        sick.Password = rs.getString(4);
+                        sick.S_Location = rs.getString(5);
+                        sick.Subscription = rs.getString(6);
+                        sick.Check_Email = rs.getString(7);
+                        sick.Blocking = rs.getBoolean(8);
+                        sick.Personal_Image = rs.getString(9);
+                        sick.Creat_Date = rs.getString(10);
+                        sick.S_Gender = rs.getString(11);
+                        s.set(sick);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    ConnectionResult = "Successfull";
+                    isSucces = true;
+                    connect.close();
+                    return "User";
+                }
+                else {
+                    connect.close();
+                    return "Not Found";
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            isSucces = false;
+            ConnectionResult=throwables.getMessage();
+        }
+        return "Faild Access!";
     }
 }
