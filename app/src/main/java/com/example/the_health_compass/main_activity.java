@@ -190,13 +190,15 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             }
             // parse using the builder to get the DOM mapping of the
             // XML file
-            String filePath = this.getFilesDir().getPath().toString()+"/Sick.xml";
+            //String filePath = this.getFilesDir().getPath().toString()+"/Sick.xml";
+            String filePath = this.getFilesDir().getPath().toString()+"/Doctor.xml";
             File f = new File(filePath);
             dom = db.parse(f);
 
             Element doc = dom.getDocumentElement();
 
-            UserNameX = getTextValue(UserNameX, doc, "S_Full_Name");
+            //UserNameX = getTextValue(UserNameX, doc, "S_Full_Name");
+            UserNameX = getTextValue(UserNameX, doc, "D_Full_Name");
 
             //UserNameX += " " + getTextValue(UserNameX, doc, "S_Last_Name");
 

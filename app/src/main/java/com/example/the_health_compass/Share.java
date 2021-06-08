@@ -19,6 +19,15 @@ public class Share {
         this.Phone_Mobile = sick.get("Phone_Mobile");
         id++;
     }
+    public void InputShareDoctor(HashMap<String,String> Doctor,boolean Blocking){
+        this.Blocking = Blocking;
+        this.Check_Email = Doctor.get("Check_Email");
+        this.Email = Doctor.get("Email");
+        this.ID = String.valueOf(id);
+        this.Password = Doctor.get("Password");
+        this.Phone_Mobile = Doctor.get("Mobile_Phone");
+        id++;
+    }
     public Share(){
         this.ID = "";
         this.Creat_Date = "";

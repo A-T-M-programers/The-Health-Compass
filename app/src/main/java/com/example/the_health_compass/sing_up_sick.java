@@ -52,7 +52,7 @@ public class sing_up_sick extends AppCompatActivity {
         awesomeValidation.addValidation(this, R.id.et_password, ".{6,}", R.string.invalid_password);
         awesomeValidation.addValidation(this, R.id.ed_config_password, R.id.et_password, R.string.invalid_confirm_password);
         awesomeValidation.addValidation(this, R.id.et_mobile_phone, Patterns.PHONE, R.string.invalid_mobile_phone_number);
-        awesomeValidation.addValidation(this, R.id.ed_birthday, "^(?:(?:31(\\\\/|-|\\\\.)(?:0?[13578]|1[02]))\\\\1|(?:(?:29|30)(\\\\/|-|\\\\.)(?:0?[1,3-9]|1[0-2])\\\\2))(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$|^(?:29(\\\\/|-|\\\\.)0?2\\\\3(?:(?:(?:1[6-9]|[2-9]\\\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\\\d|2[0-8])(\\\\/|-|\\\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\\\4(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$", R.string.invalid_birthday);
+        //awesomeValidation.addValidation(this, R.id.ed_birthday, "^(?:(?:31(\\\\/|-|\\\\.)(?:0?[13578]|1[02]))\\\\1|(?:(?:29|30)(\\\\/|-|\\\\.)(?:0?[1,3-9]|1[0-2])\\\\2))(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$|^(?:29(\\\\/|-|\\\\.)0?2\\\\3(?:(?:(?:1[6-9]|[2-9]\\\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\\\d|2[0-8])(\\\\/|-|\\\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\\\4(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$", R.string.invalid_birthday);
 
 
         //Get Controler to this class
@@ -71,8 +71,6 @@ public class sing_up_sick extends AppCompatActivity {
 
 
                 if (awesomeValidation.validate()) {
-
-
                     // Add The Data to HashMap
                     sickmap.put("S_Full_Name", editTexts[0].getText().toString());
                     sickmap.put("Email", editTexts[1].getText().toString());
@@ -88,20 +86,20 @@ public class sing_up_sick extends AppCompatActivity {
                     //Add Information Sick to class sick
                     s.InPutSick(sickmap);
                     s.InputShare(sickmap, false);
-                    String CheckDataBase = dataAccessLayer.getsick(s.S_Full_Name, s.Email, s.Password);
-                    //Check if Sink Found in DataBase
-                    switch (CheckDataBase) {
-                        case "User":
-                            return;
-                        case "Email":
-                            return;
-                        case "Password":
-                            return;
-                        default:
-                            break;
-                    }
-                    //Add sick to database
-                    boolean CheckSet = dataAccessLayer.SetSick(s);
+//                    String CheckDataBase = dataAccessLayer.getsick(s.S_Full_Name, s.Email, s.Password);
+//                    //Check if Sink Found in DataBase
+//                    switch (CheckDataBase) {
+//                        case "User":
+//                            return;
+//                        case "Email":
+//                            return;
+//                        case "Password":
+//                            return;
+//                        default:
+//                            break;
+//                    }
+//                    //Add sick to database
+//                    boolean CheckSet = dataAccessLayer.SetSick(s);
                     //Add sick to File Xml
                     WriteToXml(s);
                     This();
@@ -113,47 +111,11 @@ public class sing_up_sick extends AppCompatActivity {
                             loading_screen.dismissDialog();
                         }
                     }, 5000);
-                    Toast.makeText(getApplicationContext(),"بيانات صحيحة",Toast.LENGTH_SHORT).show();
+                //    Toast.makeText(getApplicationContext(),"بيانات صحيحة",Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Toast.makeText(getApplicationContext(),"بيانات خاطئة",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "بيانات خاطئة", Toast.LENGTH_SHORT).show();
                 }
-                // Add The Data to HashMap
-                sickmap.put("S_Full_Name", editTexts[0].getText().toString());
-                sickmap.put("Email", editTexts[1].getText().toString());
-                sickmap.put("Check_Email", editTexts[2].getText().toString());
-                sickmap.put("Password", editTexts[3].getText().toString());
-                sickmap.put("Phone_Mobile", editTexts[4].getText().toString());
-                sickmap.put("S_Birthday", editTexts[5].getText().toString());
-                if (radioButton[0].isChecked()) {
-                    sickmap.put("S_Gender", radioButton[0].getText().toString());
-                } else {
-                    sickmap.put("S_Gender", radioButton[1].getText().toString());
-                }
-                //Add Information Sick to class sick
-                s.InPutSick(sickmap);
-                s.InputShare(sickmap, false);
-                String CheckDataBase = dataAccessLayer.getsick(s.S_Full_Name,s.Email,s.Password);
-                //Check if Sink Found in DataBase
-                switch (CheckDataBase){
-                    case "User":return;
-                    case "Email":return;
-                    case "Password":return;
-                    default:break;
-                }
-                //Add sick to database
-                boolean CheckSet = dataAccessLayer.SetSick(s);
-                //Add sick to File Xml
-                WriteToXml(s);
-                This();
-                loading_screen.startLoadingDialog();
-                Handler handler=new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                    loading_screen.dismissDialog();
-                    }
-                },5000);
             }
         });
     }

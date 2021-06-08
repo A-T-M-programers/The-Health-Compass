@@ -41,6 +41,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
@@ -48,55 +49,31 @@ import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 
 public class sing_in extends AppCompatActivity {
-    private TextView create_account ;
-    Button btn_Sign_in;
+    private TextView create_account;
     AwesomeValidation awesomeValidation;
-    private EditText UserNameOrEmail,Password;
+    private EditText UserNameOrEmail, Password;
     private Button Sign_In;
     DataAccessLayer dataAccessLayer = new DataAccessLayer();
     AtomicReference<Sick> s = new AtomicReference<Sick>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        btn_Sign_in = (Button)findViewById(R.id.btn_sign_in) ;
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
-        awesomeValidation.addValidation(this,R.id.ed_user_name_Sign_In, RegexTemplate.NOT_EMPTY,R.string.invalid_name);
-        awesomeValidation.addValidation(this,R.id.ed_password_Sign_In,".{6,}", R.string.invalid_password);
+        awesomeValidation.addValidation(this, R.id.ed_user_name_Sign_In, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
+        awesomeValidation.addValidation(this, R.id.ed_password_Sign_In, ".{6,}", R.string.invalid_password);
 
-        btn_Sign_in.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(awesomeValidation.validate()){
-                    Toast.makeText(getApplicationContext(),"بيانات صحيحة",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(),"بيانات خاطئة",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
-        UserNameOrEmail = (EditText)findViewById(R.id.ed_user_name_Sign_In);
-        Password = (EditText)findViewById(R.id.ed_password_Sign_In);
+        UserNameOrEmail = (EditText) findViewById(R.id.ed_user_name_Sign_In);
+        Password = (EditText) findViewById(R.id.ed_password_Sign_In);
 
-        create_account =(TextView)findViewById(R.id.tv_create_account);
+        create_account = (TextView) findViewById(R.id.tv_create_account);
 
-        btn_Sign_in = (Button)findViewById(R.id.btn_sign_in) ;
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
-        awesomeValidation.addValidation(this,R.id.ed_user_name, RegexTemplate.NOT_EMPTY,R.string.invalid_name);
-        awesomeValidation.addValidation(this,R.id.ed_password,".{6,}", R.string.invalid_password);
+        awesomeValidation.addValidation(this, R.id.ed_user_name_Sign_In, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
+        awesomeValidation.addValidation(this, R.id.ed_password_Sign_In, ".{6,}", R.string.invalid_password);
 
-        btn_Sign_in.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(awesomeValidation.validate()){
-                    Toast.makeText(getApplicationContext(),"بيانات صحيحة",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(),"بيانات خاطئة",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
         create_account.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,22 +81,27 @@ public class sing_in extends AppCompatActivity {
                 openCreateAccountPage();
             }
         });
-        Sign_In = (Button)findViewById(R.id.btn_sign_in);
+        Sign_In = (Button) findViewById(R.id.btn_sign_in);
         Sign_In.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String check = dataAccessLayer.check_sick_sign_in(UserNameOrEmail.getText().toString(),Password.getText().toString(),s);
-                Check(check);
+                if (awesomeValidation.validate()) {
+                    String check = dataAccessLayer.check_sick_sign_in(UserNameOrEmail.getText().toString(), Password.getText().toString(), s);
+                    Check(check);
+                } else {
+                    Toast.makeText(getApplicationContext(), "بيانات خاطئة", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
-    public void openCreateAccountPage()
-    {
-        Intent intent = new Intent(this,sign_up.class);
+
+    public void openCreateAccountPage() {
+        Intent intent = new Intent(this, sign_up.class);
         startActivity(intent);
     }
-    public void Check(String datacheck){
-        switch (datacheck){
+
+    public void Check(String datacheck) {
+        switch (datacheck) {
             case "Faild Access!":
                 AlertDialog.Builder ad = new AlertDialog.Builder(this)
                         .setTitle("Check Internet")
@@ -127,10 +109,10 @@ public class sing_in extends AppCompatActivity {
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(),"OK is clicked",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "OK is clicked", Toast.LENGTH_LONG).show();
                             }
                         });
-                AlertDialog alertDialog=ad.create();
+                AlertDialog alertDialog = ad.create();
                 alertDialog.show();
                 break;
             case "User":
@@ -144,7 +126,7 @@ public class sing_in extends AppCompatActivity {
                                 OpenHome();
                             }
                         });
-                AlertDialog alertDialog1=ad1.create();
+                AlertDialog alertDialog1 = ad1.create();
                 alertDialog1.show();
                 break;
             case "Not Found":
@@ -154,18 +136,20 @@ public class sing_in extends AppCompatActivity {
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(),"OK is clicked",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "OK is clicked", Toast.LENGTH_LONG).show();
                             }
                         });
-                AlertDialog alertDialog2=ad2.create();
+                AlertDialog alertDialog2 = ad2.create();
                 alertDialog2.show();
                 break;
         }
     }
-    public void OpenHome(){
-        Intent intent = new Intent(this,main_activity.class);
+
+    public void OpenHome() {
+        Intent intent = new Intent(this, main_activity.class);
         startActivity(intent);
     }
+
     public void WriteToXml(Sick s) {
 
         Document dom;
@@ -223,7 +207,7 @@ public class sing_in extends AppCompatActivity {
                 tr.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "Sick.dtd");
                 tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
                 /*String filePath = f.getAbsolutePath();*/
-                String filePath = this.getFilesDir().getPath().toString()+"/Sick.xml";
+                String filePath = this.getFilesDir().getPath().toString() + "/Sick.xml";
                 File f = new File(filePath);
                 StreamResult streamResult1 = new StreamResult(System.out);
                 StreamResult streamResult = null;
@@ -245,8 +229,7 @@ public class sing_in extends AppCompatActivity {
             System.out.println("UsersXML: Error trying to instantiate DocumentBuilder " + pce);
         }/*catch (IOException te){
             System.out.println(te.getMessage());
-        }*/
-        finally {
+        }*/ finally {
 
         }
     }

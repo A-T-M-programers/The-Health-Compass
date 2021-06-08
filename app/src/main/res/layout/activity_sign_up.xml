@@ -98,7 +98,7 @@
             android:layout_marginTop="676dp"
             android:ems="10"
             android:hint="تاريخ الميلاد"
-            android:inputType="date"
+            android:inputType="datetime"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.468"
             app:layout_constraintStart_toStartOf="parent"

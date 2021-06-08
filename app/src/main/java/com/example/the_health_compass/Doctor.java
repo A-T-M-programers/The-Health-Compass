@@ -1,24 +1,21 @@
 package com.example.the_health_compass;
 
-public class Doctor extends G_N
+import java.util.HashMap;
+
+public class Doctor extends Share
 {
-
-    String section;
-    Boolean Home_Res;
-
-    public Boolean getHome_Res() {
-        return Home_Res;
+    String D_Full_Name,D_Location,D_Gender,D_Birthday,D_Able;
+    public void InputDoctor(HashMap<String,String>Doctor){
+        this.D_Full_Name = Doctor.get("D_Full_Name");
+        this.D_Birthday = Doctor.get("Birthday");
+        this.D_Gender = Doctor.get("D_Gender");
+        this.D_Able = Doctor.get("D_Able");
     }
-
-    public void setHome_Res(Boolean home_Res) {
-        Home_Res = home_Res;
-    }
-
-    public String getSection() {
-        return section;
-    }
-
-    public void setSection(String section) {
-        this.section = section;
+    public Doctor(){
+        this.D_Full_Name ="";
+        this.D_Gender="";
+        this.D_Birthday="";
+        this.D_Location="";
+        this.D_Able = "";
     }
 }
