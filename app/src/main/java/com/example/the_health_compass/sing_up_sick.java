@@ -241,7 +241,7 @@ public class sing_up_sick extends AppCompatActivity {
                 tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
                 tr.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "Sick.dtd");
                 tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-                String filePath = this.getFilesDir().getPath().toString()+"/Sick.xml";
+                String filePath = this.getFilesDir().getPath()+"/Sick.xml";
                 File f = new File(filePath);
                 StreamResult streamResult1 = new StreamResult(System.out);
                 StreamResult streamResult = null;

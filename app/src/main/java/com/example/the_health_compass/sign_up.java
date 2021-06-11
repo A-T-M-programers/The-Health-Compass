@@ -196,7 +196,7 @@ public class sign_up extends AppCompatActivity {
                 transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
                 transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "Doctor.dtd");
                 transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-                String filePath = this.getFilesDir().getPath().toString() + "/Doctor.xml";
+                String filePath = this.getFilesDir().getPath() + "/Doctor.xml";
                 System.out.println(filePath);
                 File file = new File(filePath);
                 StreamResult streamResult = new StreamResult(System.out);
@@ -206,7 +206,7 @@ public class sign_up extends AppCompatActivity {
                 } catch (FileNotFoundException fileNotFoundException) {
                     fileNotFoundException.printStackTrace();
                 }
-                transformer.transform(new DOMSource(document), streamResult);
+                transformer.transform(new DOMSource(document), streamResult1);
             } catch (TransformerException transformerException) {
                 System.out.println(transformerException.getMessage());
             } catch (IOException ioException) {
