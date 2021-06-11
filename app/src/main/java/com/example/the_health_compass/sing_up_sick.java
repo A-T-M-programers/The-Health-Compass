@@ -1,13 +1,21 @@
 package com.example.the_health_compass;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.util.Linkify;
+import android.util.Log;
 import android.util.Patterns;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -15,12 +23,14 @@ import android.widget.Toast;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
+import com.santalu.maskedittext.MaskEditText;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import javax.xml.parsers.*;
@@ -35,11 +45,13 @@ public class sing_up_sick extends AppCompatActivity {
     HashMap<String, String> sickmap = new HashMap<String, String>();
     Button CreatAccount;
     Sick s = new Sick();
-    EditText[] editTexts = new EditText[6];
+    EditText[] editTexts = new EditText[5];
     RadioButton[] radioButton = new RadioButton[2];
     loading_screen loading_screen = new loading_screen(sing_up_sick.this);
     DataAccessLayer dataAccessLayer = new DataAccessLayer();
-
+    String lastChar = "";
+    MaskEditText maskedEditText;
+    int counts = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +74,14 @@ public class sing_up_sick extends AppCompatActivity {
         editTexts[1] = (EditText) findViewById(R.id.et_email);
         editTexts[2] = (EditText) findViewById(R.id.et_check_email);
         editTexts[3] = (EditText) findViewById(R.id.et_password);
-        editTexts[4] = (EditText) findViewById(R.id.et_mobile_phone);
-        editTexts[5] = (EditText) findViewById(R.id.ed_birthday);
+        maskedEditText = (MaskEditText) findViewById(R.id.et_mobile_phone);
+        editTexts[4] = (EditText) findViewById(R.id.ed_birthday);
+        editTexts[4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowDialogBirthday(editTexts[4]);
+            }
+        });
         radioButton[0] = (RadioButton) findViewById(R.id.rb_female);
         radioButton[1] = (RadioButton) findViewById(R.id.rb_male);
 
@@ -78,8 +96,8 @@ public class sing_up_sick extends AppCompatActivity {
                     sickmap.put("Email", editTexts[1].getText().toString());
                     sickmap.put("Check_Email", editTexts[2].getText().toString());
                     sickmap.put("Password", editTexts[3].getText().toString());
-                    sickmap.put("Phone_Mobile", editTexts[4].getText().toString());
-                    sickmap.put("S_Birthday", editTexts[5].getText().toString());
+                    sickmap.put("Phone_Mobile", maskedEditText.getText().toString());
+                    sickmap.put("S_Birthday", editTexts[4].getText().toString());
                     if (radioButton[0].isChecked()) {
                         sickmap.put("S_Gender", radioButton[0].getText().toString());
                     } else {
@@ -101,7 +119,7 @@ public class sing_up_sick extends AppCompatActivity {
 //                            break;
 //                    }
                     //Add sick to database
-//                    boolean CheckSet = dataAccessLayer.SetSick(s);
+                    boolean CheckSet = dataAccessLayer.SetSick(s);
                     // Add sick to File Xml
                     WriteToXml(s);
                     This();
@@ -118,6 +136,42 @@ public class sing_up_sick extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "بيانات خاطئة", Toast.LENGTH_SHORT).show();
                 }
+                // Add The Data to HashMap
+                sickmap.put("S_Full_Name", editTexts[0].getText().toString());
+                sickmap.put("Email", editTexts[1].getText().toString());
+                sickmap.put("Check_Email", editTexts[2].getText().toString());
+                sickmap.put("Password", editTexts[3].getText().toString());
+                sickmap.put("Phone_Mobile", maskedEditText.getText().toString());
+                sickmap.put("S_Birthday", editTexts[4].getText().toString());
+                if (radioButton[0].isChecked()) {
+                    sickmap.put("S_Gender", radioButton[0].getText().toString());
+                } else {
+                    sickmap.put("S_Gender", radioButton[1].getText().toString());
+                }
+                //Add Information Sick to class sick
+                s.InPutSick(sickmap);
+                s.InputShare(sickmap, false);
+                String CheckDataBase = dataAccessLayer.getsick(s.S_Full_Name,s.Email,s.Password);
+                //Check if Sink Found in DataBase
+                switch (CheckDataBase){
+                    case "User":return;
+                    case "Email":return;
+                    case "Password":return;
+                    default:break;
+                }
+                //Add sick to database
+                boolean CheckSet = dataAccessLayer.SetSick(s);
+                //Add sick to File Xml
+                WriteToXml(s);
+                This();
+                loading_screen.startLoadingDialog();
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                    loading_screen.dismissDialog();
+                    }
+                },5000);
             }
         });
     }
@@ -206,12 +260,15 @@ public class sing_up_sick extends AppCompatActivity {
             }
         } catch (ParserConfigurationException pce) {
             System.out.println("UsersXML: Error trying to instantiate DocumentBuilder " + pce);
-        }/*catch (IOException te){
-            System.out.println(te.getMessage());
-        }*/
+        }
         finally {
 
         }
     }
+    public void ShowDialogBirthday(EditText editText){
+        DialogFragment newFragment = new DatePickerFragment(editText);
+        newFragment.show(getSupportFragmentManager(), "Date Picker");
+    }
+
 }
 

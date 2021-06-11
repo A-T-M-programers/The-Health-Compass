@@ -118,12 +118,21 @@ public class DataAccessLayer {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
 
-                PreparedStatement statement = connect.prepareStatement("EXEC Insert_Sick " + s.ID + ",'" + s.S_Full_Name + "'," +
-                        "'" + s.Email + "','" + s.Password + "','" + s.S_Location + "','" + s.Subscription + "'," +
-                        "'" + s.Check_Email + "','" + s.Blocking + "','" + s.Personal_Image + "'," +
-                        "'" + s.S_Gender + "'");
+                PreparedStatement statement = connect.prepareStatement("EXEC Insert_Sick "+s.ID+",'"+s.S_Full_Name+"'," +
+                        "'"+s.Email+"','"+s.Password+"','"+s.S_Location+"','"+s.Subscription+"',"+
+                        "'"+s.Check_Email+"','"+s.Blocking+"','"+s.Personal_Image+"'," +
+                        "'"+s.S_Gender+"'");
                 int rs = statement.executeUpdate();
-                if (rs == 1) {
+                PreparedStatement statement1 = connect.prepareStatement("select Sick_ID from TBLSick where Sick_Email='"+s.Email+"'");
+                ResultSet resultSet = statement1.executeQuery();
+                if (resultSet.next()){
+                    ConnectionResult = "Successfull";
+                }
+                PreparedStatement statement2 = connect.prepareStatement("EXEC Insert_Sick_Phone "+resultSet.getString("Sick_ID")+",'"+s.Phone_Mobile+"'");
+                PreparedStatement statement3 = connect.prepareStatement("EXEC Insert_Sick_Age "+resultSet.getString("Sick_ID")+",'"+s.S_Birthday+"'");
+                int rs1 = statement2.executeUpdate();
+                int rs2 = statement3.executeUpdate();
+                if (rs==1&rs1==1&rs2==1) {
                     ConnectionResult = "Successfull";
                     isSucces = true;
                     connect.close();
