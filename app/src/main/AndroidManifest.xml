@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheHealthCompass"
         tools:ignore="HardcodedDebugMode">
-        <activity android:name=".Notification_Page"/>
+        <activity android:name=".Notification_Page"
+            tools:ignore="Instantiatable" />
         <activity android:name=".Adivertisement_Management_Page" />
         <activity android:name=".Medical_Advice_Management_Page" />
         <activity android:name=".Doctor_Management_Page" />

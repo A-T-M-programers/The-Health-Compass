@@ -21,11 +21,11 @@ public class Share {
     }
     public void InputShareDoctor(HashMap<String,String> Doctor,boolean Blocking){
         this.Blocking = Blocking;
-        this.Check_Email = Doctor.get("Check_Email");
+        this.Check_Email = Doctor.get("D_Check_Email");
         this.Email = Doctor.get("D_Email");
         this.ID = String.valueOf(id);
-        this.Password = Doctor.get("Password");
-        this.Phone_Mobile = Doctor.get("Mobile_Phone");
+        this.Password = Doctor.get("D_Password");
+        this.Phone_Mobile = Doctor.get("D_Mobile_Phone");
         id++;
     }
     public Share(){

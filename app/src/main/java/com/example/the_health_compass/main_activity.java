@@ -62,6 +62,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
     static TextView UserName, UserEmail;
     String UserNameX, UserEmailX;
     ArrayList<String> rolev;
+    boolean x;
     View view;
 
     @Override
@@ -183,6 +184,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
     public boolean readXML() {
         rolev = new ArrayList<String>();
         Document dom;
+
         // Make an  instance of the DocumentBuilderFactory
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         try {
@@ -195,16 +197,16 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             }
             // parse using the builder to get the DOM mapping of the
             // XML file
-            String filePath = this.getFilesDir().getPath().toString() + "/Sick.xml";
+            //String filePath = this.getFilesDir().getPath().toString() + "/Sick.xml";
 
-            //String filePath = this.getFilesDir().getPath().toString()+"/Doctor.xml";
+            String filePath = this.getFilesDir().getPath().toString() + "/Doctor.xml";
 
             File f = new File(filePath);
             dom = db.parse(f);
 
             Element doc = dom.getDocumentElement();
-            UserNameX = getTextValue(UserNameX, doc, "S_Full_Name");
-            // UserNameX = getTextValue(UserNameX, doc, "D_Full_Name");
+            //UserNameX = getTextValue(UserNameX, doc, "S_Full_Name");
+            UserNameX = getTextValue(UserNameX, doc, "D_Full_Name");
 
             //UserNameX += " " + getTextValue(UserNameX, doc, "S_Last_Name");
 
@@ -212,8 +214,8 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                 if (!UserNameX.isEmpty())
                     rolev.add(UserNameX);
             }
-            UserEmailX = getTextValue(UserEmailX, doc, "Email");
-            //UserEmailX = getTextValue(UserEmailX, doc, "D_Email");
+            //UserEmailX = getTextValue(UserEmailX, doc, "Email");
+            UserEmailX = getTextValue(UserEmailX, doc, "D_Email");
             if (UserEmailX != null) {
                 if (!UserEmailX.isEmpty())
                     rolev.add(UserNameX);

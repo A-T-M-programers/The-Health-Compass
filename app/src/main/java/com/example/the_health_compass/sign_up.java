@@ -87,7 +87,7 @@ public class sign_up extends AppCompatActivity {
             public void onClick(View v) {
                 if (awesomeValidation.validate()) {
 
-
+                    Toast.makeText(getApplicationContext(), "بيانات صحيحة", Toast.LENGTH_SHORT).show();
 
                     DoctorMap.put("D_Full_Name", editTexts[0].getText().toString());
                     DoctorMap.put("D_Email", editTexts[1].getText().toString());
@@ -120,7 +120,7 @@ public class sign_up extends AppCompatActivity {
 //                    }
 //                    boolean CheckSet = dataAccessLayer.SetDoctor(D);
                     // Write To XML File
-                    WriteToXML(D);
+                    WriteToXMLDoctor(D);
                     This();
                     loading_screen.startLoadingDialog();
                     Handler handler = new Handler();
@@ -130,7 +130,6 @@ public class sign_up extends AppCompatActivity {
                             loading_screen.dismissDialog();
                         }
                     }, 5000);
-                    Toast.makeText(getApplicationContext(), "بيانات صحيحة", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "بيانات خاطئة", Toast.LENGTH_SHORT).show();
                 }
@@ -144,7 +143,7 @@ public class sign_up extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void WriteToXML(Doctor D) {
+    public void WriteToXMLDoctor(Doctor D) {
         Document document;
         Element element;
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -161,7 +160,7 @@ public class sign_up extends AppCompatActivity {
             element.appendChild(document.createTextNode(D.D_Birthday));
             rootElement.appendChild(element);
 
-            element = document.createElement("Email");
+            element = document.createElement("D_Email");
             element.appendChild(document.createTextNode(D.Email));
             rootElement.appendChild(element);
 
@@ -173,15 +172,15 @@ public class sign_up extends AppCompatActivity {
             element.appendChild(document.createTextNode(D.Check_Email));
             rootElement.appendChild(element);
 
-            element = document.createElement("D_ID");
+            element = document.createElement("ID");
             element.appendChild(document.createTextNode(D.ID));
             rootElement.appendChild(element);
 
-            element = document.createElement("D_Password");
+            element = document.createElement("Password");
             element.appendChild(document.createTextNode(D.Password));
             rootElement.appendChild(element);
 
-            element = document.createElement("D_Mobile_Phone");
+            element = document.createElement("Mobile_Phone");
             element.appendChild(document.createTextNode(D.Phone_Mobile));
             rootElement.appendChild(element);
 
@@ -197,7 +196,8 @@ public class sign_up extends AppCompatActivity {
                 transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
                 transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "Doctor.dtd");
                 transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-                String filePath = this.getFilesDir().getPath().toString() + "/Sick.xml";
+                String filePath = this.getFilesDir().getPath().toString() + "/Doctor.xml";
+                System.out.println(filePath);
                 File file = new File(filePath);
                 StreamResult streamResult = new StreamResult(System.out);
                 StreamResult streamResult1 = null;
