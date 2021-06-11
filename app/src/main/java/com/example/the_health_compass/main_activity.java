@@ -26,6 +26,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PersistableBundle;
+import android.provider.DocumentsContract;
 import android.transition.TransitionManager;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -59,7 +60,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
     private int counttouch = 0;
     private DrawerLayout drawer;
     private Button open_, btn_Sign_in_3, btn_Sign_up_1;
-    static TextView UserName, UserEmail;
+    TextView UserName, UserEmail;
     String UserNameX, UserEmailX;
     ArrayList<String> rolev;
     boolean x;
@@ -80,10 +81,12 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+/*
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new home_page()).commit();
             navigationView.setCheckedItem(R.id.home_page);
         }
+*/
     }
 
     @Override
@@ -123,25 +126,30 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
-            case R.id.home_page:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new home_page()).commit();
-                break;
+           case R.id.home_page:
+                  break;
             case R.id.medical_advice:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new medical_advice()).commit();
+                intent = new Intent(this,medical_advice.class);
+                startActivity(intent);
                 break;
             case R.id.consult_house:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new consult_house()).commit();
+                intent = new Intent(this,consult_house.class);
+                startActivity(intent);
                 break;
             case R.id.notification:
-                Intent intent = new Intent(this,Notification_Page.class);
+                intent = new Intent(this, Notification_Page.class);
                 startActivity(intent);
                 break;
             case R.id.profile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new sick_profile()).commit();
+                intent =new Intent(this,sick_profile.class);
+                startActivity(intent);
                 break;
             case R.id.settings:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Settings_page()).commit();
+                intent = new Intent(this,Settings_page.class);
+                startActivity(intent);
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -197,16 +205,16 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             }
             // parse using the builder to get the DOM mapping of the
             // XML file
-            //String filePath = this.getFilesDir().getPath().toString() + "/Sick.xml";
+            String filePath = this.getFilesDir().getPath().toString() + "/Sick.xml";
 
-            String filePath = this.getFilesDir().getPath().toString() + "/Doctor.xml";
+            //String filePath = this.getFilesDir().getPath().toString() + "/Doctor.xml";
 
             File f = new File(filePath);
             dom = db.parse(f);
 
             Element doc = dom.getDocumentElement();
-            //UserNameX = getTextValue(UserNameX, doc, "S_Full_Name");
-            UserNameX = getTextValue(UserNameX, doc, "D_Full_Name");
+            UserNameX = getTextValue(UserNameX, doc, "S_Full_Name");
+            //UserNameX = getTextValue(UserNameX, doc, "D_Full_Name");
 
             //UserNameX += " " + getTextValue(UserNameX, doc, "S_Last_Name");
 
@@ -214,8 +222,8 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                 if (!UserNameX.isEmpty())
                     rolev.add(UserNameX);
             }
-            //UserEmailX = getTextValue(UserEmailX, doc, "Email");
-            UserEmailX = getTextValue(UserEmailX, doc, "D_Email");
+            UserEmailX = getTextValue(UserEmailX, doc, "Email");
+            //UserEmailX = getTextValue(UserEmailX, doc, "D_Email");
             if (UserEmailX != null) {
                 if (!UserEmailX.isEmpty())
                     rolev.add(UserNameX);
@@ -240,4 +248,6 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
         }
         return value;
     }
+
+
 }

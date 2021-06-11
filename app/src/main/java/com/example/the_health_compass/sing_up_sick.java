@@ -52,6 +52,7 @@ public class sing_up_sick extends AppCompatActivity {
     String lastChar = "";
     MaskEditText maskedEditText;
     int counts = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +66,7 @@ public class sing_up_sick extends AppCompatActivity {
         awesomeValidation.addValidation(this, R.id.et_check_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
         awesomeValidation.addValidation(this, R.id.et_password, ".{6,}", R.string.invalid_password);
         awesomeValidation.addValidation(this, R.id.ed_config_password, R.id.et_password, R.string.invalid_confirm_password);
-        awesomeValidation.addValidation(this, R.id.et_mobile_phone,Patterns.PHONE, R.string.invalid_mobile_phone_number);
+        awesomeValidation.addValidation(this, R.id.et_mobile_phone, Patterns.PHONE, R.string.invalid_mobile_phone_number);
         awesomeValidation.addValidation(this, R.id.ed_birthday, RegexTemplate.NOT_EMPTY, R.string.invalid_birthday);
 
 
@@ -92,7 +93,7 @@ public class sing_up_sick extends AppCompatActivity {
 
                 if (awesomeValidation.validate()) {
 
-                    Toast.makeText(getApplicationContext(),"بيانات صحيحة",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "بيانات صحيحة", Toast.LENGTH_SHORT).show();
                     // Add The Data to HashMap
                     sickmap.put("S_Full_Name", editTexts[0].getText().toString());
                     sickmap.put("Email", editTexts[1].getText().toString());
@@ -121,7 +122,7 @@ public class sing_up_sick extends AppCompatActivity {
 //                            break;
 //                    }
                     //Add sick to database
-                    boolean CheckSet = dataAccessLayer.SetSick(s);
+//                    boolean CheckSet = dataAccessLayer.SetSick(s);
                     // Add sick to File Xml
                     WriteToXml(s);
                     This();
@@ -138,42 +139,6 @@ public class sing_up_sick extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "بيانات خاطئة", Toast.LENGTH_SHORT).show();
                 }
-                // Add The Data to HashMap
-                sickmap.put("S_Full_Name", editTexts[0].getText().toString());
-                sickmap.put("Email", editTexts[1].getText().toString());
-                sickmap.put("Check_Email", editTexts[2].getText().toString());
-                sickmap.put("Password", editTexts[3].getText().toString());
-                sickmap.put("Phone_Mobile", maskedEditText.getText().toString());
-                sickmap.put("S_Birthday", editTexts[4].getText().toString());
-                if (radioButton[0].isChecked()) {
-                    sickmap.put("S_Gender", radioButton[0].getText().toString());
-                } else {
-                    sickmap.put("S_Gender", radioButton[1].getText().toString());
-                }
-                //Add Information Sick to class sick
-                s.InPutSick(sickmap);
-                s.InputShare(sickmap, false);
-                String CheckDataBase = dataAccessLayer.getsick(s.S_Full_Name,s.Email,s.Password);
-                //Check if Sink Found in DataBase
-                switch (CheckDataBase){
-                    case "User":return;
-                    case "Email":return;
-                    case "Password":return;
-                    default:break;
-                }
-                //Add sick to database
-                boolean CheckSet = dataAccessLayer.SetSick(s);
-                //Add sick to File Xml
-                WriteToXml(s);
-                This();
-                loading_screen.startLoadingDialog();
-                Handler handler=new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                    loading_screen.dismissDialog();
-                    }
-                },5000);
             }
         });
     }
@@ -241,7 +206,7 @@ public class sing_up_sick extends AppCompatActivity {
                 tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
                 tr.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "Sick.dtd");
                 tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-                String filePath = this.getFilesDir().getPath()+"/Sick.xml";
+                String filePath = this.getFilesDir().getPath() + "/Sick.xml";
                 File f = new File(filePath);
                 StreamResult streamResult1 = new StreamResult(System.out);
                 StreamResult streamResult = null;
@@ -257,17 +222,17 @@ public class sing_up_sick extends AppCompatActivity {
 
             } catch (TransformerException te) {
                 System.out.println(te.getMessage());
-            }catch (IOException te){
+            } catch (IOException te) {
                 System.out.println(te.getMessage());
             }
         } catch (ParserConfigurationException pce) {
             System.out.println("UsersXML: Error trying to instantiate DocumentBuilder " + pce);
-        }
-        finally {
+        } finally {
 
         }
     }
-    public void ShowDialogBirthday(EditText editText){
+
+    public void ShowDialogBirthday(EditText editText) {
         DialogFragment newFragment = new DatePickerFragment(editText);
         newFragment.show(getSupportFragmentManager(), "Date Picker");
     }
