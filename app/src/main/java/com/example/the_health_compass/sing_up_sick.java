@@ -44,15 +44,17 @@ public class sing_up_sick extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_in_sick);
+        CreatAccount = (Button) findViewById(R.id.btn_create_account);
 
+        // Validations
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         awesomeValidation.addValidation(this, R.id.et_full_name, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
         awesomeValidation.addValidation(this, R.id.et_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
         awesomeValidation.addValidation(this, R.id.et_check_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
         awesomeValidation.addValidation(this, R.id.et_password, ".{6,}", R.string.invalid_password);
         awesomeValidation.addValidation(this, R.id.ed_config_password, R.id.et_password, R.string.invalid_confirm_password);
-        awesomeValidation.addValidation(this, R.id.et_mobile_phone, Patterns.PHONE, R.string.invalid_mobile_phone_number);
-        //awesomeValidation.addValidation(this, R.id.ed_birthday, "^(?:(?:31(\\\\/|-|\\\\.)(?:0?[13578]|1[02]))\\\\1|(?:(?:29|30)(\\\\/|-|\\\\.)(?:0?[1,3-9]|1[0-2])\\\\2))(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$|^(?:29(\\\\/|-|\\\\.)0?2\\\\3(?:(?:(?:1[6-9]|[2-9]\\\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\\\d|2[0-8])(\\\\/|-|\\\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\\\4(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$", R.string.invalid_birthday);
+        awesomeValidation.addValidation(this, R.id.et_mobile_phone,Patterns.PHONE, R.string.invalid_mobile_phone_number);
+        awesomeValidation.addValidation(this, R.id.ed_birthday, RegexTemplate.NOT_EMPTY, R.string.invalid_birthday);
 
 
         //Get Controler to this class
@@ -64,7 +66,7 @@ public class sing_up_sick extends AppCompatActivity {
         editTexts[5] = (EditText) findViewById(R.id.ed_birthday);
         radioButton[0] = (RadioButton) findViewById(R.id.rb_female);
         radioButton[1] = (RadioButton) findViewById(R.id.rb_male);
-        CreatAccount = (Button) findViewById(R.id.btn_create_account);
+
         CreatAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,9 +100,9 @@ public class sing_up_sick extends AppCompatActivity {
 //                        default:
 //                            break;
 //                    }
-//                    //Add sick to database
+                    //Add sick to database
 //                    boolean CheckSet = dataAccessLayer.SetSick(s);
-                    //Add sick to File Xml
+                    // Add sick to File Xml
                     WriteToXml(s);
                     This();
                     loading_screen.startLoadingDialog();
@@ -111,7 +113,7 @@ public class sing_up_sick extends AppCompatActivity {
                             loading_screen.dismissDialog();
                         }
                     }, 5000);
-                //    Toast.makeText(getApplicationContext(),"بيانات صحيحة",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"بيانات صحيحة",Toast.LENGTH_SHORT).show();
 
                 } else {
                     Toast.makeText(getApplicationContext(), "بيانات خاطئة", Toast.LENGTH_SHORT).show();

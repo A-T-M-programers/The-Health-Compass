@@ -38,7 +38,7 @@ import javax.xml.transform.stream.StreamResult;
 
 public class sign_up extends AppCompatActivity {
     Button btn_Create_Account;
-    HashMap<String, String> DoctorMap = new HashMap<>();
+    HashMap<String, String> DoctorMap = new HashMap<String,String>();
     AwesomeValidation awesomeValidation;
     Doctor D = new Doctor();
     EditText[] editTexts = new EditText[6];
@@ -61,7 +61,7 @@ public class sign_up extends AppCompatActivity {
         awesomeValidation.addValidation(this, R.id.et_password, ".{6,}", R.string.invalid_password);
         awesomeValidation.addValidation(this, R.id.ed_config_password, R.id.et_password, R.string.invalid_confirm_password);
         awesomeValidation.addValidation(this, R.id.et_mobile_phone, Patterns.PHONE, R.string.invalid_mobile_phone_number);
-       // awesomeValidation.addValidation(this, R.id.ed_birthday, "^(?:(?:31(\\\\/|-|\\\\.)(?:0?[13578]|1[02]))\\\\1|(?:(?:29|30)(\\\\/|-|\\\\.)(?:0?[1,3-9]|1[0-2])\\\\2))(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$|^(?:29(\\\\/|-|\\\\.)0?2\\\\3(?:(?:(?:1[6-9]|[2-9]\\\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\\\d|2[0-8])(\\\\/|-|\\\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\\\4(?:(?:1[6-9]|[2-9]\\\\d)?\\\\d{2})$", R.string.invalid_birthday);
+        awesomeValidation.addValidation(this, R.id.ed_birthday, RegexTemplate.NOT_EMPTY, R.string.invalid_birthday);
 
         // Get Controls To This Class
 
@@ -81,19 +81,20 @@ public class sign_up extends AppCompatActivity {
         radioButtons[2] = (RadioButton) findViewById(R.id.rb_able);
         radioButtons[3] = (RadioButton) findViewById(R.id.rb_unable);
 
-
+        // Button On Click Event
         btn_Create_Account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (awesomeValidation.validate()) {
-                    Toast.makeText(getApplicationContext(), "بيانات صحيحة", Toast.LENGTH_SHORT).show();
+
+
 
                     DoctorMap.put("D_Full_Name", editTexts[0].getText().toString());
-                    DoctorMap.put("Email", editTexts[1].getText().toString());
-                    DoctorMap.put("Check_Email", editTexts[2].getText().toString());
-                    DoctorMap.put("Password", editTexts[3].getText().toString());
-                    DoctorMap.put("Mobile_Phone", editTexts[4].getText().toString());
-                    DoctorMap.put("Birthday", editTexts[5].getText().toString());
+                    DoctorMap.put("D_Email", editTexts[1].getText().toString());
+                    DoctorMap.put("D_Check_Email", editTexts[2].getText().toString());
+                    DoctorMap.put("D_Password", editTexts[3].getText().toString());
+                    DoctorMap.put("D_Mobile_Phone", editTexts[4].getText().toString());
+                    DoctorMap.put("D_Birthday", editTexts[5].getText().toString());
                     if (radioButtons[0].isChecked()) {
                         DoctorMap.put("D_Gender", radioButtons[0].getText().toString());
                     } else if (radioButtons[1].isChecked()) {
@@ -129,17 +130,20 @@ public class sign_up extends AppCompatActivity {
                             loading_screen.dismissDialog();
                         }
                     }, 5000);
+                    Toast.makeText(getApplicationContext(), "بيانات صحيحة", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "بيانات خاطئة", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
     //Move to home page
     public void This() {
         Intent intent = new Intent(this, main_activity.class);
         startActivity(intent);
     }
+
     public void WriteToXML(Doctor D) {
         Document document;
         Element element;
@@ -148,32 +152,42 @@ public class sign_up extends AppCompatActivity {
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             document = documentBuilder.newDocument();
             Element rootElement = document.createElement("Doctor");
+
             element = document.createElement("D_Full_Name");
             element.appendChild(document.createTextNode(D.D_Full_Name));
+            rootElement.appendChild(element);
 
             element = document.createElement("D_Birthday");
             element.appendChild(document.createTextNode(D.D_Birthday));
+            rootElement.appendChild(element);
 
-            element = document.createElement("D_Email");
+            element = document.createElement("Email");
             element.appendChild(document.createTextNode(D.Email));
+            rootElement.appendChild(element);
 
             element = document.createElement("D_Gender");
             element.appendChild(document.createTextNode(D.D_Gender));
+            rootElement.appendChild(element);
 
             element = document.createElement("D_Check_Email");
             element.appendChild(document.createTextNode(D.Check_Email));
+            rootElement.appendChild(element);
 
             element = document.createElement("D_ID");
             element.appendChild(document.createTextNode(D.ID));
+            rootElement.appendChild(element);
 
             element = document.createElement("D_Password");
             element.appendChild(document.createTextNode(D.Password));
+            rootElement.appendChild(element);
 
             element = document.createElement("D_Mobile_Phone");
             element.appendChild(document.createTextNode(D.Phone_Mobile));
+            rootElement.appendChild(element);
 
             element = document.createElement("D_Able");
             element.appendChild(document.createTextNode(D.D_Able));
+            rootElement.appendChild(element);
 
             document.appendChild(rootElement);
             try {
@@ -183,7 +197,7 @@ public class sign_up extends AppCompatActivity {
                 transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
                 transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "Doctor.dtd");
                 transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-                String filePath = this.getFilesDir().getPath().toString() + "/Doctor.xml";
+                String filePath = this.getFilesDir().getPath().toString() + "/Sick.xml";
                 File file = new File(filePath);
                 StreamResult streamResult = new StreamResult(System.out);
                 StreamResult streamResult1 = null;
@@ -199,12 +213,9 @@ public class sign_up extends AppCompatActivity {
                 System.out.println(ioException.getMessage());
             }
 
-
         } catch (ParserConfigurationException parserConfigurationException) {
             System.out.println("UsersXML: Error trying to instantiate DocumentBuilder " + parserConfigurationException);
-        }
-        finally {
-
+        } finally {
         }
     }
 }

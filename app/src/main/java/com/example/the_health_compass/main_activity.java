@@ -58,11 +58,12 @@ import javax.xml.parsers.ParserConfigurationException;
 public class main_activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private int counttouch = 0;
     private DrawerLayout drawer;
-    private Button open_,btn_Sign_in_3,btn_Sign_up_1;
-    static TextView UserName,UserEmail;
-    String UserNameX,UserEmailX;
+    private Button open_, btn_Sign_in_3, btn_Sign_up_1;
+    static TextView UserName, UserEmail;
+    String UserNameX, UserEmailX;
     ArrayList<String> rolev;
     View view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,16 +80,16 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new home_page()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new home_page()).commit();
             navigationView.setCheckedItem(R.id.home_page);
         }
     }
+
     @Override
     public void onClick(View v) {
-        if (v.getId()==R.id.btn_Sign_IN_3){
+        if (v.getId() == R.id.btn_Sign_IN_3) {
             OpenSignIn();
-        }
-        else if (v.getId()==R.id.btn_Sign_up_1){
+        } else if (v.getId() == R.id.btn_Sign_up_1) {
             OpenSignUp();
         }
     }
@@ -96,7 +97,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        btn_Sign_in_3 = (Button)findViewById(R.id.btn_Sign_IN_3);
+        btn_Sign_in_3 = (Button) findViewById(R.id.btn_Sign_IN_3);
         btn_Sign_in_3.setOnClickListener(this);
         btn_Sign_up_1 = (Button) findViewById(R.id.btn_Sign_up_1);
         btn_Sign_up_1.setOnClickListener(this);
@@ -104,16 +105,15 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (counttouch==0) {
+        if (counttouch == 0) {
             UserName = (TextView) findViewById(R.id.tv_nav_UserName);
             UserEmail = (TextView) findViewById(R.id.tv_nav_UserEmail);
             boolean ReadXml = readXML();
             if (ReadXml) {
                 UserName.setText(UserNameX);
                 UserEmail.setText(UserEmailX);
-            }
-            else {
-                
+            } else {
+
             }
             counttouch++;
         }
@@ -133,13 +133,13 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new consult_house()).commit();
                 break;
             case R.id.notification:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Notification_Page()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Notification_Page()).commit();
                 break;
             case R.id.profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new sick_profile()).commit();
                 break;
             case R.id.settings:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Settings_page()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Settings_page()).commit();
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -154,16 +154,19 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
         }
     }
 
-    public void OpenSignIn(){
-        Intent intent = new Intent(this,sing_in.class);
+    public void OpenSignIn() {
+        Intent intent = new Intent(this, sing_in.class);
         startActivity(intent);
     }
-    public void OpenSignUp(){
-        Intent intent = new Intent(this,sing_up_sick.class);
+
+    public void OpenSignUp() {
+        Intent intent = new Intent(this, sing_up_sick.class);
         startActivity(intent);
     }
+
     NotificationManager manager;
-    static  int notID=1;
+    static int notID = 1;
+
     public void buclick(View view) {
         NotificationCompat.Builder rold = new NotificationCompat.Builder(this);
         rold.setContentTitle("Danger");
@@ -175,6 +178,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
         notID++;
 
     }
+
     public boolean readXML() {
         rolev = new ArrayList<String>();
         Document dom;
@@ -190,15 +194,16 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             }
             // parse using the builder to get the DOM mapping of the
             // XML file
-            //String filePath = this.getFilesDir().getPath().toString()+"/Sick.xml";
-            String filePath = this.getFilesDir().getPath().toString()+"/Doctor.xml";
+            String filePath = this.getFilesDir().getPath().toString() + "/Sick.xml";
+
+            //String filePath = this.getFilesDir().getPath().toString()+"/Doctor.xml";
+
             File f = new File(filePath);
             dom = db.parse(f);
 
             Element doc = dom.getDocumentElement();
-
-            //UserNameX = getTextValue(UserNameX, doc, "S_Full_Name");
-            UserNameX = getTextValue(UserNameX, doc, "D_Full_Name");
+            UserNameX = getTextValue(UserNameX, doc, "S_Full_Name");
+            // UserNameX = getTextValue(UserNameX, doc, "D_Full_Name");
 
             //UserNameX += " " + getTextValue(UserNameX, doc, "S_Last_Name");
 
@@ -207,6 +212,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                     rolev.add(UserNameX);
             }
             UserEmailX = getTextValue(UserEmailX, doc, "Email");
+            //UserEmailX = getTextValue(UserEmailX, doc, "D_Email");
             if (UserEmailX != null) {
                 if (!UserEmailX.isEmpty())
                     rolev.add(UserNameX);
@@ -221,6 +227,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
 
         return false;
     }
+
     private static String getTextValue(String def, Element doc, String tag) {
         String value = def;
         NodeList nl;

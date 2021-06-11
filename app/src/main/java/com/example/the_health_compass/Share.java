@@ -22,7 +22,7 @@ public class Share {
     public void InputShareDoctor(HashMap<String,String> Doctor,boolean Blocking){
         this.Blocking = Blocking;
         this.Check_Email = Doctor.get("Check_Email");
-        this.Email = Doctor.get("Email");
+        this.Email = Doctor.get("D_Email");
         this.ID = String.valueOf(id);
         this.Password = Doctor.get("Password");
         this.Phone_Mobile = Doctor.get("Mobile_Phone");
