@@ -14,7 +14,7 @@ public class ConnectionHelper {
     //Found DataBase and Format the Connection
     public Connection connections(){
         //Information the connection
-        IP = "208.118.63.167";
+        IP = "208.118.63.157";
         DB = "db_a75982_tofiqdaoud";
         DBUserName = "db_a75982_tofiqdaoud_admin";
         DBPassword = "1q2w3e4r5t6y7u";

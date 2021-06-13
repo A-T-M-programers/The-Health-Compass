@@ -41,7 +41,7 @@
     <string name="pressure_rate">معدل الضغط</string>
     <string name="earth_number">الهاتف الأرضي</string>
     <string name="discreption">الوصف</string>
-    <string name="phone_number">رقم الوبايل</string>
+    <string name="phone_number">مرض سابق</string>
     <string name="sugger_rate">معدل السكر</string>
     <string name="tempriture">الحرارة</string>
     <string name="doctor_name">اسم الطبيب</string>
@@ -68,4 +68,13 @@
     <string name="invalid_confirm_password">الرجاء التأكد من كلمة المرور</string>
     <string name="invalid_mobile_phone_number">الرجاء إدخال رقم هاتف صحيح</string>
     <string name="invalid_birthday">الرجاء إدخال تاريخ ميلاد</string>
+    <string name="title_activity_recycl_serching">RecyclSerching</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

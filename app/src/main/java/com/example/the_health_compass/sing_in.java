@@ -172,6 +172,10 @@ public class sing_in extends AppCompatActivity {
             e.appendChild(dom.createTextNode(s.S_Birthday));
             rootEle.appendChild(e);
 
+            e = dom.createElement("Age");
+            e.appendChild(dom.createTextNode(s.Age));
+            rootEle.appendChild(e);
+
             e = dom.createElement("S_Gender");
             e.appendChild(dom.createTextNode(s.S_Gender));
             rootEle.appendChild(e);

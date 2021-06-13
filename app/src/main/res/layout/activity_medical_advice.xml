@@ -99,22 +99,6 @@
                 tools:ignore="LabelFor" />
 
             <TextView
-                android:id="@+id/TextView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="392dp"
-                android:layout_marginBottom="328dp"
-                android:text="@string/earth_number"
-                android:textColor="@color/black"
-                android:textSize="50px"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.629"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.246" />
-
-            <TextView
                 android:id="@+id/TextView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -338,7 +322,7 @@
             <EditText
                 android:id="@+id/sv_search"
                 android:layout_width="264dp"
-                android:layout_height="38dp"
+                android:layout_height="45dp"
                 android:layout_marginTop="100dp"
                 android:layout_marginBottom="608dp"
                 android:hint="@string/search"
@@ -350,39 +334,39 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.196" />
 
-            <TextView
-                android:id="@+id/tv_mobile_phone"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Searching"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:scrollbars="vertical"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.107"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.235" />
+
+            <Spinner
+                android:id="@+id/Spinner_Illness"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="348dp"
                 android:layout_marginBottom="372dp"
-                android:text="[رقم الهاتف الجوال]"
-                android:textColor="@color/black"
-                android:textSize="50px"
+                tools:layout_editor_absoluteX="1dp"
+                tools:layout_editor_absoluteY="357dp"
+                android:tooltipText="الأمراض المزمنة"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.139"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.237" />
+                app:layout_constraintVertical_bias="0.237"
+                tools:ignore="MissingConstraints" />
 
-            <TextView
-                android:id="@+id/tv_earth_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="392dp"
-                android:layout_marginBottom="328dp"
-                android:text="[رقم الهاتف الأرضي]"
-                android:textColor="@color/black"
-                android:textSize="50px"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.246" />
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/btn_Search"
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_marginTop="100dp"
@@ -406,6 +390,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.42" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
     <LinearLayout
