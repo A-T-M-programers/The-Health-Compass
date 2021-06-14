@@ -7,117 +7,154 @@
     android:layout_height="match_parent"
     android:background="@drawable/costom_color"
     android:fitsSystemWindows="true"
+
     tools:context=".main_activity">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutHeader"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layoutDirection="rtl"
-        android:padding="10dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/btn_Sign_IN_3"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutHeader"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="تسجيل دخول"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.636"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.155" />
+            android:layoutDirection="rtl"
+            android:padding="10dp"
+            app:layout_constraintTop_toTopOf="parent">
+            <Button
+                android:id="@+id/btn_Sign_IN_3"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="20sp"
+                android:layout_height="wrap_content"
+                android:text="تسجيل دخول"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.636"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.155" />
 
-        <Button
-            android:id="@+id/btn_Sign_up_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="إنشاء حساب"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.155" />
+            <Button
+                android:id="@+id/btn_Sign_up_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="إنشاء حساب"
+                android:layout_marginTop="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.155" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="البوصلة الصحية "
+                android:textColor="@color/white"
+                android:layout_marginTop="20sp"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.004"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.163"
+                tools:ignore="MissingConstraints" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                app:layout_constraintVertical_bias="0.0"
+                tools:layout_editor_absoluteX="-39dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@string/app_name"
+                    android:padding="6dp"
+                    android:src="@drawable/search_icon"
+                    app:tint="@color/Aqua" />
+
+
+            </LinearLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="البوصلة الصحية "
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="151dp"
+            android:text="الصفحة الرئيسية"
             android:textColor="@color/white"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.004"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.163"
-            tools:ignore="MissingConstraints" />
+            android:textSize="30dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="-39dp">
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="300dp"
+            android:layoutDirection="rtl">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:contentDescription="@string/app_name"
-                android:padding="6dp"
-                android:src="@drawable/search_icon"
-                app:tint="@color/Aqua" />
+            <ListView
+                android:layout_width="156dp"
+                android:layout_height="221dp"
+                android:layout_marginRight="30dp" />
+
+            <ListView
+                android:layout_width="156dp"
+                android:layout_height="221dp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="551dp"
+            android:layoutDirection="rtl">
+
+            <ListView
+                android:layout_width="156dp"
+                android:layout_height="221dp"
+                android:layout_marginRight="30dp" />
+
+            <ListView
+                android:layout_width="156dp"
+                android:layout_height="221dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="295dp"
+            android:layout_marginTop="246dp"
+            android:layout_marginEnd="20dp"
+            android:text="الإعلانات"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
+    </RelativeLayout>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="300dp"
-        android:layoutDirection="rtl">
-
-        <ListView
-            android:layout_width="156dp"
-            android:layout_height="221dp"
-            android:layout_marginRight="30dp" />
-
-        <ListView
-            android:layout_width="156dp"
-            android:layout_height="221dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="551dp"
-        android:addStatesFromChildren="true"
-        android:layoutDirection="rtl">
-
-        <ListView
-            android:layout_width="156dp"
-            android:layout_height="221dp"
-            android:layout_marginRight="30dp" />
-
-        <ListView
-            android:layout_width="156dp"
-            android:layout_height="221dp" />
-
-    </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <LinearLayout
+        android:layout_marginTop="50sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -129,14 +166,6 @@
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </FrameLayout>
-
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -145,6 +174,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_menu" />
-
+        app:menu="@menu/drawer_menu"
+        tools:ignore="MissingConstraints" />
 </androidx.drawerlayout.widget.DrawerLayout>

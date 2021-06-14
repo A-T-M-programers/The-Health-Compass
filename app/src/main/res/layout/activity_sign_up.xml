@@ -96,6 +96,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="676dp"
+            android:focusable="false"
             android:ems="10"
             android:hint="تاريخ الميلاد"
             android:inputType="datetime"
@@ -163,14 +164,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/shield" />
 
-        <EditText
+        <com.santalu.maskedittext.MaskEditText
             android:id="@+id/et_mobile_phone"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="612dp"
             android:ems="10"
-            android:hint="رقم الهاتف الجوال"
-            android:inputType="numberSigned"
+            android:hint="(+963)رقم الهاتف الجوال"
+            android:inputType="phone"
+            app:met_mask="+963 ### ### ###"
+            android:maxLength="12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.468"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,5 +1,11 @@
 package com.example.the_health_compass;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -7,12 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -29,7 +29,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class consult_house_doctor extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class medical_advice_doctor extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private int counttouch = 0;
@@ -40,7 +40,7 @@ public class consult_house_doctor extends AppCompatActivity implements Navigatio
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_consult_house_doctor);
+        setContentView(R.layout.activity_medical_advice_doctor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
@@ -151,10 +151,10 @@ public class consult_house_doctor extends AppCompatActivity implements Navigatio
                 startActivity(intent);
                 break;
             case R.id.medical_advice:
-                intent = new Intent(this, medical_advice_doctor.class);
-                startActivity(intent);
                 break;
             case R.id.consult_house:
+                intent = new Intent(this,consult_house_doctor.class);
+                startActivity(intent);
                 break;
             case R.id.notification:
                 intent = new Intent(this, Notification_Page.class);

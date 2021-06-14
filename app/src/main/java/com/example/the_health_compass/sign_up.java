@@ -1,6 +1,7 @@
 package com.example.the_health_compass;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -56,8 +57,10 @@ public class sign_up extends AppCompatActivity {
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         awesomeValidation.addValidation(this, R.id.et_full_name, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
+        awesomeValidation.addValidation(this, R.id.et_full_name,"[a-zA-Zأ-ي\\s]+", R.string.invalid_name);
         awesomeValidation.addValidation(this, R.id.et_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
         awesomeValidation.addValidation(this, R.id.et_check_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
+        awesomeValidation.addValidation(this,R.id.et_password,"[1-9a-zA-Z\\s]+",R.string.invalid_password2);
         awesomeValidation.addValidation(this, R.id.et_password, ".{6,}", R.string.invalid_password);
         awesomeValidation.addValidation(this, R.id.ed_config_password, R.id.et_password, R.string.invalid_confirm_password);
         awesomeValidation.addValidation(this, R.id.et_mobile_phone, Patterns.PHONE, R.string.invalid_mobile_phone_number);
@@ -73,6 +76,13 @@ public class sign_up extends AppCompatActivity {
         editTexts[3] = (EditText) findViewById(R.id.et_password);
         editTexts[4] = (EditText) findViewById(R.id.et_mobile_phone);
         editTexts[5] = (EditText) findViewById(R.id.ed_birthday);
+
+        editTexts[5].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowDialogBirthday(editTexts[5]);
+            }
+        });
 
         // RadioButtons
 
@@ -217,5 +227,9 @@ public class sign_up extends AppCompatActivity {
             System.out.println("UsersXML: Error trying to instantiate DocumentBuilder " + parserConfigurationException);
         } finally {
         }
+    }
+    public void ShowDialogBirthday(EditText editText) {
+        DialogFragment newFragment = new DatePickerFragment(editText);
+        newFragment.show(getSupportFragmentManager(), "Date Picker");
     }
 }

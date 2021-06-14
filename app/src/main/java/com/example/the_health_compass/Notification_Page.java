@@ -13,13 +13,34 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class Notification_Page extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+public class Notification_Page extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
+    private int counttouch = 0;
+    TextView UserName, UserEmail;
+    String UserNameX, UserEmailX;
+    ArrayList<String> rolev;
+    File file;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,29 +58,130 @@ public class Notification_Page extends AppCompatActivity implements NavigationVi
     }
 
     @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (counttouch == 0) {
+            UserName = (TextView) findViewById(R.id.tv_nav_UserName);
+            UserEmail = (TextView) findViewById(R.id.tv_nav_UserEmail);
+            boolean ReadXml = readXML();
+            if (ReadXml) {
+                UserName.setText(UserNameX);
+                UserEmail.setText(UserEmailX);
+            } else {
+
+            }
+            counttouch++;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    public boolean readXML() {
+        rolev = new ArrayList<String>();
+        Document dom;
+
+        // Make an  instance of the DocumentBuilderFactory
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        try {
+            // use the factory to take an instance of the document builder
+            DocumentBuilder db = null;
+            try {
+                db = dbf.newDocumentBuilder();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            }
+            // parse using the builder to get the DOM mapping of the
+            // XML file
+            File file = new File(this.getFilesDir().toString() + "/Sick.xml");
+            if (file.exists()) {
+                String filePath = this.getFilesDir().getPath().toString() + "/Sick.xml";
+                File f = new File(filePath);
+                dom = db.parse(f);
+
+                Element doc = dom.getDocumentElement();
+                UserNameX = getTextValue(UserNameX, doc, "S_Full_Name");
+
+                //UserNameX += " " + getTextValue(UserNameX, doc, "S_Last_Name");
+
+                if (UserNameX != null) {
+                    if (!UserNameX.isEmpty())
+                        rolev.add(UserNameX);
+                }
+                UserEmailX = getTextValue(UserEmailX, doc, "Email");
+                if (UserEmailX != null) {
+                    if (!UserEmailX.isEmpty())
+                        rolev.add(UserNameX);
+                }
+            } else {
+                String filePath = this.getFilesDir().getPath().toString() + "/Doctor.xml";
+                File f = new File(filePath);
+                dom = db.parse(f);
+
+                Element doc = dom.getDocumentElement();
+                UserNameX = getTextValue(UserNameX, doc, "D_Full_Name");
+                if (UserNameX != null) {
+                    if (!UserNameX.isEmpty())
+                        rolev.add(UserNameX);
+                }
+                UserEmailX = getTextValue(UserEmailX, doc, "D_Email");
+                if (UserEmailX != null) {
+                    if (!UserEmailX.isEmpty())
+                        rolev.add(UserNameX);
+                }
+            }
+
+            return true;
+
+        } catch (SAXException se) {
+            System.out.println(se.getMessage());
+        } catch (IOException ioe) {
+            System.err.println(ioe.getMessage());
+        }
+
+        return false;
+    }
+
+    private static String getTextValue(String def, Element doc, String tag) {
+        String value = def;
+        NodeList nl;
+        nl = doc.getElementsByTagName(tag);
+        if (nl.getLength() > 0 && nl.item(0).hasChildNodes()) {
+            value = nl.item(0).getFirstChild().getNodeValue();
+        }
+        return value;
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent;
+        file = new File(this.getFilesDir().getPath().toString() + "/Sick.xml");
         switch (item.getItemId()) {
             case R.id.home_page:
-                intent = new Intent(this,main_activity.class);
+                intent = new Intent(this, main_activity.class);
                 startActivity(intent);
                 break;
             case R.id.medical_advice:
-                intent = new Intent(this,medical_advice.class);
+                intent = new Intent(this, medical_advice.class);
                 startActivity(intent);
                 break;
             case R.id.consult_house:
-                intent = new Intent(this,consult_house.class);
+                if (file.exists()) {
+                    intent = new Intent(this, consult_house.class);
+                } else {
+                    intent = new Intent(this, consult_house_doctor.class);
+                }
                 startActivity(intent);
                 break;
             case R.id.notification:
                 break;
             case R.id.profile:
-                intent =new Intent(this,sick_profile.class);
+                if (file.exists()) {
+                    intent = new Intent(this, sick_profile.class);
+                } else {
+                    intent = new Intent(this, Doctor_Profile.class);
+                }
                 startActivity(intent);
                 break;
             case R.id.settings:
-                intent = new Intent(this,Settings_page.class);
+                intent = new Intent(this, Settings_page.class);
                 startActivity(intent);
                 break;
         }

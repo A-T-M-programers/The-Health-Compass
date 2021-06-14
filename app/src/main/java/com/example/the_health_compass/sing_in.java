@@ -63,16 +63,14 @@ public class sing_in extends AppCompatActivity {
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         awesomeValidation.addValidation(this, R.id.ed_user_name_Sign_In, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
         awesomeValidation.addValidation(this, R.id.ed_password_Sign_In, ".{6,}", R.string.invalid_password);
+        awesomeValidation.addValidation(this,R.id.et_password,"[a-zA-Z\\s]+",R.string.invalid_password2);
+
 
 
         UserNameOrEmail = (EditText) findViewById(R.id.ed_user_name_Sign_In);
         Password = (EditText) findViewById(R.id.ed_password_Sign_In);
 
         create_account = (TextView) findViewById(R.id.tv_create_account);
-
-        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
-        awesomeValidation.addValidation(this, R.id.ed_user_name_Sign_In, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
-        awesomeValidation.addValidation(this, R.id.ed_password_Sign_In, ".{6,}", R.string.invalid_password);
 
 
         create_account.setOnClickListener(new View.OnClickListener() {

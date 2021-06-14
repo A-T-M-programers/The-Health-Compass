@@ -56,5 +56,6 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.25'
     implementation 'com.basgeekball:awesome-validation:4.3'
     implementation 'com.github.santalu:mask-edittext:1.0.2'
+    implementation 'com.github.santalu:mask-edittext:1.0.2'
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
 }

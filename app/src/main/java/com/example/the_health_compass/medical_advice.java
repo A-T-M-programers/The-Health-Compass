@@ -59,7 +59,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class medical_advice extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-
+    private int counttouch = 0;
     String User;
     HashMap<String,String> rolev;
 
@@ -77,6 +77,11 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
     TextView[] textView = new TextView[3];
     Spinner ilness;
     Button Send ;
+    File file;
+
+    TextView UserName, UserEmail;
+    String UserNameX, UserEmailX;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -157,7 +162,22 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
 
         mAdapter.filterList(filteredList);
     }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (counttouch == 0) {
+            UserName = (TextView) findViewById(R.id.tv_nav_UserName);
+            UserEmail = (TextView) findViewById(R.id.tv_nav_UserEmail);
+            boolean ReadXml = readXML();
+            if (ReadXml) {
+                UserName.setText(UserNameX);
+                UserEmail.setText(UserEmailX);
+            } else {
 
+            }
+            counttouch++;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent;
@@ -169,7 +189,7 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
             case R.id.medical_advice:
                 break;
             case R.id.consult_house:
-                intent = new Intent(this,consult_house.class);
+                intent = new Intent(this, consult_house.class);
                 startActivity(intent);
                 break;
             case R.id.notification:
@@ -177,7 +197,7 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
                 startActivity(intent);
                 break;
             case R.id.profile:
-                intent =new Intent(this,sick_profile.class);
+                intent = new Intent(this, sick_profile.class);
                 startActivity(intent);
                 break;
             case R.id.settings:
@@ -223,12 +243,15 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
             String filePath = this.getFilesDir().getPath().toString() + "/Sick.xml";
 
 
-            File f = new File(filePath);
-            dom = db.parse(f);
+            file = new File(filePath);
+            dom = db.parse(file);
 
             Element doc = dom.getDocumentElement();
 
             User = getTextValue(User, doc, "S_Full_Name");
+
+            UserNameX = getTextValue(UserNameX,doc,"S_Full_Name");
+            UserEmailX = getTextValue(UserEmailX,doc,"Email");
 
             if (User != null) {
                 if (!User.isEmpty())

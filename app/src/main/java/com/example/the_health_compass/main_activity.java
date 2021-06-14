@@ -63,6 +63,8 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
     TextView UserName, UserEmail;
     String UserNameX, UserEmailX;
     ArrayList<String> rolev;
+    boolean Admin = false;
+    File file;
     boolean x;
     View view;
 
@@ -70,23 +72,22 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        drawer = findViewById(R.id.drawer_layout);
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        if (Admin) {
+            Intent intent = new Intent(this, Control_Panel_Page.class);
+            startActivity(intent);
+        } else {
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            drawer = findViewById(R.id.drawer_layout);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
 
-/*
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new home_page()).commit();
-            navigationView.setCheckedItem(R.id.home_page);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
         }
-*/
     }
 
     @Override
@@ -127,15 +128,25 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent;
+        file = new File(this.getFilesDir().getPath().toString() + "/Sick.xml");
         switch (item.getItemId()) {
-           case R.id.home_page:
-                  break;
+            case R.id.home_page:
+                break;
             case R.id.medical_advice:
-                intent = new Intent(this,medical_advice.class);
+                if(file.exists()){
+                intent = new Intent(this, medical_advice.class);
+                }
+                else{
+                    intent = new Intent(this,medical_advice_doctor.class);
+                }
                 startActivity(intent);
                 break;
             case R.id.consult_house:
-                intent = new Intent(this,consult_house.class);
+                if (file.exists()) {
+                    intent = new Intent(this, consult_house.class);
+                } else {
+                    intent = new Intent(this, consult_house_doctor.class);
+                }
                 startActivity(intent);
                 break;
             case R.id.notification:
@@ -143,11 +154,15 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                 startActivity(intent);
                 break;
             case R.id.profile:
-                intent =new Intent(this,sick_profile.class);
+                if (file.exists()) {
+                    intent = new Intent(this, sick_profile.class);
+                } else {
+                    intent = new Intent(this, Doctor_Profile.class);
+                }
                 startActivity(intent);
                 break;
             case R.id.settings:
-                intent = new Intent(this,Settings_page.class);
+                intent = new Intent(this, Settings_page.class);
                 startActivity(intent);
                 break;
         }
@@ -157,10 +172,13 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (Admin) {
         } else {
-            super.onBackPressed();
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
@@ -205,29 +223,38 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             }
             // parse using the builder to get the DOM mapping of the
             // XML file
-            String filePath = this.getFilesDir().getPath().toString() + "/Sick.xml";
+            file = new File(this.getFilesDir().toString() + "/Sick.xml");
+            if (file.exists()) {
+                dom = db.parse(file);
+                Element doc = dom.getDocumentElement();
+                UserNameX = getTextValue(UserNameX, doc, "S_Full_Name");
 
-            //String filePath = this.getFilesDir().getPath().toString() + "/Doctor.xml";
-
-            File f = new File(filePath);
-            dom = db.parse(f);
-
-            Element doc = dom.getDocumentElement();
-            UserNameX = getTextValue(UserNameX, doc, "S_Full_Name");
-            //UserNameX = getTextValue(UserNameX, doc, "D_Full_Name");
-
-            //UserNameX += " " + getTextValue(UserNameX, doc, "S_Last_Name");
-
-            if (UserNameX != null) {
-                if (!UserNameX.isEmpty())
-                    rolev.add(UserNameX);
+                if (UserNameX != null) {
+                    if (!UserNameX.isEmpty())
+                        rolev.add(UserNameX);
+                }
+                UserEmailX = getTextValue(UserEmailX, doc, "Email");
+                if (UserEmailX != null) {
+                    if (!UserEmailX.isEmpty())
+                        rolev.add(UserNameX);
+                }
+            } else {
+                String filePath = this.getFilesDir().getPath().toString() + "/Doctor.xml";
+                file = new File(filePath);
+                dom = db.parse(file);
+                Element doc = dom.getDocumentElement();
+                UserNameX = getTextValue(UserNameX, doc, "D_Full_Name");
+                if (UserNameX != null) {
+                    if (!UserNameX.isEmpty())
+                        rolev.add(UserNameX);
+                }
+                UserEmailX = getTextValue(UserEmailX, doc, "D_Email");
+                if (UserEmailX != null) {
+                    if (!UserEmailX.isEmpty())
+                        rolev.add(UserNameX);
+                }
             }
-            UserEmailX = getTextValue(UserEmailX, doc, "Email");
-            //UserEmailX = getTextValue(UserEmailX, doc, "D_Email");
-            if (UserEmailX != null) {
-                if (!UserEmailX.isEmpty())
-                    rolev.add(UserNameX);
-            }
+
             return true;
 
         } catch (SAXException se) {
@@ -248,6 +275,4 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
         }
         return value;
     }
-
-
 }
