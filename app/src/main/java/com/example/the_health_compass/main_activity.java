@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PersistableBundle;
@@ -63,7 +64,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
     TextView UserName, UserEmail;
     String UserNameX, UserEmailX;
     ArrayList<String> rolev;
-    boolean Admin = false;
+    boolean Admin = true;
     File file;
     boolean x;
     View view;
@@ -76,19 +77,30 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
         if (Admin) {
             Intent intent = new Intent(this, Control_Panel_Page.class);
             startActivity(intent);
+            finish();
         } else {
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             drawer = findViewById(R.id.drawer_layout);
 
+
+            btn_Sign_in_3 = (Button) findViewById(R.id.btn_Sign_IN_3);
+            btn_Sign_up_1 = (Button) findViewById(R.id.btn_Sign_up_1);
             NavigationView navigationView = findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
             drawer.addDrawerListener(toggle);
             toggle.syncState();
+
+
+            if (!readXML()) {
+                btn_Sign_in_3.setVisibility(View.VISIBLE);
+                btn_Sign_up_1.setVisibility(View.VISIBLE);
+            }
         }
     }
+
 
     @Override
     public void onClick(View v) {
@@ -133,11 +145,10 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             case R.id.home_page:
                 break;
             case R.id.medical_advice:
-                if(file.exists()){
-                intent = new Intent(this, medical_advice.class);
-                }
-                else{
-                    intent = new Intent(this,medical_advice_doctor.class);
+                if (file.exists()) {
+                    intent = new Intent(this, medical_advice.class);
+                } else {
+                    intent = new Intent(this, medical_advice_doctor.class);
                 }
                 startActivity(intent);
                 break;
@@ -164,6 +175,9 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             case R.id.settings:
                 intent = new Intent(this, Settings_page.class);
                 startActivity(intent);
+                break;
+            case R.id.logout:
+                DeleteXML();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -274,5 +288,12 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             value = nl.item(0).getFirstChild().getNodeValue();
         }
         return value;
+    }
+
+    public void DeleteXML() {
+        if(file.exists())
+        {
+            file.delete();
+        }
     }
 }

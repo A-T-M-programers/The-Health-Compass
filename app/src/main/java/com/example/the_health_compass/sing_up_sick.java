@@ -58,12 +58,14 @@ public class sing_up_sick extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_in_sick);
         CreatAccount = (Button) findViewById(R.id.btn_create_account);
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
         // Validations
-        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         awesomeValidation.addValidation(this, R.id.et_full_name, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
+        awesomeValidation.addValidation(this, R.id.et_full_name,"[a-zA-Zأ-ي\\s]+", R.string.invalid_name);
         awesomeValidation.addValidation(this, R.id.et_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
         awesomeValidation.addValidation(this, R.id.et_check_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
+        awesomeValidation.addValidation(this,R.id.et_password,"[1-9a-zA-Z\\s]+",R.string.invalid_password2);
         awesomeValidation.addValidation(this, R.id.et_password, ".{6,}", R.string.invalid_password);
         awesomeValidation.addValidation(this, R.id.ed_config_password, R.id.et_password, R.string.invalid_confirm_password);
         awesomeValidation.addValidation(this, R.id.et_mobile_phone, Patterns.PHONE, R.string.invalid_mobile_phone_number);
@@ -109,20 +111,20 @@ public class sing_up_sick extends AppCompatActivity {
                     //Add Information Sick to class sick
                     s.InPutSick(sickmap);
                     s.InputShare(sickmap, false);
-//                    String CheckDataBase = dataAccessLayer.getsick(s.S_Full_Name, s.Email, s.Password);
-//                    //Check if Sink Found in DataBase
-//                    switch (CheckDataBase) {
-//                        case "User":
-//                            return;
-//                        case "Email":
-//                            return;
-//                        case "Password":
-//                            return;
-//                        default:
-//                            break;
-//                    }
-                    //Add sick to database
-//                    boolean CheckSet = dataAccessLayer.SetSick(s);
+                    String CheckDataBase = dataAccessLayer.getsick(s.S_Full_Name, s.Email, s.Password);
+                    //Check if Sink Found in DataBase
+                    switch (CheckDataBase) {
+                        case "User":
+                            return;
+                        case "Email":
+                            return;
+                        case "Password":
+                            return;
+                        default:
+                            break;
+                    }
+                    // Add sick to database
+                    boolean CheckSet = dataAccessLayer.SetSick(s);
                     // Add sick to File Xml
                     WriteToXml(s);
                     This();

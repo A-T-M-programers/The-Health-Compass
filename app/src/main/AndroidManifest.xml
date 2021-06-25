@@ -4,6 +4,8 @@
     package="com.example.the_health_compass">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -22,15 +24,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheHealthCompass"
         tools:ignore="HardcodedDebugMode">
+        <activity android:name=".Hospital_Management_Page"/>
         <activity
             android:name=".RecyclSerching"
             android:label="@string/title_activity_recycl_serching"
             android:theme="@style/Theme.TheHealthCompass.NoActionBar"
             tools:ignore="Instantiatable" />
-        <activity android:name=".medical_advice_doctor"/>
-        <activity android:name=".Doctor_Profile"/>
-        <activity android:name=".Settings_page"/>
-
+        <activity android:name=".medical_advice_doctor" />
+        <activity android:name=".Doctor_Profile" />
+        <activity android:name=".Settings_page" />
         <activity
             android:name=".Notification_Page"
             tools:ignore="Instantiatable" />
