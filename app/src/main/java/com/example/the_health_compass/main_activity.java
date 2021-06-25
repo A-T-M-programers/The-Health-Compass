@@ -64,7 +64,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
     TextView UserName, UserEmail;
     String UserNameX, UserEmailX;
     ArrayList<String> rolev;
-    boolean Admin = true;
+    boolean Admin = false;
     File file;
     boolean x;
     View view;
