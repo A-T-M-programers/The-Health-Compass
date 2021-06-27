@@ -29,15 +29,18 @@ import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class Hospital_Management_Page extends AppCompatActivity {
 
     AwesomeValidation awesomeValidation;
     Button[] buttons = new Button[4];
-    EditText[] editTexts=new EditText[3];
+    EditText[] editTexts=new EditText[4];
     ImageView hospital_Image;
-
+    HashMap<String,String> HospitalMap= new HashMap<String, String>();
+    Hospital H = new Hospital();
+    DataAccessLayer dataAccessLayer = new DataAccessLayer();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,7 @@ public class Hospital_Management_Page extends AppCompatActivity {
         editTexts[0] = (EditText)findViewById(R.id.ed_hospital_name);
         editTexts[1] = (EditText)findViewById(R.id.ed_hospital_phone);
         editTexts[2] = (EditText)findViewById(R.id.ed_hospital_location);
+        editTexts[3] = (EditText)findViewById(R.id.ed_hospital_description);
         // Validations
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
@@ -55,10 +59,12 @@ public class Hospital_Management_Page extends AppCompatActivity {
         awesomeValidation.addValidation(this, R.id.ed_hospital_name,"[a-zA-Zأ-ي\\s]+", R.string.invalid_name);
 
 
-        awesomeValidation.addValidation(this, R.id.ed_hospital_phone, Patterns.PHONE, R.string.invalid_name);
+        awesomeValidation.addValidation(this, R.id.ed_hospital_phone, Patterns.PHONE, R.string.invalid_mobile_phone_number);
 
 
-        awesomeValidation.addValidation(this, R.id.ed_hospital_location,RegexTemplate.NOT_EMPTY, R.string.invalid_name);
+        awesomeValidation.addValidation(this, R.id.ed_hospital_location,RegexTemplate.NOT_EMPTY, R.string.invalid_Content);
+
+        awesomeValidation.addValidation(this,R.id.ed_hospital_description,RegexTemplate.NOT_EMPTY,R.string.invalid_Content);
 
 
         buttons[0] = (Button)findViewById(R.id.btn_add_hospital);
@@ -97,6 +103,21 @@ public class Hospital_Management_Page extends AppCompatActivity {
             public void onClick(View v) {
                 if(awesomeValidation.validate()){
                     Toast.makeText(getApplicationContext(),"بيانات صحيحة",Toast.LENGTH_SHORT).show();
+                    HospitalMap.put("H_Name",editTexts[0].getText().toString());
+                    HospitalMap.put("H_Phone",editTexts[1].getText().toString());
+                    HospitalMap.put("H_Location",editTexts[2].getText().toString());
+                    HospitalMap.put("H_Description",editTexts[3].getText().toString());
+                    H.InputHospital(HospitalMap);
+                    String CheckDataBase = dataAccessLayer.getHospital(H.H_Name, H.H_Phone);
+                    switch (CheckDataBase) {
+                        case "Name":
+                            return;
+                        case "Phone":
+                            return;
+                        default:
+                            break;
+                    }
+                    boolean CheckSet = dataAccessLayer.SetHospital(H);
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"بيانات خاطئة",Toast.LENGTH_SHORT).show();

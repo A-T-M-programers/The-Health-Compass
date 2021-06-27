@@ -9,9 +9,11 @@ import android.os.Handler;
 import android.util.Patterns;
 import android.view.SurfaceControl;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
@@ -39,13 +41,15 @@ import javax.xml.transform.stream.StreamResult;
 
 public class sign_up extends AppCompatActivity {
     Button btn_Create_Account;
-    HashMap<String, String> DoctorMap = new HashMap<String,String>();
+    HashMap<String, String> DoctorMap = new HashMap<String, String>();
     AwesomeValidation awesomeValidation;
     Doctor D = new Doctor();
     EditText[] editTexts = new EditText[6];
     RadioButton[] radioButtons = new RadioButton[4];
+    Spinner subscription;
     loading_screen loading_screen = new loading_screen(sign_up.this);
     DataAccessLayer dataAccessLayer = new DataAccessLayer();
+    String[] subscriptions = new String[]{"عظمية", "قلبية", "أطفال"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +61,10 @@ public class sign_up extends AppCompatActivity {
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         awesomeValidation.addValidation(this, R.id.et_full_name, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
-        awesomeValidation.addValidation(this, R.id.et_full_name,"[a-zA-Zأ-ي\\s]+", R.string.invalid_name);
+        awesomeValidation.addValidation(this, R.id.et_full_name, "[a-zA-Zأ-ي\\s]+", R.string.invalid_name);
         awesomeValidation.addValidation(this, R.id.et_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
         awesomeValidation.addValidation(this, R.id.et_check_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
-        awesomeValidation.addValidation(this,R.id.et_password,"[1-9a-zA-Z\\s]+",R.string.invalid_password2);
+        awesomeValidation.addValidation(this, R.id.et_password, "[1-9a-zA-Z\\s]+", R.string.invalid_password2);
         awesomeValidation.addValidation(this, R.id.et_password, ".{6,}", R.string.invalid_password);
         awesomeValidation.addValidation(this, R.id.ed_config_password, R.id.et_password, R.string.invalid_confirm_password);
         awesomeValidation.addValidation(this, R.id.et_mobile_phone, Patterns.PHONE, R.string.invalid_mobile_phone_number);
@@ -76,6 +80,12 @@ public class sign_up extends AppCompatActivity {
         editTexts[3] = (EditText) findViewById(R.id.et_password);
         editTexts[4] = (EditText) findViewById(R.id.et_mobile_phone);
         editTexts[5] = (EditText) findViewById(R.id.ed_birthday);
+
+        subscription = (Spinner) findViewById(R.id.sp_subscription);
+
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, subscriptions);
+        stringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        subscription.setAdapter(stringArrayAdapter);
 
         editTexts[5].setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +115,8 @@ public class sign_up extends AppCompatActivity {
                     DoctorMap.put("D_Password", editTexts[3].getText().toString());
                     DoctorMap.put("D_Mobile_Phone", editTexts[4].getText().toString());
                     DoctorMap.put("D_Birthday", editTexts[5].getText().toString());
+                    DoctorMap.put("D_Specialization", subscription.getSelectedItem().toString());
+
                     if (radioButtons[0].isChecked()) {
                         DoctorMap.put("D_Gender", radioButtons[0].getText().toString());
                     } else if (radioButtons[1].isChecked()) {
@@ -117,18 +129,18 @@ public class sign_up extends AppCompatActivity {
                     }
                     D.InputDoctor(DoctorMap);
                     D.InputShareDoctor(DoctorMap, false);
-//                    String CheckDataBase = dataAccessLayer.getDoctor(D.D_Full_Name, D.Email, D.Password);
-//                    switch (CheckDataBase) {
-//                        case "User":
-//                            return;
-//                        case "Email":
-//                            return;
-//                        case "Password":
-//                            return;
-//                        default:
-//                            break;
-//                    }
-//                    boolean CheckSet = dataAccessLayer.SetDoctor(D);
+                    String CheckDataBase = dataAccessLayer.getDoctor(D.D_Full_Name, D.Email, D.Password);
+                    switch (CheckDataBase) {
+                        case "User":
+                            return;
+                        case "Email":
+                            return;
+                        case "Password":
+                            return;
+                        default:
+                            break;
+                    }
+                    boolean CheckSet = dataAccessLayer.SetDoctor(D);
                     // Write To XML File
                     WriteToXMLDoctor(D);
                     This();
@@ -228,6 +240,7 @@ public class sign_up extends AppCompatActivity {
         } finally {
         }
     }
+
     public void ShowDialogBirthday(EditText editText) {
         DialogFragment newFragment = new DatePickerFragment(editText);
         newFragment.show(getSupportFragmentManager(), "Date Picker");

@@ -7,16 +7,23 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 
+import java.util.HashMap;
+
 public class Sick_Management_Page extends AppCompatActivity {
     AwesomeValidation awesomeValidation;
     Button [] buttons = new Button[3];
     EditText[] editTexts = new EditText[5];
+    RadioButton []radioButtons= new RadioButton[2];
+    HashMap<String,String> SickMap = new HashMap<String, String>(){};
+    DataAccessLayer dataAccessLayer = new DataAccessLayer();
+    Sick s = new Sick();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +37,9 @@ public class Sick_Management_Page extends AppCompatActivity {
         editTexts[2] = (EditText)findViewById(R.id.et_email);
         editTexts[3] = (EditText)findViewById(R.id.et_mobile_phone);
         editTexts[4] = (EditText)findViewById(R.id.ed_sick_password);
+
+        radioButtons[0] = (RadioButton)findViewById(R.id.rb_male);
+        radioButtons[1] = (RadioButton)findViewById(R.id.rb_female);
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
@@ -59,6 +69,36 @@ public class Sick_Management_Page extends AppCompatActivity {
             public void onClick(View v) {
                 if(awesomeValidation.validate()){
                     Toast.makeText(getApplicationContext(),"بيانات صحيحة",Toast.LENGTH_SHORT).show();
+
+                    SickMap.put("S_Full_Name",editTexts[0].getText().toString());
+                    SickMap.put("Email",editTexts[0].getText().toString());
+                    SickMap.put("Check_Email",editTexts[0].getText().toString());
+                    SickMap.put("Password",editTexts[0].getText().toString());
+                    SickMap.put("Phone_Mobile",editTexts[0].getText().toString());
+                    SickMap.put("S_Birthday",editTexts[0].getText().toString());
+                    if(radioButtons[0].isChecked()){
+                        SickMap.put("S_Gender",radioButtons[0].getText().toString());
+                    }
+                    else{
+                        SickMap.put("S_Gender",radioButtons[1].getText().toString());
+                    }
+                    s.InPutSick(SickMap);
+                    s.InputShare(SickMap,false);
+                    String CheckDataBase = dataAccessLayer.getsick(s.S_Full_Name, s.Email, s.Password);
+                    //Check if Sink Found in DataBase
+                    switch (CheckDataBase) {
+                        case "User":
+                            return;
+                        case "Email":
+                            return;
+                        case "Password":
+                            return;
+                        default:
+                            break;
+                    }
+                    // Add sick to database
+                    boolean CheckSet = dataAccessLayer.SetSick(s);
+
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"بيانات خاطئة",Toast.LENGTH_SHORT).show();

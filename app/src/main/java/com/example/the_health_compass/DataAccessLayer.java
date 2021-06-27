@@ -37,6 +37,7 @@ public class DataAccessLayer {
             throwables.printStackTrace();
         }
     }
+
     public void Close() {
         try {
             if (!connect.isClosed()) {
@@ -130,21 +131,21 @@ public class DataAccessLayer {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
 
-                PreparedStatement statement = connect.prepareStatement("EXEC Insert_Sick "+s.ID+",'"+s.S_Full_Name+"'," +
-                        "'"+s.Email+"','"+s.Password+"','"+s.S_Location+"','"+s.Subscription+"',"+
-                        "'"+s.Check_Email+"','"+s.Blocking+"','"+s.Personal_Image+"'," +
-                        "'"+s.S_Gender+"'");
+                PreparedStatement statement = connect.prepareStatement("EXEC Insert_Sick " + s.ID + ",'" + s.S_Full_Name + "'," +
+                        "'" + s.Email + "','" + s.Password + "','" + s.S_Location + "','" + s.Subscription + "'," +
+                        "'" + s.Check_Email + "','" + s.Blocking + "','" + s.Personal_Image + "'," +
+                        "'" + s.S_Gender + "'");
                 int rs = statement.executeUpdate();
-                PreparedStatement statement1 = connect.prepareStatement("select Sick_ID from TBLSick where Sick_Email='"+s.Email+"'");
+                PreparedStatement statement1 = connect.prepareStatement("select Sick_ID from TBLSick where Sick_Email='" + s.Email + "'");
                 ResultSet resultSet = statement1.executeQuery();
-                if (resultSet.next()){
+                if (resultSet.next()) {
                     ConnectionResult = "Successfull";
                 }
-                PreparedStatement statement2 = connect.prepareStatement("EXEC Insert_Sick_Phone "+resultSet.getString("Sick_ID")+",'"+s.Phone_Mobile+"'");
-                PreparedStatement statement3 = connect.prepareStatement("EXEC Insert_Sick_Age "+resultSet.getString("Sick_ID")+",'"+s.S_Birthday+"'");
+                PreparedStatement statement2 = connect.prepareStatement("EXEC Insert_Sick_Phone " + resultSet.getString("Sick_ID") + ",'" + s.Phone_Mobile + "'");
+                PreparedStatement statement3 = connect.prepareStatement("EXEC Insert_Sick_Age " + resultSet.getString("Sick_ID") + ",'" + s.S_Birthday + "'");
                 int rs1 = statement2.executeUpdate();
                 int rs2 = statement3.executeUpdate();
-                if (rs==1&rs1==1&rs2==1) {
+                if (rs == 1 & rs1 == 1 & rs2 == 1) {
                     ConnectionResult = "Successfull";
                     isSucces = true;
                     connect.close();
@@ -263,6 +264,7 @@ public class DataAccessLayer {
         }
         return "Faild Access!";
     }
+
     public String getDoctors(ArrayList<ListDoctor> Doctors) {
         try {
             Open();
@@ -289,6 +291,7 @@ public class DataAccessLayer {
         }
         return "Not Found";
     }
+
     public String getIllnessName(ArrayList<String> Illness) {
         try {
             Open();
@@ -315,7 +318,8 @@ public class DataAccessLayer {
         }
         return "Not Found";
     }
-    public String getPartOfBody(ArrayMap<String,String> Partofbody) {
+
+    public String getPartOfBody(ArrayMap<String, String> Partofbody) {
         try {
             Open();
             if (connect == null) {
@@ -326,7 +330,7 @@ public class DataAccessLayer {
                 Statement stat = connect.createStatement();
                 ResultSet rs = stat.executeQuery(query);
                 while (rs.next()) {
-                    Partofbody.put(rs.getString("Part_Of_Body_ID"),rs.getString("Part_Of_Body_Name"));
+                    Partofbody.put(rs.getString("Part_Of_Body_ID"), rs.getString("Part_Of_Body_Name"));
 
                     ConnectionResult = "Successfull";
                     isSucces = true;
@@ -341,19 +345,20 @@ public class DataAccessLayer {
         }
         return "Not Found";
     }
-    public String getPartOfBodysyle(ArrayMap<String,String> Partofbodystyle,String PartofbodyID) {
+
+    public String getPartOfBodysyle(ArrayMap<String, String> Partofbodystyle, String PartofbodyID) {
         try {
             Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
                 //Get Information Sick By UserName
-                String query = "select * from TBLPart_Of_Body_Style where Part_Of_Body_ID = "+PartofbodyID+";";
+                String query = "select * from TBLPart_Of_Body_Style where Part_Of_Body_ID = " + PartofbodyID + ";";
                 Statement stat = connect.createStatement();
                 ResultSet rs = stat.executeQuery(query);
                 while (rs.next()) {
 
-                    Partofbodystyle.put(rs.getString("Part_Of_Body_Style_ID"),rs.getString("Part_Of_Body_Style_Name"));
+                    Partofbodystyle.put(rs.getString("Part_Of_Body_Style_ID"), rs.getString("Part_Of_Body_Style_Name"));
 
                     ConnectionResult = "Successfull";
                     isSucces = true;
@@ -368,22 +373,23 @@ public class DataAccessLayer {
         }
         return "Not Found";
     }
-    public String getSyndromeIl(ArrayMap<String,String> syndromeil,String PartofbodystyleID) {
+
+    public String getSyndromeIl(ArrayMap<String, String> syndromeil, String PartofbodystyleID) {
         try {
             Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
                 //Get Information Sick By UserName
-                String query = "select * from Have_P_S where Part_Of_Body_Style_ID = "+PartofbodystyleID+";";
+                String query = "select * from Have_P_S where Part_Of_Body_Style_ID = " + PartofbodystyleID + ";";
                 Statement stat = connect.createStatement();
                 ResultSet rs = stat.executeQuery(query);
                 while (rs.next()) {
-                    String query1 = "select * from TBLSyndrome_IL where Syndrome_IL_ID = "+rs.getString(2)+";";
+                    String query1 = "select * from TBLSyndrome_IL where Syndrome_IL_ID = " + rs.getString(2) + ";";
                     Statement stat1 = connect.createStatement();
                     ResultSet rs1 = stat1.executeQuery(query1);
                     while (rs1.next()) {
-                        syndromeil.put(rs1.getString(1),rs1.getString(3));
+                        syndromeil.put(rs1.getString(1), rs1.getString(3));
                     }
                 }
                 ConnectionResult = "Successfull";
@@ -398,6 +404,7 @@ public class DataAccessLayer {
         }
         return "Not Found";
     }
+
     public String getDiagnos(ArrayMap<String, Integer> Diagnos, String PartofbodystyleID, String PartofbodyID, ArrayList<String> keysyndrome) {
         try {
             String d = "";
@@ -406,32 +413,32 @@ public class DataAccessLayer {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
                 //Get Information Sick By UserName
-                String id_diagnos_by_part_and_style = "select * from TBLDiagnose where Part_Of_Body_Style_ID = "+PartofbodystyleID+" and Part_Of_Body_ID = "+PartofbodyID+";";
+                String id_diagnos_by_part_and_style = "select * from TBLDiagnose where Part_Of_Body_Style_ID = " + PartofbodystyleID + " and Part_Of_Body_ID = " + PartofbodyID + ";";
                 Statement stat = connect.createStatement();
                 ResultSet rs = stat.executeQuery(id_diagnos_by_part_and_style);
-                for (int i = 0 ;i<keysyndrome.size();i++) {
+                for (int i = 0; i < keysyndrome.size(); i++) {
                     String id_diagnos_by_syndorme = "select Diagnose_ID from Belongs_D_S where Syndrome_IL_ID = " + keysyndrome.get(i) + " ;";
                     Statement stat1 = connect.createStatement();
                     ResultSet rs1 = stat1.executeQuery(id_diagnos_by_syndorme);
                     while (rs1.next()) {
                         if (Diagnos.isEmpty()) {
-                            Diagnos.put(rs1.getString(1),1);
-                        }else if(Diagnos.containsKey(rs1.getString(1))){
-                            Diagnos.replace(rs1.getString(1),Diagnos.get(rs1.getString(1)),Diagnos.get(rs1.getString(1))+1);
-                        }else {
-                            Diagnos.put(rs1.getString(1),1);
+                            Diagnos.put(rs1.getString(1), 1);
+                        } else if (Diagnos.containsKey(rs1.getString(1))) {
+                            Diagnos.replace(rs1.getString(1), Diagnos.get(rs1.getString(1)), Diagnos.get(rs1.getString(1)) + 1);
+                        } else {
+                            Diagnos.put(rs1.getString(1), 1);
                         }
                     }
                 }
-                int max = 0 ;
-                for (int i = 0 ;i <Diagnos.size();i++){
-                    if (Diagnos.valueAt(i)>max){
+                int max = 0;
+                for (int i = 0; i < Diagnos.size(); i++) {
+                    if (Diagnos.valueAt(i) > max) {
                         max = Diagnos.valueAt(i);
                         d = Diagnos.keyAt(i);
                     }
                 }
-                while (rs.next()){
-                    if (rs.getString(1)==d){
+                while (rs.next()) {
+                    if (rs.getString(1) == d) {
                         ConnectionResult = "Successfull";
                         isSucces = true;
                         d = rs.getString(3);
@@ -440,6 +447,85 @@ public class DataAccessLayer {
                     }
                 }
 
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            isSucces = false;
+            ConnectionResult = throwables.getMessage();
+        }
+        return "Not Found";
+    }
+
+    public boolean SetHospital(Hospital H) {
+        try {
+            Open();
+            if (connect == null) {
+                ConnectionResult = "Check Your Internet Access!";
+            } else {
+                PreparedStatement statement = connect.prepareStatement("ExEc Insert_Hospital" + H.ID + ",'" + H.H_Name + "','" + H.H_Phone + "','" + H.H_Description + "'");
+                int rs = statement.executeUpdate();
+                if (rs == 1) {
+                    ConnectionResult = "Successfull";
+                    isSucces = true;
+                    connect.close();
+                    return true;
+                } else {
+                    connect.close();
+                    return false;
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            isSucces = false;
+            ConnectionResult = throwables.getMessage();
+        }
+        return false;
+    }
+
+    public String getHospital(String Name, String Phone) {
+        try {
+            Open();
+            if (connect == null) {
+                ConnectionResult = "Check Your Internet Access!";
+            } else {
+                String query = "select * from TBLHospital where H_Name='" + Name + "' and H_Phone = '" + Phone + "'";
+                Statement stat = connect.createStatement();
+                ResultSet set = stat.executeQuery(query);
+                if (set.next()) {
+                    ConnectionResult = "Successfull";
+                    isSucces = true;
+                    connect.close();
+                    return "Hospital";
+                } else {
+                    connect.close();
+                    return "Not Found";
+                }
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            isSucces = false;
+            ConnectionResult = throwables.getMessage();
+        }
+        return "Not Found";
+    }
+    public String getHospitals(ArrayList<ListHospital> Hospitals){
+        try {
+            Open();
+            if (connect == null) {
+                ConnectionResult = "Check Your Internet Access!";
+            } else {
+                //Get Information Sick By UserName
+                String query = "select * from TBLDoctor;";
+                Statement stat = connect.createStatement();
+                ResultSet rs = stat.executeQuery(query);
+                while (rs.next()) {
+                    boolean check = Hospitals.add(new ListHospital(rs.getString("H_Name"),rs.getString("H_Image"),rs.getString("H_Phone")));
+                    ConnectionResult = "Successfull";
+                    isSucces = true;
+                }
+                Close();
+                return "Hospitals";
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
