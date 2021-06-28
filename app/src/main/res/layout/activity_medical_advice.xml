@@ -9,17 +9,17 @@
     tools:context=".medical_advice">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
 
             <ImageView
                 android:id="@+id/imageView11"
                 android:layout_width="589dp"
-                android:layout_height="965dp"
+                android:layout_height="900dp"
                 android:contentDescription="@string/todo"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -46,108 +46,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.2" />
 
-            <EditText
-                android:id="@+id/et_pressure_rate"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="472dp"
-                android:layout_marginBottom="238dp"
-                android:ems="10"
-                android:importantForAutofill="no"
-                android:inputType="numberDecimal"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.11"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.333"
-                tools:ignore="LabelFor" />
-
-            <TextView
-                android:id="@+id/TextView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="480dp"
-                android:layout_marginBottom="240dp"
-                android:text="@string/pressure_rate"
-                android:textColor="@color/black"
-                android:textSize="50px"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.616"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.342" />
-
-            <EditText
-                android:id="@+id/et_suger_rate"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="472dp"
-                android:layout_marginBottom="238dp"
-                android:ems="10"
-                android:importantForAutofill="no"
-                android:inputType="numberDecimal"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.11"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.091"
-                tools:ignore="LabelFor" />
-
-            <TextView
-                android:id="@+id/TextView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="576dp"
-                android:layout_marginBottom="144dp"
-                android:text="@string/discreption"
-                android:textColor="@color/black"
-                android:textSize="50px"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.936"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.438" />
-
-            <EditText
-                android:id="@+id/et_description_of_sick_pathology"
-                android:layout_width="345dp"
-                android:layout_height="72dp"
-                android:layout_marginTop="620dp"
-                android:layout_marginBottom="54dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:importantForAutofill="no"
-                android:inputType="textMultiLine"
-                android:textDirection="rtl"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.424"
-                tools:ignore="LabelFor" />
-
-            <EditText
-                android:id="@+id/et_temperature"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="512dp"
-                android:layout_marginBottom="198dp"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                android:textSize="14dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.11"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.42"
-                tools:ignore="LabelFor" />
 
             <TextView
                 android:id="@+id/TextView4"
@@ -164,38 +62,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.237" />
-
-            <TextView
-                android:id="@+id/TextView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="436dp"
-                android:layout_marginBottom="284dp"
-                android:text="@string/sugger_rate"
-                android:textColor="@color/black"
-                android:textSize="50px"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.635"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.301" />
-
-            <TextView
-                android:id="@+id/TextView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="520dp"
-                android:layout_marginBottom="200dp"
-                android:text="@string/tempriture"
-                android:textColor="@color/black"
-                android:textSize="50px"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.661"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.383" />
 
             <TextView
                 android:id="@+id/TextView3"
@@ -217,7 +83,7 @@
                 android:id="@+id/btn_sent_medical_advice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="696dp"
+                android:layout_marginTop="325dp"
                 android:layout_marginBottom="2dp"
                 android:backgroundTint="@color/Aqua"
                 android:text="@string/send"
@@ -396,7 +262,7 @@
     </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
@@ -410,7 +276,7 @@
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
         </FrameLayout>
 

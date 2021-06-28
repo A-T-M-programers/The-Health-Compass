@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telecom.Call;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -33,6 +35,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.common.base.Predicates;
@@ -73,7 +76,7 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
     private DrawerLayout drawer;
     DataAccessLayer dataAccessLayer = new DataAccessLayer();
     ImageButton Search_Doctors;
-    EditText[] editTexts = new EditText[5];
+    EditText editTexts;
     TextView[] textView = new TextView[3];
     Spinner ilness;
     Button Send ;
@@ -82,16 +85,14 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
     TextView UserName, UserEmail;
     String UserNameX, UserEmailX;
 
+    The_Diagnose the_diagnose ;
+    String IDDoctor;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_advice);
-
-        editTexts[0] = (EditText)findViewById(R.id.et_pressure_rate);
-        editTexts[1] = (EditText)findViewById(R.id.et_suger_rate);
-        editTexts[2] = (EditText)findViewById(R.id.et_description_of_sick_pathology);
-        editTexts[3] = (EditText)findViewById(R.id.et_temperature);
-        editTexts[4] = (EditText)findViewById(R.id.sv_search);
+        editTexts = (EditText)findViewById(R.id.sv_search);
         Serching = (RecyclerView) findViewById(R.id.Searching);
         Search_Doctors = (ImageButton)findViewById(R.id.btn_Search);
         ilness = (Spinner)findViewById(R.id.Spinner_Illness);
@@ -120,7 +121,7 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
         ilness.setAdapter(arrayAdapter);
 
 
-        editTexts[4].addTextChangedListener(new TextWatcher() {
+        editTexts.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -157,6 +158,7 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
         for (ListDoctor item : Doctors) {
             if (item.getText1().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
+                IDDoctor = item.getID();
             }
         }
 
@@ -212,11 +214,11 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
         Serching = findViewById(R.id.Searching);
         Serching.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new RecyclSerching(Doctors, new RecyclSerching.ItemClickListener() {
+        mAdapter = new RecyclSerching(Doctors, new RecyclSerching.ItemClickListener1() {
             @Override
             public void onItemClick(ListDoctor listDoctor) {
                 textView[2].setText(listDoctor.getText1());
-                editTexts[4].setText(listDoctor.getText1());
+                editTexts.setText(listDoctor.getText1());
                 Serching.setVisibility(View.INVISIBLE);
             }
         });
@@ -265,6 +267,15 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
                     textView[1].setText(User);
                     rolev.put("Age",User);
             }
+
+            User = getTextValue(User, doc, "ID");
+
+            if (User != null) {
+                if (!User.isEmpty())
+                    textView[1].setText(User);
+                rolev.put("ID",User);
+            }
+
             return true;
 
         } catch (SAXException se) {
@@ -307,43 +318,12 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                 checked[which]=isChecked;
-                String current = selected.get(which);
+                PartOfBodyStyle(key[which]);
+                dialog.cancel();
+                //String current = selected.get(which);
             }
         });
-        builder.setCancelable(false);
-
-        // handle the positive button of the dialog
-        builder.setPositiveButton("موافق", new DialogInterface.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                for (int i = 0; i < checked.length; i++) {
-                    if (checked[i]) {
-                        PartOfBodyStyle(key[i]);
-                        return;
-                    }
-                }
-            }
-        });
-
-        // handle the negative button of the alert dialog
-        builder.setNegativeButton("الرجوع", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-
-        // handle the neutral button of the dialog to clear
-        // the selected items boolean checkedItem
-        builder.setNeutralButton("مسح الكل", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                for (int i = 0; i < checked.length; i++) {
-                    checked[i] = false;
-                }
-            }
-        });
+        //builder.setCancelable(false);
 
         // create the builder
         builder.create();
@@ -376,41 +356,17 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                 checked[which]=isChecked;
-                String current = selected.get(which);
+                Syndrome_IL(key[which],PartOfBodyID);
+                dialog.cancel();
             }
         });
         builder.setCancelable(false);
-
-        // handle the positive button of the dialog
-        builder.setPositiveButton("موافق", new DialogInterface.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                for (int i = 0; i < checked.length; i++) {
-                    if (checked[i]) {
-                        Syndrome_IL(key[i],PartOfBodyID);
-                        return;
-                    }
-                }
-            }
-        });
 
         // handle the negative button of the alert dialog
         builder.setNegativeButton("الرجوع", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-
-        // handle the neutral button of the dialog to clear
-        // the selected items boolean checkedItem
-        builder.setNeutralButton("مسح الكل", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                for (int i = 0; i < checked.length; i++) {
-                    checked[i] = false;
-                }
+                PartOfBody();
             }
         });
 
@@ -472,20 +428,12 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
         builder.setNegativeButton("رجوع", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                PartOfBodyStyle(PartOfBodyID);
             }
         });
 
         // handle the neutral button of the dialog to clear
         // the selected items boolean checkedItem
-        builder.setNeutralButton("اعراض اخرى ", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                for (int i = 0; i < checked.length; i++) {
-                    checked[i] = false;
-                }
-            }
-        });
 
         // create the builder
         builder.create();
@@ -496,11 +444,20 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
         alertDialog.show();
     }
     public void Diagnos(String PartOfBodyStyleID,String PartofbodyID,ArrayList<String> keysyndrome){
+        final EditText editText = new EditText(this);
         ArrayMap<String, Integer> diagnos =  new ArrayMap<>();
-        String DesDiagnos = dataAccessLayer.getDiagnos(diagnos,PartOfBodyStyleID,PartofbodyID,keysyndrome);
+        String[] DesDiagnos = dataAccessLayer.getDiagnos(diagnos,PartOfBodyStyleID,PartofbodyID,keysyndrome);
         AlertDialog.Builder builder = new AlertDialog.Builder(medical_advice.this);
         builder.setTitle("من التأكد من الاعراض تبين الحالة التالية :");
-        builder.setMessage(DesDiagnos);
+        if (null != DesDiagnos[1] & !DesDiagnos[1].equals("") & DesDiagnos[2].toLowerCase().equals("yes"))
+        {
+            builder.setMessage(DesDiagnos[1]+"\n"+"سيتم التحويل للطبيب المحدد :"+"\n"+textView[2].getText());
+        }else if (DesDiagnos[1] != null & !DesDiagnos[1].equals("") & DesDiagnos[2].toLowerCase().equals("no")) {
+            builder.setMessage(DesDiagnos[1]);
+        }else  {
+            builder.setMessage("التشخيص تم بنجاح \n لم يتم تحديد المرض بشكل كافي ستم تحويل الطلب الى الطبيب المحدد : \n"+textView[2].getText());
+        }
+
 
         builder.setCancelable(false);
 
@@ -509,7 +466,47 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+                int sec = c.get(Calendar.SECOND);
+                String Date1 = String.valueOf(year)+"/"+String.valueOf(month)+"/"+String.valueOf(day)+" "+String.valueOf(hour)+":"+String.valueOf(minute)+":"+String.valueOf(sec);
+                String[] data = new String[]{DesDiagnos[0],IDDoctor,PartofbodyID,PartOfBodyStyleID,Date1};
+                String[] Il = new String[keysyndrome.size()];
+                the_diagnose = new The_Diagnose(data,keysyndrome.toArray(Il));
 
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(medical_advice.this);
+                builder2.setTitle("وصف للحالة");
+                builder2.setMessage("الرجاء أدخال الأعراض التي تشعر بها ولم يتم ذكرها");
+
+                editText.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder2.setView(editText);
+                builder2.setPositiveButton("موافق", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        boolean check = dataAccessLayer.SetDiagnos_S_D(the_diagnose,rolev.get("ID"),editText.getText().toString());
+                        if (check){
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(medical_advice.this);
+                            builder1.setTitle("تم الامر بنجاح");
+                            builder1.setMessage("تم تحويل الطلب عند استجابة الطبيب سيتم أعلامك فورا");
+
+                            builder1.create();
+
+                            // create the alert dialog with the
+                            // alert dialog builder instance
+                            builder1.show();
+                        }
+
+                    }
+                });
+                builder2.create();
+
+                // create the alert dialog with the
+                // alert dialog builder instance
+                builder2.show();
             }
         });
 
@@ -517,18 +514,10 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
         builder.setNegativeButton("رجوع", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                Syndrome_IL(PartofbodyID,PartOfBodyStyleID);
             }
         });
 
-        // handle the neutral button of the dialog to clear
-        // the selected items boolean checkedItem
-        builder.setNeutralButton("اعراض اخرى ", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
 
         // create the builder
         builder.create();

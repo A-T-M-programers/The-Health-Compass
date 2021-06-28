@@ -1,8 +1,8 @@
 package com.example.the_health_compass;
 
 public class N_ID {
-    public int ID;
-    public String Name;
+    private int ID;
+    private String Name;
 
     public int getID() {
         return ID;

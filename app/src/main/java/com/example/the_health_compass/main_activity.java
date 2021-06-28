@@ -178,6 +178,8 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                 break;
             case R.id.logout:
                 DeleteXML();
+                intent = new Intent(this,sing_in.class);
+                startActivity(intent);
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -262,7 +264,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                     if (!UserNameX.isEmpty())
                         rolev.add(UserNameX);
                 }
-                UserEmailX = getTextValue(UserEmailX, doc, "D_Email");
+                UserEmailX = getTextValue(UserEmailX, doc, "Email");
                 if (UserEmailX != null) {
                     if (!UserEmailX.isEmpty())
                         rolev.add(UserNameX);

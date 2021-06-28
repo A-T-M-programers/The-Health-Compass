@@ -182,7 +182,7 @@ public class sign_up extends AppCompatActivity {
             element.appendChild(document.createTextNode(D.D_Birthday));
             rootElement.appendChild(element);
 
-            element = document.createElement("D_Email");
+            element = document.createElement("Email");
             element.appendChild(document.createTextNode(D.Email));
             rootElement.appendChild(element);
 

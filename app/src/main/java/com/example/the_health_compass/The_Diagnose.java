@@ -4,19 +4,39 @@ import java.sql.Date;
 
 public class The_Diagnose
 {
-    int D_ID;
-    String   POB_S_ID ,TD_ID ,TD_Description,TD_Type,POB_ID, IL_ID;
-    Date Show_Date;
+    private String D_ID;
+    private String POB_S_ID ,TD_ID ,TD_Description,TD_Type,POB_ID;
+    private String[] IL_ID;
+    private String Show_Date;
 
-    public Date getShow_Date() {
+    public The_Diagnose(){
+        this.D_ID = "";
+        this.POB_S_ID = "";
+        this.TD_ID = "";
+        this.TD_Description = "";
+        this.TD_Type = "";
+        this.POB_ID = "";
+        this.Show_Date = "";
+    }
+
+    public The_Diagnose(String[] Data,String[] IL){
+        this.TD_ID = Data[0];
+        this.D_ID = Data[1];
+        this.POB_ID = Data[2];
+        this.POB_S_ID = Data[3];
+        this.Show_Date = Data[4];
+        this.IL_ID = IL;
+    }
+
+    public String getShow_Date() {
         return Show_Date;
     }
 
-    public int getD_ID() {
+    public String getD_ID() {
         return D_ID;
     }
 
-    public String getIL_ID() {
+    public String[] getIL_ID() {
         return IL_ID;
     }
 
@@ -40,11 +60,11 @@ public class The_Diagnose
         return TD_Type;
     }
 
-    public void setD_ID(int d_ID) {
+    public void setD_ID(String d_ID) {
         D_ID = d_ID;
     }
 
-    public void setIL_ID(String IL_ID) {
+    public void setIL_ID(String[] IL_ID) {
         this.IL_ID = IL_ID;
     }
 
@@ -56,7 +76,7 @@ public class The_Diagnose
         this.POB_S_ID = POB_S_ID;
     }
 
-    public void setShow_Date(Date show_Date) {
+    public void setShow_Date(String show_Date) {
         Show_Date = show_Date;
     }
 

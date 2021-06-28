@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -34,9 +37,18 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
     private DrawerLayout drawer;
     private int counttouch = 0;
     TextView UserName, UserEmail;
-    String UserNameX, UserEmailX;
+    String UserNameX, UserEmailX, UserIDX;
     ArrayList<String> rolev;
     File file;
+
+    private ArrayList<ListDiagnos> diagnos = new ArrayList<>();
+
+    private RecyclerView Diagnos;
+    private Recycler_Diagnos mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    DataAccessLayer dataAccessLayer = new DataAccessLayer();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +62,11 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        fullDiagnos();
+
 
     }
+
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (counttouch == 0) {
             UserName = (TextView) findViewById(R.id.tv_nav_UserName);
@@ -67,6 +82,7 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
         }
         return super.dispatchTouchEvent(ev);
     }
+
     public boolean readXML() {
         rolev = new ArrayList<String>();
         Document dom;
@@ -83,8 +99,8 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
             }
             // parse using the builder to get the DOM mapping of the
             // XML file
-            File file = new File(this.getFilesDir().toString()+"/Sick.xml");
-            if(file.exists()) {
+            File file = new File(this.getFilesDir().toString() + "/Sick.xml");
+            if (file.exists()) {
                 String filePath = this.getFilesDir().getPath().toString() + "/Sick.xml";
                 File f = new File(filePath);
                 dom = db.parse(f);
@@ -101,10 +117,10 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
                 UserEmailX = getTextValue(UserEmailX, doc, "Email");
                 if (UserEmailX != null) {
                     if (!UserEmailX.isEmpty())
-                        rolev.add(UserNameX);
+                        rolev.add(UserEmailX);
                 }
-            }
-            else{
+
+            } else {
                 String filePath = this.getFilesDir().getPath().toString() + "/Doctor.xml";
                 File f = new File(filePath);
                 dom = db.parse(f);
@@ -115,10 +131,16 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
                     if (!UserNameX.isEmpty())
                         rolev.add(UserNameX);
                 }
-                UserEmailX = getTextValue(UserEmailX, doc, "D_Email");
+                UserEmailX = getTextValue(UserEmailX, doc, "Email");
                 if (UserEmailX != null) {
                     if (!UserEmailX.isEmpty())
                         rolev.add(UserNameX);
+                }
+
+                UserIDX = getTextValue(UserEmailX, doc, "ID");
+                if (UserIDX != null) {
+                    if (!UserIDX.isEmpty())
+                        rolev.add(UserIDX);
                 }
             }
 
@@ -132,6 +154,7 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
 
         return false;
     }
+
     private static String getTextValue(String def, Element doc, String tag) {
         String value = def;
         NodeList nl;
@@ -153,7 +176,7 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
             case R.id.medical_advice:
                 break;
             case R.id.consult_house:
-                intent = new Intent(this,consult_house_doctor.class);
+                intent = new Intent(this, consult_house_doctor.class);
                 startActivity(intent);
                 break;
             case R.id.notification:
@@ -161,7 +184,7 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
                 startActivity(intent);
                 break;
             case R.id.profile:
-                intent =new Intent(this,Doctor_Profile.class);
+                intent = new Intent(this, Doctor_Profile.class);
                 startActivity(intent);
                 break;
             case R.id.settings:
@@ -172,5 +195,27 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
+    }
+
+    private void fullDiagnos() {
+        boolean x= readXML();
+        ArrayList<Diagnose_S_D> diagnose_s_dArrayList = dataAccessLayer.getDiagnos_S_D(UserIDX);
+        diagnos = dataAccessLayer.getDiagnos(diagnose_s_dArrayList);
+        buildRecyclerView();
+
+    }
+
+    private void buildRecyclerView() {
+        Diagnos = findViewById(R.id.Diagnos);
+        Diagnos.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mAdapter = new Recycler_Diagnos(diagnos, new Recycler_Diagnos.ItemClickListener() {
+            @Override
+            public void onItemClick(ListDiagnos listDiagnos) {
+
+            }
+        });
+        Diagnos.setLayoutManager(mLayoutManager);
+        Diagnos.setAdapter(mAdapter);
     }
 }

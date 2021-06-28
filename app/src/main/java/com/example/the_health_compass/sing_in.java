@@ -55,6 +55,7 @@ public class sing_in extends AppCompatActivity {
     private Button Sign_In;
     DataAccessLayer dataAccessLayer = new DataAccessLayer();
     AtomicReference<Sick> s = new AtomicReference<Sick>();
+    AtomicReference<Doctor> d = new AtomicReference<Doctor>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +85,14 @@ public class sing_in extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (awesomeValidation.validate()) {
-                    String check = dataAccessLayer.check_sick_sign_in(UserNameOrEmail.getText().toString(), Password.getText().toString(), s);
-                    Check(check);
+                    String user = UserNameOrEmail.getText().toString();
+                    if (user.substring(0,2).toLowerCase().equals("dr") |UserNameOrEmail.getText().toString().contains("doctor.com")){
+                        String check = dataAccessLayer.check_doctor_sign_in(UserNameOrEmail.getText().toString(), Password.getText().toString(), d);
+                        Check(check);
+                    }else {
+                        String check = dataAccessLayer.check_sick_sign_in(UserNameOrEmail.getText().toString(), Password.getText().toString(), s);
+                        Check(check);
+                    }
                 } else {
                     Toast.makeText(getApplicationContext(), "بيانات خاطئة", Toast.LENGTH_SHORT).show();
                 }
@@ -113,7 +120,7 @@ public class sing_in extends AppCompatActivity {
                 AlertDialog alertDialog = ad.create();
                 alertDialog.show();
                 break;
-            case "User":
+            case "Sick":
                 AlertDialog.Builder ad1 = new AlertDialog.Builder(this)
                         .setTitle("Access Network")
                         .setMessage("Successfull")
@@ -126,6 +133,20 @@ public class sing_in extends AppCompatActivity {
                         });
                 AlertDialog alertDialog1 = ad1.create();
                 alertDialog1.show();
+                break;
+            case "Doctor":
+                AlertDialog.Builder ad3 = new AlertDialog.Builder(this)
+                        .setTitle("Access Network")
+                        .setMessage("Successfull")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                WriteToXml(d.get());
+                                OpenHome();
+                            }
+                        });
+                AlertDialog alertDialog3 = ad3.create();
+                alertDialog3.show();
                 break;
             case "Not Found":
                 AlertDialog.Builder ad2 = new AlertDialog.Builder(this)
@@ -210,6 +231,93 @@ public class sing_in extends AppCompatActivity {
                 tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
                 /*String filePath = f.getAbsolutePath();*/
                 String filePath = this.getFilesDir().getPath().toString() + "/Sick.xml";
+                File f = new File(filePath);
+                StreamResult streamResult1 = new StreamResult(System.out);
+                StreamResult streamResult = null;
+                try {
+                    streamResult = new StreamResult(new FileWriter(f));
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
+
+                // send DOM to file
+                //tr.transform(new DOMSource(dom),streamResult1);
+                tr.transform(new DOMSource(dom), streamResult);
+
+            } catch (TransformerException te) {
+                System.out.println(te.getMessage());
+            }
+        } catch (ParserConfigurationException pce) {
+            System.out.println("UsersXML: Error trying to instantiate DocumentBuilder " + pce);
+        }/*catch (IOException te){
+            System.out.println(te.getMessage());
+        }*/ finally {
+
+        }
+    }
+    public void WriteToXml(Doctor d) {
+
+        Document dom;
+        Element e;
+        // instance of a DocumentBuilderFactory
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        try {
+            // use factory to get an instance of document builder
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            // create instance of DOM
+            dom = db.newDocument();
+            // create the root element
+            Element rootEle = dom.createElement("Doctor");
+            // create data elements and place them under root
+            e = dom.createElement("D_Full_Name");
+            e.appendChild(dom.createTextNode(d.D_Full_Name));
+            rootEle.appendChild(e);
+
+            e = dom.createElement("D_Birthday");
+            e.appendChild(dom.createTextNode(d.D_Birthday));
+            rootEle.appendChild(e);
+
+            e = dom.createElement("Age");
+            e.appendChild(dom.createTextNode(d.Age));
+            rootEle.appendChild(e);
+
+            e = dom.createElement("D_Gender");
+            e.appendChild(dom.createTextNode(d.D_Gender));
+            rootEle.appendChild(e);
+
+            e = dom.createElement("Email");
+            e.appendChild(dom.createTextNode(d.Email));
+            rootEle.appendChild(e);
+
+            e = dom.createElement("Check_Email");
+            e.appendChild(dom.createTextNode(d.Check_Email));
+            rootEle.appendChild(e);
+
+            e = dom.createElement("ID");
+            e.appendChild(dom.createTextNode(d.ID));
+            rootEle.appendChild(e);
+
+            e = dom.createElement("Password");
+            e.appendChild(dom.createTextNode(d.Password));
+            rootEle.appendChild(e);
+
+
+            e = dom.createElement("Phone_Mobile");
+            e.appendChild(dom.createTextNode(d.Phone_Mobile));
+            rootEle.appendChild(e);
+
+            dom.appendChild(rootEle);
+
+            try {
+                Transformer tr = TransformerFactory.newInstance().newTransformer();
+                tr.setOutputProperty(OutputKeys.INDENT, "yes");
+                tr.setOutputProperty(OutputKeys.METHOD, "xml");
+                tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+                tr.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "Doctor.dtd");
+                tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+                /*String filePath = f.getAbsolutePath();*/
+                String filePath = this.getFilesDir().getPath().toString() + "/Doctor.xml";
                 File f = new File(filePath);
                 StreamResult streamResult1 = new StreamResult(System.out);
                 StreamResult streamResult = null;

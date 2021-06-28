@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Recycler_Diagnos">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alignmentMode="alignMargins"
+        android:columnCount="1"
+        android:columnOrderPreserved="false"
+        android:rowCount="3"
+        tools:ignore="MissingConstraints">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10sp"
+                    android:text="التشخيص حسب الأعرلض"/>
+
+                <TextView
+                    android:id="@+id/Diagnos_System"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp"
+                        android:text="تاريخ اول تشخيص :" />
+
+                    <TextView
+                        android:id="@+id/Create_Diagnos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp"
+                        android:text="تاريخ التعديل الأخير :" />
+
+                    <TextView
+                        android:id="@+id/Finish_Update"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp"
+                        android:paddingEnd="10dp"
+                        android:text="اسم المريض :" />
+
+                    <TextView
+                        android:id="@+id/namesick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp"
+                        android:layout_marginEnd="20dp"
+                        android:text="[اسم المريض]" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp"
+                        android:layout_marginEnd="0dp"
+                        android:text="عمر المريض :" />
+
+                    <TextView
+                        android:id="@+id/agesick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp"
+                        android:text="[عمر المريض]" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp"
+                        android:paddingEnd="10dp"
+                        android:text="مكان الألم :" />
+
+                    <TextView
+                        android:id="@+id/partofbody"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp"
+                        android:layout_marginEnd="20dp"
+                        android:text="[مكان الألم]" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp"
+                        android:layout_marginEnd="0dp"
+                        android:text="نمط الألم :" />
+
+                    <TextView
+                        android:id="@+id/PartStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp"
+                        android:text="[نمط الألم]" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="100dp"
+                        android:text="الأعراض التي يشتكي منها المريض"
+                        tools:ignore="RtlSymmetry" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="35dp"
+                        android:text="الأمراض"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/Synd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="75dp" />
+
+                    <Spinner
+                        android:id="@+id/Ill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="وصف حالة المريض :"
+                        android:paddingBottom="10sp"
+                        tools:ignore="RtlSymmetry" />
+                    <TextView
+                        android:id="@+id/Description_Sick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="التشخيص" />
+
+                <EditText
+                    android:id="@+id/Description_Recylcer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/Send_Recycler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="إرسال" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

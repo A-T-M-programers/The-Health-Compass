@@ -1,14 +1,37 @@
 package com.example.the_health_compass;
 
-public class Part_Of_Body extends Total_D
+public class Part_Of_Body
 {
-    String POB_Type;
+    private String Type;
+    protected String Description;
+    protected String ID;
+    protected String Name;
 
-    public String getPOB_Type() {
-        return POB_Type;
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+    public String getID() {
+        return ID;
     }
 
-    public void setPOB_Type(String POB_Type) {
-        this.POB_Type = POB_Type;
+    public String getName() {
+        return Name;
+    }
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public String getType() {
+        return Type;
+    }
+    public void setType(String Type) {
+        this.Type = Type;
     }
 }

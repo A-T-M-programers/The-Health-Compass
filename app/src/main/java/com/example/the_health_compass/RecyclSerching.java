@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class RecyclSerching extends RecyclerView.Adapter<RecyclSerching.ExampleViewHolder> {
     private ArrayList<ListDoctor> Doctors;
-    private ItemClickListener mItemListener;
+    private ItemClickListener1 mItemListener;
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
         public ImageView image_profile;
@@ -33,7 +33,7 @@ public class RecyclSerching extends RecyclerView.Adapter<RecyclSerching.ExampleV
         }
     }
 
-    public RecyclSerching(ArrayList<ListDoctor> exampleList,ItemClickListener itemClickListener) {
+    public RecyclSerching(ArrayList<ListDoctor> exampleList,ItemClickListener1 itemClickListener) {
         Doctors = exampleList;
         this.mItemListener = itemClickListener;
     }
@@ -66,7 +66,7 @@ public class RecyclSerching extends RecyclerView.Adapter<RecyclSerching.ExampleV
         return Doctors.size();
     }
 
-    public interface ItemClickListener{
+    public interface ItemClickListener1{
         void onItemClick(ListDoctor listDoctor);
     }
 
