@@ -13,7 +13,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.service.notification.NotificationListenerService;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
+import androidx.work.Worker;
+import androidx.work.WorkerParameters;
 
 public class Notifications {
     private static final int NOTIFICATION_ID = 9000;
@@ -169,32 +172,24 @@ public class Notifications {
                 context.getString(R.string.cancel),
                 pendingIntent
         );
-
         return action;
     }
 
-//    public class TimerWithWorkManager extends Worker {
-//
-//        public TimerWithWorkManager(@NonNull Context context, @NonNull WorkerParameters workerParams) {
-//            super(context, workerParams);
-//            Constraints constraints = new Constraints.Builder()
-//                    .build();
-//
-//            OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(TimerWithWorkManager.class)
-//                    .setConstraints(constraints)
-//                    .addTag("MY_WORK_MANAGER_TAG_ONE_TIME")
-//                    .setInitialDelay(2, TimeUnit.MINUTES)
-//                    .build();
-//
-//            WorkManager.getInstance().enqueue(oneTimeWorkRequest);
-//        }
-//
-//        @NonNull
-//        @Override
-//        public Result doWork() {
-//            Notifications.showNotification(getApplicationContext(), "MyTitle", "MyBody");
-//            return Result.success();
-//        }
-//    }
+    public class TimerWithWorkManager extends Worker {
+
+        public TimerWithWorkManager(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+            super(context, workerParams);
+        }
+
+        @NonNull
+        @Override
+        public Result doWork() {
+            String title = getInputData().getString("Title");
+            String body = getInputData().getString("Body");
+            String user = getInputData().getString("User");
+            Notifications.showNotification(getApplicationContext(), title, body,user);
+            return Result.success();
+        }
+    }
 }
 

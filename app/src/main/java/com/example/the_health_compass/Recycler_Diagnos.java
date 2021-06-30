@@ -5,6 +5,11 @@ import androidx.appcompat.view.menu.MenuAdapter;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -62,12 +67,12 @@ public class Recycler_Diagnos extends RecyclerView.Adapter<Recycler_Diagnos.Exam
                     int hour = c.get(Calendar.HOUR_OF_DAY);
                     int minute = c.get(Calendar.MINUTE);
                     String Date = String.valueOf(year)+"/"+String.valueOf(month)+"/"+String.valueOf(day)+" "+String.valueOf(hour)+":"+String.valueOf(minute);
-                    String[] data = {editText.getText().toString(),Date,String.valueOf(textViews[0].getImeActionId()),String.valueOf(textViews[5].getImeActionId()),textViews[6].getText().toString(), Type};
+                    String[] data = {editText.getText().toString(),Date,String.valueOf(textViews[0].getImeOptions()),String.valueOf(textViews[5].getImeOptions()),textViews[6].getText().toString(), Type};
                     boolean check = new DataAccessLayer().UpdateDiagnos_S_D(data);
                     if (check){
                         androidx.appcompat.app.AlertDialog.Builder builder1 = new AlertDialog.Builder(v.getContext());
                         builder1.setTitle("تم الامر بنجاح");
-                        builder1.setMessage("سيتم اعلام المريض");
+                        builder1.setMessage("سيتم اعلام الجهة المرسلة للأستشارة");
 
                         builder1.create();
 
@@ -75,6 +80,24 @@ public class Recycler_Diagnos extends RecyclerView.Adapter<Recycler_Diagnos.Exam
                         // alert dialog builder instance
                         builder1.show();
                         cardView.setVisibility(View.INVISIBLE);
+
+                        Data myData = new Data.Builder()
+                                .putString("Tile","أستشارة طبية" )
+                                .putString("Body", "لديك استشارة طبية قيد الأستجابة يمكنك الرد عليها بالضغط على الأشعار")
+                                .putString("User", Type)
+                                .build();
+                        Constraints constraints = new Constraints.Builder()
+                                .setRequiresDeviceIdle(true)
+                                .setRequiredNetworkType(NetworkType.CONNECTED)
+                                .build();
+
+                        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(Notifications.TimerWithWorkManager.class)
+                                .setInputData(myData)
+                                .setConstraints(constraints)
+                                .addTag("MY_WORK_MANAGER_TAG_ONE_TIME")
+                                .build();
+
+                        WorkManager.getInstance().enqueue(oneTimeWorkRequest);
                     }
                 }
             });
@@ -103,22 +126,25 @@ public class Recycler_Diagnos extends RecyclerView.Adapter<Recycler_Diagnos.Exam
     public void onBindViewHolder(Recycler_Diagnos.ExampleViewHolder holder, int position) {
         ListDiagnos currentItem = Diagnos.get(position);
         try {
-            if (currentItem.getDiagnoseSD().getType_Update()=="Doctor"){
+            if (currentItem.getDiagnoseSD().getType_Update().equals("Doctor")){
                 return;
             }else {
                 holder.Type = Type;
-                holder.textViews[0].setImeActionLabel(currentItem.getNameSick(), Integer.parseInt(currentItem.getDiagnoseSD().getSick_ID()));
+                holder.textViews[0].setText(currentItem.getNameSick());
+                holder.textViews[0].setImeOptions(Integer.parseInt(currentItem.getDiagnoseSD().getSick_ID()));
                 holder.textViews[1].setText(currentItem.getAgeSick());
                 holder.textViews[2].setText(currentItem.getPartOfBody());
                 holder.textViews[3].setText(currentItem.getStyleBody());
                 holder.textViews[4].setText(currentItem.getDescription_Sick());
-                holder.textViews[5].setImeActionLabel(currentItem.getDiagnos_System(), Integer.parseInt(currentItem.getDiagnoseSD().getTD_ID()));
+                holder.textViews[5].setText(currentItem.getDiagnos_System());
+                holder.textViews[5].setImeOptions(Integer.parseInt(currentItem.getDiagnoseSD().getTD_ID()));
                 holder.textViews[6].setText(currentItem.getCreate_Diagnos());
                 holder.textViews[7].setText(currentItem.getFinishe_Update());
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(holder.itemView.getContext(), R.layout.support_simple_spinner_dropdown_item, currentItem.getSyndromeIl());
                 holder.spinners[0].setAdapter(arrayAdapter);
                 arrayAdapter = new ArrayAdapter<String>(v.getContext(), R.layout.support_simple_spinner_dropdown_item, currentItem.getIllness().values().toArray(new String[currentItem.getIllness().size()]));
                 holder.spinners[1].setAdapter(arrayAdapter);
+
             }
         }catch (Exception e){
             e.printStackTrace();

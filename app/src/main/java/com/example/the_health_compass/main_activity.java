@@ -14,6 +14,11 @@ import androidx.core.app.TaskStackBuilder;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import android.app.Application;
 import android.app.Notification;
@@ -102,6 +107,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                 btn_Sign_up_1.setVisibility(View.VISIBLE);
             }
         }
+
         getNotification();
 
     }

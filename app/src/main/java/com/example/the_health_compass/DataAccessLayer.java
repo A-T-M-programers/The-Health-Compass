@@ -50,10 +50,10 @@ public class DataAccessLayer {
 
     public boolean SetDoctor(Doctor D) {
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 PreparedStatement statement = connect.prepareStatement("EXEc Insert_Doctor " + D.ID + ",'" + D.D_Full_Name + "'," +
                         "'" + D.Email + "','" + D.Password + "','" + D.D_Location + "','" + D.Subscription + "'," +
                         "'" + D.Check_Email + "','" + D.Blocking + "','" + D.Personal_Image + "'," +
@@ -79,10 +79,10 @@ public class DataAccessLayer {
 
     public String getDoctor(String UserName, String Email, String Password) {
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 String query = "select * from TBLDoctor where Doctor_Full_Name='" + UserName + "' and Doctor_Password='" + Password + "';";
                 Statement stat = connect.createStatement();
                 ResultSet rs = stat.executeQuery(query);
@@ -125,12 +125,11 @@ public class DataAccessLayer {
     //Set Sick By Prosedure Insert_Sick
     public boolean SetSick(Sick s) {
         try {
-            Open();
             //Check The Connection Successfull By Internet
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
-
+                Open();
                 PreparedStatement statement = connect.prepareStatement("EXEC Insert_Sick "+s.ID+",'"+s.S_Full_Name+"'," +
                         "'"+s.Email+"','"+s.Password+"','"+s.S_Location+"','"+s.Subscription+"',"+
                         "'"+s.Check_Email+"','"+s.Blocking+"','"+s.Personal_Image+"'," +
@@ -166,10 +165,10 @@ public class DataAccessLayer {
     // Get Information Sick By UserName or Email or Password
     public String getsick(String UserName, String Email, String Password) {
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 //Get Information Sick By UserName
                 String query = "select * from TBLSick where Sick_Full_Name='" + UserName + "';";
                 Statement stat = connect.createStatement();
@@ -215,10 +214,10 @@ public class DataAccessLayer {
     public String check_sick_sign_in(String UserName, String
             Password, AtomicReference<Sick> s) {
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 //Get Information Sick By UserName
                 String query = "select * from TBLSick where Sick_Full_Name='" + UserName + "' and Sick_Password='" + Password + "';";
                 Statement stat = connect.createStatement();
@@ -267,10 +266,10 @@ public class DataAccessLayer {
     public String check_doctor_sign_in(String UserName, String
             Password, AtomicReference<Doctor> d) {
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 //Get Information Sick By UserName
                 String query = "select * from TBLDoctor where Doctor_Full_Name='" + UserName + "' and Doctor_Password ='" + Password + "';";
                 Statement stat = connect.createStatement();
@@ -317,10 +316,10 @@ public class DataAccessLayer {
     }
     public String getDoctors(ArrayList<ListDoctor> Doctors) {
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 //Get Information Sick By UserName
                 String query = "select * from TBLDoctor;";
                 Statement stat = connect.createStatement();
@@ -343,10 +342,10 @@ public class DataAccessLayer {
     }
     public String getIllnessName(ArrayList<String> Illness) {
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 //Get Information Sick By UserName
                 String query = "select ILLnessState_Name from TBLILLnessState;";
                 Statement stat = connect.createStatement();
@@ -369,10 +368,10 @@ public class DataAccessLayer {
     }
     public String getPartOfBody(ArrayMap<String,String> Partofbody) {
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 //Get Information Sick By UserName
                 String query = "select * from TBLPart_Of_Body;";
                 Statement stat = connect.createStatement();
@@ -395,10 +394,10 @@ public class DataAccessLayer {
     }
     public String getPartOfBodysyle(ArrayMap<String,String> Partofbodystyle,String PartofbodyID) {
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 //Get Information Sick By UserName
                 String query = "select * from TBLPart_Of_Body_Style where Part_Of_Body_ID = "+PartofbodyID+";";
                 Statement stat = connect.createStatement();
@@ -422,10 +421,10 @@ public class DataAccessLayer {
     }
     public String getSyndromeIl(ArrayMap<String,String> syndromeil,String PartofbodystyleID) {
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 //Get Information Sick By UserName
                 String query = "select * from Have_P_S where Part_Of_Body_Style_ID = "+PartofbodystyleID+";";
                 Statement stat = connect.createStatement();
@@ -454,10 +453,10 @@ public class DataAccessLayer {
     public String[] getDiagnos(ArrayMap<String, Integer> Diagnos, String PartofbodystyleID, String PartofbodyID, ArrayList<String> keysyndrome) {
         String[] d = new String[3];
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 //Get Information Sick By UserName
                 String id_diagnos_by_part_and_style = "select * from TBLDiagnose where Part_Of_Body_Style_ID = "+PartofbodystyleID+" and Part_Of_Body_ID = "+PartofbodyID+";";
                 Statement stat = connect.createStatement();
@@ -505,10 +504,10 @@ public class DataAccessLayer {
 
     public boolean SetHospital(Hospital H) {
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 PreparedStatement statement = connect.prepareStatement("ExEc Insert_Hospital" + H.ID + ",'" + H.H_Name + "','" + H.H_Phone + "','" + H.H_Description + "'");
                 int rs = statement.executeUpdate();
                 if (rs == 1) {
@@ -531,10 +530,10 @@ public class DataAccessLayer {
 
     public String getHospital(String Name, String Phone) {
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 String query = "select * from TBLHospital where H_Name='" + Name + "' and H_Phone = '" + Phone + "'";
                 Statement stat = connect.createStatement();
                 ResultSet set = stat.executeQuery(query);
@@ -558,10 +557,10 @@ public class DataAccessLayer {
     }
     public String getHospitals(ArrayList<ListHospital> Hospitals){
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 //Get Information Sick By UserName
                 String query = "select * from TBLDoctor;";
                 Statement stat = connect.createStatement();
@@ -583,10 +582,10 @@ public class DataAccessLayer {
     }
     public boolean SetDiagnos_S_D(The_Diagnose diagnose,String S_ID,String Description) {
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 PreparedStatement statement = connect.prepareStatement("EXEc Insert_Diagnose_S_D " + diagnose.getTD_ID() + ",'" + S_ID + "'," +
                         "'" + Description + "','" + diagnose.getShow_Date() + "','" + diagnose.getShow_Date() + "'," + diagnose.getD_ID()+",'"+"Sick" );
                 int rs = statement.executeUpdate();
@@ -609,10 +608,10 @@ public class DataAccessLayer {
     }
     public boolean UpdateDiagnos_S_D(String[] data) {
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 PreparedStatement statement = connect.prepareStatement("update Diagnose_S_D set Description ='" + data[0] + "',Date_Update ='" +data[1]+ "'" +
                         ",Type_Update ='"+data[5]+"' where Sick_ID = "+data[2]+" and Diagnose_ID = "+data[3]+" and Date_Diagnos = '"+data[4]+"'");
                 int rs = statement.executeUpdate();
@@ -637,10 +636,10 @@ public class DataAccessLayer {
         ArrayList<Diagnose_S_D> diagnose_s_dArrayList = new ArrayList<>();
         Diagnose_S_D diagnose_s_d ;
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
+                Open();
                 //Get Information Sick By UserName
                 String query = "select * from Diagnose_S_D where "+User+" = " + ID + " and Type_Update = '"+Type+"';";
                 Statement stat = connect.createStatement();
@@ -681,11 +680,10 @@ public class DataAccessLayer {
         ArrayList<ListDiagnos> diagnose_s_dArrayList = new ArrayList<>();
         String[] Syndrom ;
         try {
-            Open();
             if (connect == null) {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
-
+                Open();
                 for (int i = 0 ; i<ds.size();i++){
                     ListDiagnos listDiagnos = new ListDiagnos();
                     listDiagnos.setDescription_Sick(ds.get(i).getTD_Description());
