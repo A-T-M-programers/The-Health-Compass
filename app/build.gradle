@@ -62,5 +62,5 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
     // Work Manager
     def work_version = "1.0.0-beta05"
-    implementation "android.arch.work:work-runtime:$work_version"
+    implementation "android.arch.work:work-runtime:1.0.1"
 }

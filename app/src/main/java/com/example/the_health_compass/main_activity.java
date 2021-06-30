@@ -330,7 +330,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             arrayList = new DataAccessLayer().getDiagnos_S_D("Doctor_ID",User_ID,"Sick");
         }
         for (int i = 0 ; i<arrayList.size();i++) {
-            Notifications.showNotification(main_activity.this,"أستشارة طبية","مراجعة طبية حسب استشارة قدمتها سابقا",User);
+            Notifications.showNotification(main_activity.this,"أستشارة طبية","لديك استشارة طبية قيد الأستجابة يمكنك الرد عليها بالضغط على الأشعار",User);
 //            Notification.Builder mBuilder = new Notification.Builder(main_activity.this);
 //            mBuilder.setSmallIcon(R.drawable.ic_accounts);
 //            mBuilder.setContentTitle("أستشارة طبية");

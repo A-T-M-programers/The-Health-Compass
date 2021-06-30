@@ -193,7 +193,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="وصف حالة المريض :"
+                        android:text="وصف الحالة المرضية :"
                         android:paddingBottom="10sp"
                         tools:ignore="RtlSymmetry" />
                     <TextView
@@ -207,7 +207,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="التشخيص" />
+                    android:text="التوصيف الخاص بالحالة" />
 
                 <EditText
                     android:id="@+id/Description_Recylcer"
