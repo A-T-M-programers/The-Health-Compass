@@ -579,7 +579,7 @@ public class DataAccessLayer {
             isSucces = false;
             ConnectionResult = throwables.getMessage();
         }
-        return d;
+        return "Not Found";
     }
     public boolean SetDiagnos_S_D(The_Diagnose diagnose,String S_ID,String Description) {
         try {
@@ -588,7 +588,7 @@ public class DataAccessLayer {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
                 PreparedStatement statement = connect.prepareStatement("EXEc Insert_Diagnose_S_D " + diagnose.getTD_ID() + ",'" + S_ID + "'," +
-                        "'" + Description + "','" + diagnose.getShow_Date() + "','" + diagnose.getShow_Date() + "'," + diagnose.getD_ID() );
+                        "'" + Description + "','" + diagnose.getShow_Date() + "','" + diagnose.getShow_Date() + "'," + diagnose.getD_ID()+",'"+"Sick" );
                 int rs = statement.executeUpdate();
                 if (rs == 1) {
                     ConnectionResult = "Successfull";
@@ -614,7 +614,7 @@ public class DataAccessLayer {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
                 PreparedStatement statement = connect.prepareStatement("update Diagnose_S_D set Description ='" + data[0] + "',Date_Update ='" +data[1]+ "'" +
-                        " where Sick_ID = "+data[2]+" and Diagnose_ID = "+data[3]+" and Date_Diagnos = '"+data[4]+"'");
+                        ",Type_Update ='"+data[5]+"' where Sick_ID = "+data[2]+" and Diagnose_ID = "+data[3]+" and Date_Diagnos = '"+data[4]+"'");
                 int rs = statement.executeUpdate();
                 if (rs == 1) {
                     ConnectionResult = "Successfull";
@@ -633,7 +633,7 @@ public class DataAccessLayer {
         }
         return false;
     }
-    public ArrayList<Diagnose_S_D> getDiagnos_S_D(String D_ID) {
+    public ArrayList<Diagnose_S_D> getDiagnos_S_D(String User,String ID,String Type) {
         ArrayList<Diagnose_S_D> diagnose_s_dArrayList = new ArrayList<>();
         Diagnose_S_D diagnose_s_d ;
         try {
@@ -642,18 +642,19 @@ public class DataAccessLayer {
                 ConnectionResult = "Check Your Internet Access!";
             } else {
                 //Get Information Sick By UserName
-                String query = "select * from Diagnose_S_D where Doctor_ID = " + D_ID + ";";
+                String query = "select * from Diagnose_S_D where "+User+" = " + ID + " and Type_Update = '"+Type+"';";
                 Statement stat = connect.createStatement();
                 ResultSet rs = stat.executeQuery(query);
                 while (rs.next()){
                     if (rs.getString(4)!=rs.getString(5)) {
                         diagnose_s_d = new Diagnose_S_D();
-                        diagnose_s_d.setD_ID(D_ID);
+                        diagnose_s_d.setD_ID(ID);
                         diagnose_s_d.setSick_ID(rs.getString(1));
                         diagnose_s_d.setTD_ID(rs.getString(2));
                         diagnose_s_d.setTD_Description(rs.getString(3));
                         diagnose_s_d.setTD_Date_Diagnose(rs.getString(4));
                         diagnose_s_d.setTD_Date_Update(rs.getString(5));
+                        diagnose_s_d.setType_Update(rs.getString(7));
                         boolean check = diagnose_s_dArrayList.add(diagnose_s_d);
                     }
                 }

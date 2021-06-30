@@ -80,4 +80,5 @@
     <string name="invalid_password2">الرجاء إدخال كلمة مرور خالية من الرموز</string>
     <string name="invalid_Content">الرجاء عدم ترك الحقل فارغ</string>
     <string name="invalid_Content2">الرجاء التأكد من المدخلات</string>
+    <string name="cancel">cancel</string>
 </resources>

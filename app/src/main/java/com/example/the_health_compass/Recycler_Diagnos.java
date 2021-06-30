@@ -2,9 +2,11 @@ package com.example.the_health_compass;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.menu.MenuAdapter;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,17 +26,20 @@ import java.util.Calendar;
 public class Recycler_Diagnos extends RecyclerView.Adapter<Recycler_Diagnos.ExampleViewHolder> {
     private ArrayList<ListDiagnos> Diagnos;
     private Recycler_Diagnos.ItemClickListener mItemListener;
+    String Type = "";
     View v;
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
         public TextView[] textViews = new TextView[8];
         Spinner[] spinners = new Spinner[2];
+        CardView cardView;
         EditText editText ;
         Button Send ;
-
+        String Type ;
 
         public ExampleViewHolder(View itemView) {
             super(itemView);
+            cardView = itemView.findViewById(R.id.CardView);
             textViews[0] = itemView.findViewById(R.id.namesick);
             textViews[1] = itemView.findViewById(R.id.agesick);
             textViews[2] = itemView.findViewById(R.id.partofbody);
@@ -57,7 +62,7 @@ public class Recycler_Diagnos extends RecyclerView.Adapter<Recycler_Diagnos.Exam
                     int hour = c.get(Calendar.HOUR_OF_DAY);
                     int minute = c.get(Calendar.MINUTE);
                     String Date = String.valueOf(year)+"/"+String.valueOf(month)+"/"+String.valueOf(day)+" "+String.valueOf(hour)+":"+String.valueOf(minute);
-                    String[] data = {editText.getText().toString(),Date,String.valueOf(textViews[0].getImeActionId()),String.valueOf(textViews[5].getImeActionId()),textViews[6].getText().toString()};
+                    String[] data = {editText.getText().toString(),Date,String.valueOf(textViews[0].getImeActionId()),String.valueOf(textViews[5].getImeActionId()),textViews[6].getText().toString(), Type};
                     boolean check = new DataAccessLayer().UpdateDiagnos_S_D(data);
                     if (check){
                         androidx.appcompat.app.AlertDialog.Builder builder1 = new AlertDialog.Builder(v.getContext());
@@ -69,6 +74,7 @@ public class Recycler_Diagnos extends RecyclerView.Adapter<Recycler_Diagnos.Exam
                         // create the alert dialog with the
                         // alert dialog builder instance
                         builder1.show();
+                        cardView.setVisibility(View.INVISIBLE);
                     }
                 }
             });
@@ -77,8 +83,9 @@ public class Recycler_Diagnos extends RecyclerView.Adapter<Recycler_Diagnos.Exam
         }
     }
 
-    public Recycler_Diagnos(ArrayList<ListDiagnos> exampleList, Recycler_Diagnos.ItemClickListener itemClickListener) {
+    public Recycler_Diagnos(String Type,ArrayList<ListDiagnos> exampleList, Recycler_Diagnos.ItemClickListener itemClickListener) {
         Diagnos = exampleList;
+        this.Type = Type;
         this.mItemListener = itemClickListener;
     }
 
@@ -96,19 +103,23 @@ public class Recycler_Diagnos extends RecyclerView.Adapter<Recycler_Diagnos.Exam
     public void onBindViewHolder(Recycler_Diagnos.ExampleViewHolder holder, int position) {
         ListDiagnos currentItem = Diagnos.get(position);
         try {
-//            holder.textViews[0].setText(currentItem.getNameSick());
-            holder.textViews[0].setImeActionLabel(currentItem.getNameSick(),Integer.parseInt(currentItem.getDiagnoseSD().getSick_ID()));
-            holder.textViews[1].setText(currentItem.getAgeSick());
-            holder.textViews[2].setText(currentItem.getPartOfBody());
-            holder.textViews[3].setText(currentItem.getStyleBody());
-            holder.textViews[4].setText(currentItem.getDescription_Sick());
-            holder.textViews[5].setImeActionLabel(currentItem.getDiagnos_System(),Integer.parseInt(currentItem.getDiagnoseSD().getTD_ID()));
-            holder.textViews[6].setText(currentItem.getCreate_Diagnos());
-            holder.textViews[7].setText(currentItem.getFinishe_Update());
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(holder.itemView.getContext(), R.layout.support_simple_spinner_dropdown_item, currentItem.getSyndromeIl());
-            holder.spinners[0].setAdapter(arrayAdapter);
-            arrayAdapter = new ArrayAdapter<String>(v.getContext(), R.layout.support_simple_spinner_dropdown_item, currentItem.getIllness().values().toArray(new String[currentItem.getIllness().size()]));
-            holder.spinners[1].setAdapter(arrayAdapter);
+            if (currentItem.getDiagnoseSD().getType_Update()=="Doctor"){
+                return;
+            }else {
+                holder.Type = Type;
+                holder.textViews[0].setImeActionLabel(currentItem.getNameSick(), Integer.parseInt(currentItem.getDiagnoseSD().getSick_ID()));
+                holder.textViews[1].setText(currentItem.getAgeSick());
+                holder.textViews[2].setText(currentItem.getPartOfBody());
+                holder.textViews[3].setText(currentItem.getStyleBody());
+                holder.textViews[4].setText(currentItem.getDescription_Sick());
+                holder.textViews[5].setImeActionLabel(currentItem.getDiagnos_System(), Integer.parseInt(currentItem.getDiagnoseSD().getTD_ID()));
+                holder.textViews[6].setText(currentItem.getCreate_Diagnos());
+                holder.textViews[7].setText(currentItem.getFinishe_Update());
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(holder.itemView.getContext(), R.layout.support_simple_spinner_dropdown_item, currentItem.getSyndromeIl());
+                holder.spinners[0].setAdapter(arrayAdapter);
+                arrayAdapter = new ArrayAdapter<String>(v.getContext(), R.layout.support_simple_spinner_dropdown_item, currentItem.getIllness().values().toArray(new String[currentItem.getIllness().size()]));
+                holder.spinners[1].setAdapter(arrayAdapter);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

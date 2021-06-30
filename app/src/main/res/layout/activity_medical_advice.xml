@@ -13,13 +13,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
 
             <ImageView
                 android:id="@+id/imageView11"
-                android:layout_width="589dp"
-                android:layout_height="900dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/todo"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -83,7 +83,6 @@
                 android:id="@+id/btn_sent_medical_advice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="325dp"
                 android:layout_marginBottom="2dp"
                 android:backgroundTint="@color/Aqua"
                 android:text="@string/send"

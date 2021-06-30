@@ -37,7 +37,7 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
     private DrawerLayout drawer;
     private int counttouch = 0;
     TextView UserName, UserEmail;
-    String UserNameX, UserEmailX, UserIDX;
+    String UserNameX, UserEmailX, UserIDX,User;
     ArrayList<String> rolev;
     File file;
 
@@ -62,7 +62,15 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        fullDiagnos();
+        Intent intent  = getIntent();
+        if (intent.hasExtra("Type")){
+            String U = intent.getExtras().getString("User");
+            String T = intent.getExtras().getString("Type");
+            fullDiagnos(U,T);
+        }
+        else if (intent.hasExtra("User")) {
+            fullDiagnos(intent.getExtras().getString("User")+"_ID","Sick");
+        }
 
 
     }
@@ -120,6 +128,13 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
                         rolev.add(UserEmailX);
                 }
 
+                UserIDX = getTextValue(UserEmailX, doc, "ID");
+                if (UserIDX != null) {
+                    if (!UserIDX.isEmpty())
+                        rolev.add(UserIDX);
+                }
+                User = "Sick_ID";
+
             } else {
                 String filePath = this.getFilesDir().getPath().toString() + "/Doctor.xml";
                 File f = new File(filePath);
@@ -142,6 +157,7 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
                     if (!UserIDX.isEmpty())
                         rolev.add(UserIDX);
                 }
+                User = "Doctor_ID";
             }
 
             return true;
@@ -174,6 +190,12 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
                 startActivity(intent);
                 break;
             case R.id.medical_advice:
+                if (User.equals("Sick_ID")){
+                    intent = new Intent(this, medical_advice.class);
+                    startActivity(intent);
+                }else if (User.equals("Doctor")){
+
+                }
                 break;
             case R.id.consult_house:
                 intent = new Intent(this, consult_house_doctor.class);
@@ -197,19 +219,24 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
 
     }
 
-    private void fullDiagnos() {
+    private void fullDiagnos(String User,String Type) {
+        this.User = User;
         boolean x= readXML();
-        ArrayList<Diagnose_S_D> diagnose_s_dArrayList = dataAccessLayer.getDiagnos_S_D(UserIDX);
+        ArrayList<Diagnose_S_D> diagnose_s_dArrayList = dataAccessLayer.getDiagnos_S_D(User,UserIDX,Type);
         diagnos = dataAccessLayer.getDiagnos(diagnose_s_dArrayList);
-        buildRecyclerView();
+        if (Type.equals("Doctor")) {
+            buildRecyclerView("Sick");
+        }else if (Type.equals("Sick")){
+            buildRecyclerView("Doctor");
+        }
 
     }
 
-    private void buildRecyclerView() {
+    private void buildRecyclerView(String Type) {
         Diagnos = findViewById(R.id.Diagnos);
         Diagnos.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new Recycler_Diagnos(diagnos, new Recycler_Diagnos.ItemClickListener() {
+        mAdapter = new Recycler_Diagnos(Type,diagnos, new Recycler_Diagnos.ItemClickListener() {
             @Override
             public void onItemClick(ListDiagnos listDiagnos) {
 

@@ -1,7 +1,7 @@
 package com.example.the_health_compass;
 
 public class Diagnose_S_D {
-    private String D_ID,TD_ID,TD_Description,TD_Date_Diagnose,TD_Date_Update,Sick_ID;
+    private String D_ID,TD_ID,TD_Description,TD_Date_Diagnose,TD_Date_Update,Sick_ID,Type_Update;
 
     public Diagnose_S_D(String[] data){
         this.D_ID = data[0];
@@ -10,6 +10,7 @@ public class Diagnose_S_D {
         this.TD_Date_Diagnose = data[3];
         this.TD_Date_Update = data[4];
         this.Sick_ID = data[5];
+        this.Type_Update = data[6];
     }
 
     public Diagnose_S_D(){
@@ -19,6 +20,7 @@ public class Diagnose_S_D {
         this.TD_Description = "";
         this.TD_ID = "";
         this.D_ID = "";
+        this.Type_Update = "";
     }
 
     public String[] GetData(){
@@ -29,7 +31,16 @@ public class Diagnose_S_D {
         data[3] = this.TD_Date_Diagnose;
         data[4] = this.TD_Date_Update;
         data[5] = this.Sick_ID;
+        data[6] = this.Type_Update;
         return data;
+    }
+
+    public String getType_Update() {
+        return Type_Update;
+    }
+
+    public void setType_Update(String type_Update) {
+        Type_Update = type_Update;
     }
 
     public String getD_ID() {

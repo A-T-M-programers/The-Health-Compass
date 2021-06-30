@@ -18,11 +18,14 @@ import androidx.fragment.app.Fragment;
 import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Handler;
@@ -62,9 +65,9 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
     private DrawerLayout drawer;
     private Button open_, btn_Sign_in_3, btn_Sign_up_1;
     TextView UserName, UserEmail;
-    String UserNameX, UserEmailX;
+    String UserNameX, UserEmailX,User,User_ID;
     ArrayList<String> rolev;
-    boolean Admin = true;
+    boolean Admin = false;
     File file;
     boolean x;
     View view;
@@ -99,6 +102,8 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                 btn_Sign_up_1.setVisibility(View.VISIBLE);
             }
         }
+        getNotification();
+
     }
 
 
@@ -150,6 +155,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                 } else {
                     intent = new Intent(this, medical_advice_doctor.class);
                 }
+                intent.putExtra("User",User);
                 startActivity(intent);
                 break;
             case R.id.consult_house:
@@ -241,6 +247,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             // XML file
             file = new File(this.getFilesDir().toString() + "/Sick.xml");
             if (file.exists()) {
+                User = "Sick";
                 dom = db.parse(file);
                 Element doc = dom.getDocumentElement();
                 UserNameX = getTextValue(UserNameX, doc, "S_Full_Name");
@@ -254,7 +261,13 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                     if (!UserEmailX.isEmpty())
                         rolev.add(UserNameX);
                 }
+                User_ID = getTextValue(UserEmailX, doc, "ID");
+                if (User_ID != null) {
+                    if (!User_ID.isEmpty())
+                        rolev.add(User_ID);
+                }
             } else {
+                User = "Doctor";
                 String filePath = this.getFilesDir().getPath().toString() + "/Doctor.xml";
                 file = new File(filePath);
                 dom = db.parse(file);
@@ -268,6 +281,11 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                 if (UserEmailX != null) {
                     if (!UserEmailX.isEmpty())
                         rolev.add(UserNameX);
+                }
+                User_ID = getTextValue(UserEmailX, doc, "ID");
+                if (User_ID != null) {
+                    if (!User_ID.isEmpty())
+                        rolev.add(User_ID);
                 }
             }
 
@@ -296,6 +314,31 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
         if(file.exists())
         {
             file.delete();
+        }
+    }
+    public void getNotification(){
+        ArrayList<Diagnose_S_D> arrayList = new ArrayList<>();
+        if (User.equals("Sick")){
+            arrayList = new DataAccessLayer().getDiagnos_S_D("Sick_ID",User_ID,"Doctor");
+        }else {
+            arrayList = new DataAccessLayer().getDiagnos_S_D("Doctor_ID",User_ID,"Sick");
+        }
+        for (int i = 0 ; i<arrayList.size();i++) {
+            Notifications.showNotification(main_activity.this,"أستشارة طبية","مراجعة طبية حسب استشارة قدمتها سابقا",User);
+//            Notification.Builder mBuilder = new Notification.Builder(main_activity.this);
+//            mBuilder.setSmallIcon(R.drawable.ic_accounts);
+//            mBuilder.setContentTitle("أستشارة طبية");
+//            mBuilder.setContentText(arrayList.get(i).getTD_Description());
+//            mBuilder.setAutoCancel(true);
+//            mBuilder.setVisibility(Notification.VISIBILITY_PRIVATE);
+//            Intent intent = new Intent(main_activity.this,medical_advice_doctor.class);
+//            intent.putExtra("User",User+"_ID");
+//            intent.putExtra("Type",User);
+//            PendingIntent pendingIntent = PendingIntent.getActivity(main_activity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+//            mBuilder.setContentIntent(pendingIntent);
+//            Notification notif = mBuilder.build();
+//            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//            notificationManager.notify(i,notif);
         }
     }
 }
