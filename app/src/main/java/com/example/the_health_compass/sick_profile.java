@@ -52,6 +52,8 @@ public class sick_profile extends AppCompatActivity implements NavigationView.On
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sick_profile);
+
+        // Sick Image
         imageViewProfile = (ImageView)findViewById(R.id.imageView7);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,12 +65,26 @@ public class sick_profile extends AppCompatActivity implements NavigationView.On
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        // Sick Name
         UserName = (TextView) findViewById(R.id.tv_full_name);
+
+        // Sick Email
         UserEmail = (TextView) findViewById(R.id.tv_Email);
+
+        // Sick Birthday
         Birthday = (TextView) findViewById(R.id.tv_birthday);
+
+        // Sick Gender
         Gender = (TextView) findViewById(R.id.tv_gender);
+
+        // Sick Mobile Phone Number
         MobilePhone = (TextView) findViewById(R.id.tv_Phone_Mobile_Sick);
+
+        // Sick Check Email
         CheckEmail = (TextView) findViewById(R.id.tv_check_email);
+
+        // Read XML File To Fill Data In Controls
         if (ReadXML_Profile()) {
             UserName.setText(UserNameX);
             UserEmail.setText(UserEmailX);
@@ -77,7 +93,10 @@ public class sick_profile extends AppCompatActivity implements NavigationView.On
             MobilePhone.setText(MobilePhoneX);
             CheckEmail.setText(CheckEmailX);
         }
+
+        // Button To Open Edit Profile Sick
         btn_Open_Edit = (Button) findViewById(R.id.btn_edit_profile);
+
         btn_Open_Edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +104,7 @@ public class sick_profile extends AppCompatActivity implements NavigationView.On
             }
         });
     }
-
+    // Method To Read XML File
     public boolean ReadXML_Profile() {
         rolev = new ArrayList<String>();
         Document document;
@@ -122,7 +141,7 @@ public class sick_profile extends AppCompatActivity implements NavigationView.On
         }
         return false;
     }
-
+    // Method To Move From Page To Page
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent;

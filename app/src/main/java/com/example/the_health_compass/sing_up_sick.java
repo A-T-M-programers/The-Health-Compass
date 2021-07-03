@@ -58,44 +58,74 @@ public class sing_up_sick extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_in_sick);
         CreatAccount = (Button) findViewById(R.id.btn_create_account);
-        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
         // Validations
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+
+        // Validate Sick Name
         awesomeValidation.addValidation(this, R.id.et_full_name, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
         awesomeValidation.addValidation(this, R.id.et_full_name,"[a-zA-Zأ-ي\\s]+", R.string.invalid_name);
+
+        // Validate Sick Email
         awesomeValidation.addValidation(this, R.id.et_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
+
+        // Validate Sick Check Email
         awesomeValidation.addValidation(this, R.id.et_check_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
+
+        // Validate Sick Password
         awesomeValidation.addValidation(this,R.id.et_password,"[1-9a-zA-Z\\s]+",R.string.invalid_password2);
         awesomeValidation.addValidation(this, R.id.et_password, ".{6,}", R.string.invalid_password);
+
+        // Validate Sick Confirm Password
         awesomeValidation.addValidation(this, R.id.ed_config_password, R.id.et_password, R.string.invalid_confirm_password);
+
+        // Validate Sick Mobile Phone Number
         awesomeValidation.addValidation(this, R.id.et_mobile_phone, Patterns.PHONE, R.string.invalid_mobile_phone_number);
+
+        // Validate Sick Birthday
         awesomeValidation.addValidation(this, R.id.ed_birthday, RegexTemplate.NOT_EMPTY, R.string.invalid_birthday);
 
 
         //Get Controler to this class
+
+        // Sick Name
         editTexts[0] = (EditText) findViewById(R.id.et_full_name);
+
+        // Sick Email
         editTexts[1] = (EditText) findViewById(R.id.et_email);
+
+        // Sick Check Email
         editTexts[2] = (EditText) findViewById(R.id.et_check_email);
+
+        // Sick Password
         editTexts[3] = (EditText) findViewById(R.id.et_password);
+
+        // Sick Mobile Phone Number
         maskedEditText = (MaskEditText) findViewById(R.id.et_mobile_phone);
+
+        // Sick Birthday
         editTexts[4] = (EditText) findViewById(R.id.ed_birthday);
+
+        // Event On Click For Sick Birthday
         editTexts[4].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ShowDialogBirthday(editTexts[4]);
             }
         });
+        // RadioButtons
+
+        // Sick Gender
         radioButton[0] = (RadioButton) findViewById(R.id.rb_female);
         radioButton[1] = (RadioButton) findViewById(R.id.rb_male);
 
         CreatAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 if (awesomeValidation.validate()) {
 
                     Toast.makeText(getApplicationContext(), "بيانات صحيحة", Toast.LENGTH_SHORT).show();
+
                     // Add The Data to HashMap
                     sickmap.put("S_Full_Name", editTexts[0].getText().toString());
                     sickmap.put("Email", editTexts[1].getText().toString());
@@ -103,16 +133,19 @@ public class sing_up_sick extends AppCompatActivity {
                     sickmap.put("Password", editTexts[3].getText().toString());
                     sickmap.put("Phone_Mobile", maskedEditText.getText().toString());
                     sickmap.put("S_Birthday", editTexts[4].getText().toString());
+
                     if (radioButton[0].isChecked()) {
                         sickmap.put("S_Gender", radioButton[0].getText().toString());
                     } else {
                         sickmap.put("S_Gender", radioButton[1].getText().toString());
                     }
+
                     //Add Information Sick to class sick
                     s.InPutSick(sickmap);
                     s.InputShare(sickmap, false);
-                    String CheckDataBase = dataAccessLayer.getsick(s.S_Full_Name, s.Email, s.Password);
+
                     //Check if Sink Found in DataBase
+                    String CheckDataBase = dataAccessLayer.getsick(s.S_Full_Name, s.Email, s.Password);
                     switch (CheckDataBase) {
                         case "User":
                             return;
@@ -123,11 +156,17 @@ public class sing_up_sick extends AppCompatActivity {
                         default:
                             break;
                     }
+
                     // Add sick to database
                     boolean CheckSet = dataAccessLayer.SetSick(s);
+
                     // Add sick to File Xml
                     WriteToXml(s);
+
+                    // Method To Move To Home Page
                     This();
+
+                    // To Add Animation After Click On Sing Up Button
                     loading_screen.startLoadingDialog();
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -161,10 +200,13 @@ public class sing_up_sick extends AppCompatActivity {
         try {
             // use factory to get an instance of document builder
             DocumentBuilder db = dbf.newDocumentBuilder();
+
             // create instance of DOM
             dom = db.newDocument();
+
             // create the root element
             Element rootEle = dom.createElement("Sick");
+
             // create data elements and place them under root
             e = dom.createElement("Full_Name");
             e.appendChild(dom.createTextNode(s.S_Full_Name));
@@ -237,7 +279,7 @@ public class sing_up_sick extends AppCompatActivity {
 
         }
     }
-
+    // Method To Show Interface To Enter Birthday
     public void ShowDialogBirthday(EditText editText) {
         DialogFragment newFragment = new DatePickerFragment(editText);
         newFragment.show(getSupportFragmentManager(), "Date Picker");

@@ -29,6 +29,7 @@ public class DataAccessLayer {
         connect = connectionHelper.connections();
     }
 
+    // Method To Open Connection
     public void Open() {
         try {
             if (connect.isClosed()) {
@@ -38,6 +39,8 @@ public class DataAccessLayer {
             throwables.printStackTrace();
         }
     }
+
+    // Method To Close Connection
     public void Close() {
         try {
             if (!connect.isClosed()) {
@@ -48,6 +51,7 @@ public class DataAccessLayer {
         }
     }
 
+    // Method To Insert Doctor In Database By Procedure
     public boolean SetDoctor(Doctor D) {
         try {
             if (connect == null) {
@@ -77,6 +81,7 @@ public class DataAccessLayer {
         return false;
     }
 
+    // Method To Get Doctor Information From Database By UserName Or Email Or Password
     public String getDoctor(String UserName, String Email, String Password) {
         try {
             if (connect == null) {
@@ -86,6 +91,7 @@ public class DataAccessLayer {
                 String query = "select * from TBLDoctor where Doctor_Full_Name='" + UserName + "' and Doctor_Password='" + Password + "';";
                 Statement stat = connect.createStatement();
                 ResultSet rs = stat.executeQuery(query);
+                // Get Information By User Name
                 if (rs.next()) {
                     ConnectionResult = "Successfull";
                     isSucces = true;
@@ -95,6 +101,8 @@ public class DataAccessLayer {
                 String query1 = "select * from TBLDoctor where Doctor_Email='" + Email + "';";
                 stat = connect.createStatement();
                 rs = stat.executeQuery(query);
+
+                // Get Information By Email
                 if (rs.next()) {
                     ConnectionResult = "Successfull";
                     isSucces = true;
@@ -104,6 +112,8 @@ public class DataAccessLayer {
                 String query2 = "select * from TBLDoctor where Doctor_Password='" + Password + "';";
                 stat = connect.createStatement();
                 rs = stat.executeQuery(query);
+
+                // Get Information By User Password
                 if (rs.next()) {
                     ConnectionResult = "Successfull";
                     isSucces = true;
@@ -122,7 +132,7 @@ public class DataAccessLayer {
         return "Not Found";
     }
 
-    //Set Sick By Prosedure Insert_Sick
+    //Set Sick By Procedure Insert_Sick
     public boolean SetSick(Sick s) {
         try {
             //Check The Connection Successfull By Internet
@@ -210,7 +220,69 @@ public class DataAccessLayer {
         }
         return "Not Found";
     }
+    // Get All Sicks Information From Database
+    public String getSicks(ArrayList<ListSick> sicks) {
+        try {
+            if (connect == null) {
+                ConnectionResult = "Check Your Internet Access!";
+            } else {
+                Open();
+                //Get Information Sick By UserName
+                String query = "select * from TBLSick;";
+                Statement stat = connect.createStatement();
+                ResultSet rs = stat.executeQuery(query);
+                while (rs.next()) {
+                    boolean check;
+                    check = sicks.add(new ListSick(Integer.parseInt(rs.getString("Sick_ID")),
+                            rs.getString("Sick_Full_Name"),
+                            rs.getString("Sick_Email"),
+                            rs.getString("Sick_Password"),
+                            rs.getString("Sick_Location"),
+                            rs.getString("Sick_Subscription"),
+                            rs.getString("Sick_Check_Email"),
+                            Boolean.parseBoolean(rs.getString("Sick_Blocking")),
+                            rs.getString("Sick_profile_Image"),
+                            rs.getString("Sick_Create_Date"),
+                            rs.getString("Sick_Gender")));
 
+                    ConnectionResult = "Successfull";
+                    isSucces = true;
+                }
+                Close();
+                return "Sick";
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            isSucces = false;
+            ConnectionResult = throwables.getMessage();
+        }
+        return "Not Found";
+    }
+
+    // Delete Sick Information By Sick ID
+    public void deleteSick(int Id) {
+        try {
+            if (connect == null) {
+                ConnectionResult = "Check Your Internet Access!";
+            } else {
+                String query = "delete from TBLSick where Sick_ID = " + Id + ";";
+                Statement stat = connect.createStatement();
+                ResultSet rs = stat.executeQuery(query);
+                if (rs.next()) {
+                    ConnectionResult = "Successful";
+                    isSucces = true;
+                    connect.close();
+                } else {
+                    connect.close();
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            isSucces = false;
+            ConnectionResult = throwables.getMessage();
+        }
+    }
+    // Check Sick Sign In
     public String check_sick_sign_in(String UserName, String
             Password, AtomicReference<Sick> s) {
         try {
@@ -263,6 +335,8 @@ public class DataAccessLayer {
         }
         return "Faild Access!";
     }
+
+    // Check Doctor Sign In
     public String check_doctor_sign_in(String UserName, String
             Password, AtomicReference<Doctor> d) {
         try {
@@ -314,6 +388,8 @@ public class DataAccessLayer {
         }
         return "Faild Access!";
     }
+
+    // Get All Doctors Information From Database
     public String getDoctors(ArrayList<ListDoctor> Doctors) {
         try {
             if (connect == null) {
@@ -340,6 +416,8 @@ public class DataAccessLayer {
         }
         return "Not Found";
     }
+
+    // Get Illness Name From Database
     public String getIllnessName(ArrayList<String> Illness) {
         try {
             if (connect == null) {
@@ -366,6 +444,8 @@ public class DataAccessLayer {
         }
         return "Not Found";
     }
+
+    // Get Part Of Body From Database
     public String getPartOfBody(ArrayMap<String,String> Partofbody) {
         try {
             if (connect == null) {
@@ -392,6 +472,8 @@ public class DataAccessLayer {
         }
         return "Not Found";
     }
+
+    // Get Part Of Body Style From Database
     public String getPartOfBodysyle(ArrayMap<String,String> Partofbodystyle,String PartofbodyID) {
         try {
             if (connect == null) {
@@ -419,6 +501,7 @@ public class DataAccessLayer {
         }
         return "Not Found";
     }
+
     public String getSyndromeIl(ArrayMap<String,String> syndromeil,String PartofbodystyleID) {
         try {
             if (connect == null) {
@@ -501,7 +584,7 @@ public class DataAccessLayer {
         }
         return d;
     }
-
+    // Set The Hospital Data To Database By Procedure
     public boolean SetHospital(Hospital H) {
         try {
             if (connect == null) {
@@ -528,6 +611,7 @@ public class DataAccessLayer {
         return false;
     }
 
+    // Get Hospital Information From Database By Name Or Phone Number
     public String getHospital(String Name, String Phone) {
         try {
             if (connect == null) {
@@ -555,6 +639,8 @@ public class DataAccessLayer {
         }
         return "Not Found";
     }
+
+    // Get All Hospitals Information From Database
     public String getHospitals(ArrayList<ListHospital> Hospitals){
         try {
             if (connect == null) {

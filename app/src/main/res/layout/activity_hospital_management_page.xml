@@ -25,15 +25,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.024" />
 
-        <GridView
-            android:id="@+id/gv_hospital_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.212"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="-5dp" />
+
 
         <Button
             android:id="@+id/btn_update_hospital"
@@ -41,19 +33,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="384dp"
             android:text="تعديل"
+            android:visibility="visible"
             app:layout_constraintEnd_toStartOf="@+id/btn_add_hospital"
             app:layout_constraintStart_toEndOf="@+id/btn_remove_hospital"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
-
-        <Button
-            android:id="@+id/btn_save_changes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="840dp"
-            android:text="حفظ"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
@@ -64,6 +46,7 @@
             android:layout_marginTop="384dp"
             android:layout_marginEnd="36dp"
             android:text="إضافة"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
@@ -73,84 +56,13 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@drawable/account_icon"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.598" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="اضغط هنا لإضافة صورة "
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.64" />
-
-        <EditText
-            android:id="@+id/ed_hospital_name"
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
-            android:hint="اسم المشفى"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.545"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.702"
-            tools:ignore="MissingConstraints" />
-
-        <com.santalu.maskedittext.MaskEditText
-            android:id="@+id/ed_hospital_phone"
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="رقم هاتف المشفى"
-            android:inputType="phone"
-            android:maxLength="12"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.454"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.769"
-            app:met_mask="### ## ##" />
-
-        <EditText
-            android:id="@+id/ed_hospital_location"
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
-            android:hint="موقع المشفى"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.454"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.839"
-            tools:ignore="MissingConstraints" />
-
-        <Button
-            android:id="@+id/btn_remove_hospital"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="حذف"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.077"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.457"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintVertical_bias="0.593" />
 
         <EditText
             android:id="@+id/ed_hospital_description"
@@ -162,13 +74,145 @@
             android:inputType="textMultiLine"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.363"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.909"
+            app:layout_constraintVertical_bias="0.902"
             tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/tv_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="اضغط هنا لإضافة صورة "
+            android:textColor="@color/white"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.636" />
+
+        <com.santalu.maskedittext.MaskEditText
+            android:id="@+id/ed_hospital_phone"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="رقم هاتف المشفى"
+            android:inputType="phone"
+            android:maxLength="12"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.454"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.763"
+            app:met_mask="### ## ##" />
+
+        <EditText
+            android:id="@+id/ed_hospital_name"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:hint="اسم المشفى"
+            android:inputType="textPersonName"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.545"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.7"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/ed_ID"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:hint="رقم المشفى (المعرف)"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.363"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.461"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/ed_hospital_location"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:hint="موقع المشفى"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.454"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.831"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btn_save_changes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="1016dp"
+            android:text="حفظ"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btn_remove_hospital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="384dp"
+            android:text=" حذف"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btn_remove_hospital_by_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="532dp"
+            android:text="حذف المشفى"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <GridView
+            android:id="@+id/data"
+            android:layout_width="400dp"
+            android:layout_height="250dp"
+            app:layout_constraintBottom_toTopOf="@+id/ed_hospital_location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.182"
+            tools:ignore="MissingConstraints" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

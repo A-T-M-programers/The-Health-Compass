@@ -22,22 +22,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class Hospital_Management_Page extends AppCompatActivity {
 
     AwesomeValidation awesomeValidation;
-    Button[] buttons = new Button[4];
-    EditText[] editTexts=new EditText[4];
+    Button[] buttons = new Button[5];
+    EditText[] editTexts=new EditText[5];
     ImageView hospital_Image;
+    TextView Photo;
+    GridView datagridView;
+    ArrayList<ListHospital>Hospitals = new ArrayList<>();
     HashMap<String,String> HospitalMap= new HashMap<String, String>();
     Hospital H = new Hospital();
     DataAccessLayer dataAccessLayer = new DataAccessLayer();
@@ -46,12 +53,16 @@ public class Hospital_Management_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital_management_page);
 
+        datagridView = (GridView)findViewById(R.id.data);
         hospital_Image = (ImageView)findViewById(R.id.hospital_Image);
+
+        Photo = (TextView)findViewById(R.id.tv_photo);
 
         editTexts[0] = (EditText)findViewById(R.id.ed_hospital_name);
         editTexts[1] = (EditText)findViewById(R.id.ed_hospital_phone);
         editTexts[2] = (EditText)findViewById(R.id.ed_hospital_location);
         editTexts[3] = (EditText)findViewById(R.id.ed_hospital_description);
+        editTexts[4] = (EditText)findViewById(R.id.ed_ID);
         // Validations
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
@@ -71,7 +82,9 @@ public class Hospital_Management_Page extends AppCompatActivity {
         buttons[1] = (Button)findViewById(R.id.btn_update_hospital);
         buttons[2] = (Button)findViewById(R.id.btn_remove_hospital);
         buttons[3] = (Button)findViewById(R.id.btn_save_changes);
+        buttons[4] = (Button)findViewById(R.id.btn_remove_hospital_by_id);
 
+        String Check = dataAccessLayer.getHospitals(Hospitals);
 
         hospital_Image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,12 +97,29 @@ public class Hospital_Management_Page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Photo.setVisibility(View.VISIBLE);
+                editTexts[0].setVisibility(View.VISIBLE);
+                editTexts[1].setVisibility(View.VISIBLE);
+                editTexts[2].setVisibility(View.VISIBLE);
+                editTexts[3].setVisibility(View.VISIBLE);
+
+                buttons[3].setVisibility(View.VISIBLE);
+
+                hospital_Image.setVisibility(View.VISIBLE);
+
             }
         });
         buttons[1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Photo.setVisibility(View.VISIBLE);
+                editTexts[0].setVisibility(View.VISIBLE);
+                editTexts[1].setVisibility(View.VISIBLE);
+                editTexts[2].setVisibility(View.VISIBLE);
+                editTexts[3].setVisibility(View.VISIBLE);
+                buttons[3].setVisibility(View.VISIBLE);
 
+                hospital_Image.setVisibility(View.VISIBLE);
             }
         });
         buttons[2].setOnClickListener(new View.OnClickListener() {

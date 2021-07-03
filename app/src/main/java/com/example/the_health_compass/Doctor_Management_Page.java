@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
@@ -19,8 +21,11 @@ import java.util.HashMap;
 
 public class Doctor_Management_Page extends AppCompatActivity {
     AwesomeValidation awesomeValidation;
-    EditText [] editTexts= new EditText[6];
-    Button [] buttons = new Button[3];
+    TextView []textViews= new TextView[3];
+    EditText [] editTexts= new EditText[8];
+    Button [] buttons = new Button[4];
+    Spinner Subscription;
+    RadioGroup [] radioGroups = new RadioGroup[2];
     RadioButton [] radioButtons = new RadioButton[4];
     Spinner subscription ;
     DataAccessLayer dataAccessLayer = new DataAccessLayer();
@@ -30,6 +35,16 @@ public class Doctor_Management_Page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_management_page);
+
+        subscription= (Spinner)findViewById(R.id.sp_subscription);
+
+        textViews[0] = (TextView)findViewById(R.id.tv_subscription2);
+        textViews[1] = (TextView)findViewById(R.id.tv_gender3);
+        textViews[2] = (TextView)findViewById(R.id.tv_gender2);
+
+        radioGroups[0] = (RadioGroup)findViewById(R.id.radioGroup);
+        radioGroups[1] = (RadioGroup)findViewById(R.id.radioGroup2);
+
 
         radioButtons[0] = (RadioButton)findViewById(R.id.rb_male);
         radioButtons[1] = (RadioButton)findViewById(R.id.rb_female);
@@ -41,13 +56,20 @@ public class Doctor_Management_Page extends AppCompatActivity {
         buttons[0] = (Button)findViewById(R.id.btn_add);
         buttons[1] = (Button)findViewById(R.id.btn_remove);
         buttons[2] = (Button)findViewById(R.id.btn_save_changes);
+        buttons[3] = (Button)findViewById(R.id.btn_remove_Doctor_by_id);
+
 
         editTexts[0] = (EditText)findViewById(R.id.et_full_name);
         editTexts[1] = (EditText)findViewById(R.id.et_email);
         editTexts[2] = (EditText)findViewById(R.id.et_check_email);
         editTexts[3] = (EditText)findViewById(R.id.et_password);
         editTexts[4] = (EditText)findViewById(R.id.et_mobile_phone);
-        editTexts[5] = (EditText)findViewById(R.id.et_birthday);
+        editTexts[5] = (EditText)findViewById(R.id.ed_birthday);
+        editTexts[6] = (EditText)findViewById(R.id.ed_config_password);
+        editTexts[7] = (EditText)findViewById(R.id.ed_ID);
+
+
+
 
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
@@ -68,12 +90,58 @@ public class Doctor_Management_Page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                editTexts[7].setVisibility(View.INVISIBLE);
+                buttons[3].setVisibility(View.INVISIBLE);
+
+                editTexts[0].setVisibility(View.VISIBLE);
+                editTexts[1].setVisibility(View.VISIBLE);
+                editTexts[2].setVisibility(View.VISIBLE);
+                editTexts[3].setVisibility(View.VISIBLE);
+                editTexts[4].setVisibility(View.VISIBLE);
+                editTexts[5].setVisibility(View.VISIBLE);
+                editTexts[6].setVisibility(View.VISIBLE);
+
+                buttons[2].setVisibility(View.VISIBLE);
+
+                textViews[0].setVisibility(View.VISIBLE);
+                textViews[1].setVisibility(View.VISIBLE);
+                textViews[2].setVisibility(View.VISIBLE);
+
+                radioGroups[0].setVisibility(View.VISIBLE);
+                radioGroups[1].setVisibility(View.VISIBLE);
+
+                subscription.setVisibility(View.VISIBLE);
+
+
+
             }
         });
         buttons[1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                editTexts[0].setVisibility(View.INVISIBLE);
+                editTexts[1].setVisibility(View.INVISIBLE);
+                editTexts[2].setVisibility(View.INVISIBLE);
+                editTexts[3].setVisibility(View.INVISIBLE);
+                editTexts[4].setVisibility(View.INVISIBLE);
+                editTexts[5].setVisibility(View.INVISIBLE);
+                editTexts[6].setVisibility(View.INVISIBLE);
+
+                buttons[2].setVisibility(View.INVISIBLE);
+
+                textViews[0].setVisibility(View.INVISIBLE);
+                textViews[1].setVisibility(View.INVISIBLE);
+                textViews[2].setVisibility(View.INVISIBLE);
+
+                radioGroups[0].setVisibility(View.INVISIBLE);
+                radioGroups[1].setVisibility(View.INVISIBLE);
+
+                subscription.setVisibility(View.INVISIBLE);
+
+
+                editTexts[7].setVisibility(View.VISIBLE);
+                buttons[3].setVisibility(View.VISIBLE);
             }
         });
         buttons[2].setOnClickListener(new View.OnClickListener() {
@@ -118,6 +186,13 @@ public class Doctor_Management_Page extends AppCompatActivity {
                 else{
                     Toast.makeText(getApplicationContext(), "بيانات خاطئة", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        buttons[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataAccessLayer.deleteDoctor(Integer.parseInt(editTexts[7].getText().toString()));
+                Toast.makeText(getApplicationContext(),"الطبيب رقم "+editTexts[7].getText().toString()+" تم حذفه",Toast.LENGTH_SHORT).show();
             }
         });
     }

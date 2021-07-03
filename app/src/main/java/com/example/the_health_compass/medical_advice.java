@@ -92,6 +92,7 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_advice);
+
         editTexts = (EditText)findViewById(R.id.sv_search);
         Serching = (RecyclerView) findViewById(R.id.Searching);
         Search_Doctors = (ImageButton)findViewById(R.id.btn_Search);

@@ -60,33 +60,60 @@ public class sign_up extends AppCompatActivity {
         // Validations
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+
+        //Validate Doctor Name
         awesomeValidation.addValidation(this, R.id.et_full_name, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
         awesomeValidation.addValidation(this, R.id.et_full_name, "[a-zA-Zأ-ي\\s]+", R.string.invalid_name);
+
+        // Validate Doctor Email
         awesomeValidation.addValidation(this, R.id.et_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
+
+        // Validate Doctor Check Email
         awesomeValidation.addValidation(this, R.id.et_check_email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
+
+        // Validate Doctor Password
         awesomeValidation.addValidation(this, R.id.et_password, "[1-9a-zA-Z\\s]+", R.string.invalid_password2);
         awesomeValidation.addValidation(this, R.id.et_password, ".{6,}", R.string.invalid_password);
+
+        // Validate Doctor Confirm Password
         awesomeValidation.addValidation(this, R.id.ed_config_password, R.id.et_password, R.string.invalid_confirm_password);
+
+        // Validate Doctor Mobile Phone Number
         awesomeValidation.addValidation(this, R.id.et_mobile_phone, Patterns.PHONE, R.string.invalid_mobile_phone_number);
+
+        // Validate Doctor Birthday
         awesomeValidation.addValidation(this, R.id.ed_birthday, RegexTemplate.NOT_EMPTY, R.string.invalid_birthday);
 
         // Get Controls To This Class
 
         // EditTexts
 
+        // Doctor Full Name
         editTexts[0] = (EditText) findViewById(R.id.et_full_name);
+
+        // Doctor Email
         editTexts[1] = (EditText) findViewById(R.id.et_email);
+
+        // Doctor CheckEmail
         editTexts[2] = (EditText) findViewById(R.id.et_check_email);
+
+        // Doctor Password
         editTexts[3] = (EditText) findViewById(R.id.et_password);
+
+        // Doctor Mobile Phone Number
         editTexts[4] = (EditText) findViewById(R.id.et_mobile_phone);
+
+        // Doctor Birthday
         editTexts[5] = (EditText) findViewById(R.id.ed_birthday);
 
+        // Doctor Specialization
         subscription = (Spinner) findViewById(R.id.sp_subscription);
 
         ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, subscriptions);
         stringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         subscription.setAdapter(stringArrayAdapter);
 
+        // Event On Click For Doctor Birthday To Enter The Birthday Using Interface
         editTexts[5].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,18 +123,23 @@ public class sign_up extends AppCompatActivity {
 
         // RadioButtons
 
+        // Doctor Gender
         radioButtons[0] = (RadioButton) findViewById(R.id.rb_male);
         radioButtons[1] = (RadioButton) findViewById(R.id.rb_female);
+
+        // Doctor Ability To Respond At Home
         radioButtons[2] = (RadioButton) findViewById(R.id.rb_able);
         radioButtons[3] = (RadioButton) findViewById(R.id.rb_unable);
 
-        // Button On Click Event
+        // Button On Click Event To Save Data
         btn_Create_Account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (awesomeValidation.validate()) {
 
                     Toast.makeText(getApplicationContext(), "بيانات صحيحة", Toast.LENGTH_SHORT).show();
+
+                    // Add Data To HashMap
 
                     DoctorMap.put("D_Full_Name", editTexts[0].getText().toString());
                     DoctorMap.put("D_Email", editTexts[1].getText().toString());
@@ -127,8 +159,12 @@ public class sign_up extends AppCompatActivity {
                     } else if (radioButtons[3].isChecked()) {
                         DoctorMap.put("D_Able", radioButtons[3].getText().toString());
                     }
+                    // Add Data From HashMap To Object From Type Doctor
                     D.InputDoctor(DoctorMap);
+
                     D.InputShareDoctor(DoctorMap, false);
+
+                    // Check If Doctor Is In Database
                     String CheckDataBase = dataAccessLayer.getDoctor(D.D_Full_Name, D.Email, D.Password);
                     switch (CheckDataBase) {
                         case "User":
@@ -140,10 +176,17 @@ public class sign_up extends AppCompatActivity {
                         default:
                             break;
                     }
+
+                    // Add Doctor Data To Database
                     boolean CheckSet = dataAccessLayer.SetDoctor(D);
+
                     // Write To XML File
                     WriteToXMLDoctor(D);
+
+                    // Method To Move To Home Page
                     This();
+
+                    // To Add Animation After Click On Sing Up Button
                     loading_screen.startLoadingDialog();
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -152,6 +195,7 @@ public class sign_up extends AppCompatActivity {
                             loading_screen.dismissDialog();
                         }
                     }, 5000);
+
                 } else {
                     Toast.makeText(getApplicationContext(), "بيانات خاطئة", Toast.LENGTH_SHORT).show();
                 }
@@ -168,11 +212,21 @@ public class sign_up extends AppCompatActivity {
     public void WriteToXMLDoctor(Doctor D) {
         Document document;
         Element element;
+
+        // instance of a DocumentBuilderFactory
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         try {
+
+            // use factory to get an instance of document builder
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+
+            // create instance of DOM
             document = documentBuilder.newDocument();
+
+            // Create A Root Element
             Element rootElement = document.createElement("Doctor");
+
+            // Create A Elements Under The Root Element And Data To Them
 
             element = document.createElement("D_Full_Name");
             element.appendChild(document.createTextNode(D.D_Full_Name));
@@ -228,6 +282,9 @@ public class sign_up extends AppCompatActivity {
                 } catch (FileNotFoundException fileNotFoundException) {
                     fileNotFoundException.printStackTrace();
                 }
+
+                // send DOM to file
+                //tr.transform(new DOMSource(dom),streamResult1);
                 transformer.transform(new DOMSource(document), streamResult1);
             } catch (TransformerException transformerException) {
                 System.out.println(transformerException.getMessage());
@@ -241,6 +298,7 @@ public class sign_up extends AppCompatActivity {
         }
     }
 
+    // Method To Show Interface To Enter Birthday
     public void ShowDialogBirthday(EditText editText) {
         DialogFragment newFragment = new DatePickerFragment(editText);
         newFragment.show(getSupportFragmentManager(), "Date Picker");

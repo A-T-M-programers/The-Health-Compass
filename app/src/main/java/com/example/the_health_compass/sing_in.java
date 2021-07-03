@@ -50,7 +50,12 @@ public class sing_in extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+
+        // Validate User Name
         awesomeValidation.addValidation(this, R.id.ed_user_name_Sign_In, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
+        awesomeValidation.addValidation(this, R.id.ed_user_name_Sign_In, "[a-zA-Zأ-ي\\s]+", R.string.invalid_name);
+
+        // Validate Password
         awesomeValidation.addValidation(this, R.id.ed_password_Sign_In, ".{6,}", R.string.invalid_password);
         awesomeValidation.addValidation(this,R.id.ed_password_Sign_In,"[a-zA-Z0-9\\s]+",R.string.invalid_password2);
 
@@ -78,10 +83,13 @@ public class sing_in extends AppCompatActivity {
             public void onClick(View v) {
                 if (awesomeValidation.validate()) {
                     String user = UserNameOrEmail.getText().toString();
+
+                    // Check If User Is Doctor
                     if (user.substring(0,2).toLowerCase().equals("dr") |UserNameOrEmail.getText().toString().contains("doctor.com")){
                         String check = dataAccessLayer.check_doctor_sign_in(UserNameOrEmail.getText().toString(), Password.getText().toString(), d);
                         Check(check);
-                    }else {
+                    }
+                    else {
                         String check = dataAccessLayer.check_sick_sign_in(UserNameOrEmail.getText().toString(), Password.getText().toString(), s);
                         Check(check);
                     }
@@ -91,8 +99,9 @@ public class sing_in extends AppCompatActivity {
             }
         });
     }
-
+    // Method To Open The Create Account Page
     public void openCreateAccountPage() {
+        // Select Account Type
         AlertDialog.Builder builder = new AlertDialog.Builder(sing_in.this);
         builder.setTitle("ما نوع الحساب التي تريد انشائه");
         builder.setMessage("يجب عليك تحديد نوع الحساب المراد انشائه");
@@ -116,7 +125,7 @@ public class sing_in extends AppCompatActivity {
         alertDialog.show();
 
     }
-
+    // Che
     public void Check(String datacheck) {
         switch (datacheck) {
             case "Faild Access!":
@@ -176,11 +185,12 @@ public class sing_in extends AppCompatActivity {
         }
     }
 
+    // Method To Open Home Page
     public void OpenHome() {
         Intent intent = new Intent(this, main_activity.class);
         startActivity(intent);
     }
-
+    // Method To Add Sick Data To XML File
     public void WriteToXml(Sick s) {
 
         Document dom;
@@ -268,6 +278,8 @@ public class sing_in extends AppCompatActivity {
 
         }
     }
+
+    // Method To Add Doctor Data To XML File
     public void WriteToXml(Doctor d) {
 
         Document dom;

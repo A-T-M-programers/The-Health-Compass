@@ -72,6 +72,7 @@ public class Settings_page extends AppCompatActivity implements NavigationView.O
         }
         return super.dispatchTouchEvent(ev);
     }
+    // Read XML File
     public boolean readXML() {
         rolev = new ArrayList<String>();
         Document dom;

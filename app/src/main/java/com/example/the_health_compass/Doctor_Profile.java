@@ -47,16 +47,34 @@ public class Doctor_Profile extends AppCompatActivity implements NavigationView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_profile);
 
+        // Button To Open Edit Doctor Profile
         btn_Edit_Profile = (Button) findViewById(R.id.btn_sign_in2);
+
+        // Doctor Image
         imageViewProfile =(ImageView)findViewById(R.id.imageViewProfile);
+
+        // Doctor Name
         UserName  =(TextView)findViewById(R.id.tv_full_name);
+
+        // Doctor Email
         UserEmail = (TextView)findViewById(R.id.tv_Email);
+
+        // Doctor Birthday
         Birthday = (TextView)findViewById(R.id.tv_birthday);
+
+        // Doctor Gender
         Gender = (TextView)findViewById(R.id.tv_gender);
+
+        // Doctor Mobile Phone Number
         MobilePhone = (TextView)findViewById(R.id.tv_mobile_phone);
+
+        // Doctor Check Email
         CheckEmail = (TextView)findViewById(R.id.tv_check_email);
+
+        // Doctor Specialization
         Specialization = (TextView) findViewById(R.id.tv_sectionity);
 
+        // Read XML File To Fill Data Into Controls
         if (ReadXML_Profile()) {
             UserName.setText(UserNameX);
             UserEmail.setText(UserEmailX);
@@ -66,8 +84,6 @@ public class Doctor_Profile extends AppCompatActivity implements NavigationView.
             CheckEmail.setText(CheckEmailX);
             Specialization.setText(SpecializationX);
             imageViewProfile.setImageMatrix(Image);
-            /* Image Profile */
-
         }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -88,6 +104,7 @@ public class Doctor_Profile extends AppCompatActivity implements NavigationView.
             }
         });
     }
+    // Method To Read XML File
     public boolean ReadXML_Profile() {
         rolev = new ArrayList<String>();
         Document document;

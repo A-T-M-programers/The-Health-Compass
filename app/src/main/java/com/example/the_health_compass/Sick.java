@@ -15,6 +15,7 @@ public class Sick extends Share{
         this.S_Gender = sick.get("S_Gender");
         InputAge();
     }
+
     public Sick(){
         this.S_Full_Name = "";
         this.S_Gender = "";

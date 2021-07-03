@@ -81,7 +81,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
     TextView UserName, UserEmail;
     String UserNameX, UserEmailX,User,User_ID;
     ArrayList<String> rolev;
-    boolean Admin = false;
+    boolean Admin = true;
     File file;
     boolean x;
     View view;
@@ -90,7 +90,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-
+        // If User Is Admin
         if (Admin) {
             Intent intent = new Intent(this, Control_Panel_Page.class);
             startActivity(intent);
@@ -115,11 +115,9 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                 btn_Sign_in_3.setVisibility(View.VISIBLE);
                 btn_Sign_up_1.setVisibility(View.VISIBLE);
             }
+            //getNotification();
+            workManager();
         }
-
-        //getNotification();
-        workManager();
-
     }
 
 
@@ -220,11 +218,13 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
         }
     }
 
+    // Method To Open Sign In Page
     public void OpenSignIn() {
         Intent intent = new Intent(this, sing_in.class);
         startActivity(intent);
     }
 
+    // Method To Open Sign Up Page
     public void OpenSignUp() {
         Intent intent = new Intent(this, sing_up_sick.class);
         startActivity(intent);
