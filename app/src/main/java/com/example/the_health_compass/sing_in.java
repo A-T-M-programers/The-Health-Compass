@@ -5,14 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.ImageDecoder;
-import android.media.Image;
-import android.media.ImageReader;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,13 +16,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.MessageFormat;
 import java.util.concurrent.atomic.AtomicReference;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -41,8 +29,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
-import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
@@ -57,30 +43,36 @@ public class sing_in extends AppCompatActivity {
     AtomicReference<Sick> s = new AtomicReference<Sick>();
     AtomicReference<Doctor> d = new AtomicReference<Doctor>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         awesomeValidation.addValidation(this, R.id.ed_user_name_Sign_In, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
         awesomeValidation.addValidation(this, R.id.ed_password_Sign_In, ".{6,}", R.string.invalid_password);
-        awesomeValidation.addValidation(this,R.id.et_password,"[a-zA-Z\\s]+",R.string.invalid_password2);
+        awesomeValidation.addValidation(this,R.id.ed_password_Sign_In,"[a-zA-Z0-9\\s]+",R.string.invalid_password2);
 
 
-
+        //set control UserName or Email to variable UserNameOrEmail
         UserNameOrEmail = (EditText) findViewById(R.id.ed_user_name_Sign_In);
+        //set control password to variable Password
         Password = (EditText) findViewById(R.id.ed_password_Sign_In);
-
+        //set control create account to variable create account
         create_account = (TextView) findViewById(R.id.tv_create_account);
-
-
+        //Event Create Acount
         create_account.setOnClickListener(new View.OnClickListener() {
+            //Event Click
             @Override
             public void onClick(View v) {
+                //move user to page create account
                 openCreateAccountPage();
             }
         });
+        //set control Sign in to variable Sign in
         Sign_In = (Button) findViewById(R.id.btn_sign_in);
+        //Event Sign in
         Sign_In.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,8 +93,28 @@ public class sing_in extends AppCompatActivity {
     }
 
     public void openCreateAccountPage() {
-        Intent intent = new Intent(this, sign_up.class);
-        startActivity(intent);
+        AlertDialog.Builder builder = new AlertDialog.Builder(sing_in.this);
+        builder.setTitle("ما نوع الحساب التي تريد انشائه");
+        builder.setMessage("يجب عليك تحديد نوع الحساب المراد انشائه");
+        builder.setCancelable(false);
+        builder.setPositiveButton("مريض", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(sing_in.this, sing_up_sick.class);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("طبيب", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(sing_in.this, sing_up_sick.class);
+                startActivity(intent);
+            }
+        });
+        builder.create();
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
     }
 
     public void Check(String datacheck) {
@@ -183,11 +195,11 @@ public class sing_in extends AppCompatActivity {
             // create the root element
             Element rootEle = dom.createElement("Sick");
             // create data elements and place them under root
-            e = dom.createElement("S_Full_Name");
+            e = dom.createElement("Full_Name");
             e.appendChild(dom.createTextNode(s.S_Full_Name));
             rootEle.appendChild(e);
 
-            e = dom.createElement("S_Birthday");
+            e = dom.createElement("Birthday");
             e.appendChild(dom.createTextNode(s.S_Birthday));
             rootEle.appendChild(e);
 
@@ -195,7 +207,7 @@ public class sing_in extends AppCompatActivity {
             e.appendChild(dom.createTextNode(s.Age));
             rootEle.appendChild(e);
 
-            e = dom.createElement("S_Gender");
+            e = dom.createElement("Gender");
             e.appendChild(dom.createTextNode(s.S_Gender));
             rootEle.appendChild(e);
 
@@ -270,11 +282,11 @@ public class sing_in extends AppCompatActivity {
             // create the root element
             Element rootEle = dom.createElement("Doctor");
             // create data elements and place them under root
-            e = dom.createElement("D_Full_Name");
+            e = dom.createElement("Full_Name");
             e.appendChild(dom.createTextNode(d.D_Full_Name));
             rootEle.appendChild(e);
 
-            e = dom.createElement("D_Birthday");
+            e = dom.createElement("Birthday");
             e.appendChild(dom.createTextNode(d.D_Birthday));
             rootEle.appendChild(e);
 
@@ -282,7 +294,7 @@ public class sing_in extends AppCompatActivity {
             e.appendChild(dom.createTextNode(d.Age));
             rootEle.appendChild(e);
 
-            e = dom.createElement("D_Gender");
+            e = dom.createElement("Gender");
             e.appendChild(dom.createTextNode(d.D_Gender));
             rootEle.appendChild(e);
 

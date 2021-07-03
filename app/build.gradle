@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 android {
     compileSdkVersion 30
@@ -48,6 +49,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.3.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.work:work-runtime:2.5.0-alpha01'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 //    implementation 'androidx.gridlayout:gridlayout:1.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -63,4 +66,10 @@ dependencies {
     // Work Manager
     def work_version = "1.0.0-beta05"
     implementation "android.arch.work:work-runtime:1.0.1"
+
+    //noinspection GradleCompatible,GradleCompatible
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+    implementation 'com.google.firebase:firebase-database:20.0.0'
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+    implementation 'com.google.firebase:firebase-analytics:19.0.0'
 }

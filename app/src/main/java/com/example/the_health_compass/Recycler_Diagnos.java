@@ -1,17 +1,20 @@
 package com.example.the_health_compass;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.menu.MenuAdapter;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.Constraints;
-import androidx.work.Data;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.icu.text.CaseMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,16 +26,38 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.the_health_compass.SendNotification.APIService;
+import com.example.the_health_compass.SendNotification.Client;
+import com.example.the_health_compass.SendNotification.Data;
+import com.example.the_health_compass.SendNotification.MyResponse;
+import com.example.the_health_compass.SendNotification.NotificationSender;
+import com.example.the_health_compass.SendNotification.Token;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Recycler_Diagnos extends RecyclerView.Adapter<Recycler_Diagnos.ExampleViewHolder> {
     private ArrayList<ListDiagnos> Diagnos;
     private Recycler_Diagnos.ItemClickListener mItemListener;
-    String Type = "";
-    View v;
+    String Type = "",token;
+    public View v;
+
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
         public TextView[] textViews = new TextView[8];
@@ -57,9 +82,12 @@ public class Recycler_Diagnos extends RecyclerView.Adapter<Recycler_Diagnos.Exam
             spinners[1] = itemView.findViewById(R.id.Ill);
             editText = itemView.findViewById(R.id.Description_Recylcer);
             Send = itemView.findViewById(R.id.Send_Recycler);
+
             Send.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+//                    medical_advice_doctor medicalAdviceDoctor = new medical_advice_doctor();
+//                    medicalAdviceDoctor.Excutenotification(Type);
                     Calendar c = Calendar.getInstance();
                     int year = c.get(Calendar.YEAR);
                     int month = c.get(Calendar.MONTH);
@@ -67,52 +95,27 @@ public class Recycler_Diagnos extends RecyclerView.Adapter<Recycler_Diagnos.Exam
                     int hour = c.get(Calendar.HOUR_OF_DAY);
                     int minute = c.get(Calendar.MINUTE);
                     String Date = String.valueOf(year)+"/"+String.valueOf(month)+"/"+String.valueOf(day)+" "+String.valueOf(hour)+":"+String.valueOf(minute);
-                    String[] data = {editText.getText().toString(),Date,String.valueOf(textViews[0].getImeActionId()),String.valueOf(textViews[5].getImeActionId()),textViews[6].getText().toString(), Type};
+                    String[] data = {editText.getText().toString(),Date,String.valueOf(textViews[0].getImeActionId()),String.valueOf(textViews[5].getImeActionId()),textViews[6].getText().toString(),Type};
                     boolean check = new DataAccessLayer().UpdateDiagnos_S_D(data);
                     if (check){
                         androidx.appcompat.app.AlertDialog.Builder builder1 = new AlertDialog.Builder(v.getContext());
                         builder1.setTitle("تم الامر بنجاح");
                         builder1.setMessage("سيتم اعلام الجهة المرسلة للأستشارة");
-
                         builder1.create();
-
                         // create the alert dialog with the
                         // alert dialog builder instance
                         builder1.show();
                         cardView.setVisibility(View.INVISIBLE);
-
-                        Data myData = new Data.Builder()
-                                .putString("Tile","أستشارة طبية" )
-                                .putString("Body", "لديك استشارة طبية قيد الأستجابة يمكنك الرد عليها بالضغط على الأشعار")
-                                .putString("User", Type)
-                                .build();
-                        Constraints constraints = new Constraints.Builder()
-                                .setRequiresDeviceIdle(true)
-                                .setRequiredNetworkType(NetworkType.CONNECTED)
-                                .build();
-
-                        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(Notifications.TimerWithWorkManager.class)
-                                .setInputData(myData)
-                                .setConstraints(constraints)
-                                .addTag("MY_WORK_MANAGER_TAG_ONE_TIME")
-                                .build();
-
-                        WorkManager.getInstance().enqueue(oneTimeWorkRequest);
                     }
                 }
             });
-
-
         }
     }
-
     public Recycler_Diagnos(String Type,ArrayList<ListDiagnos> exampleList, Recycler_Diagnos.ItemClickListener itemClickListener) {
         Diagnos = exampleList;
         this.Type = Type;
         this.mItemListener = itemClickListener;
     }
-
-
 
     @Override
     public Recycler_Diagnos.ExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -167,4 +170,5 @@ public class Recycler_Diagnos extends RecyclerView.Adapter<Recycler_Diagnos.Exam
         Diagnos = filteredList;
         notifyDataSetChanged();
     }
+
 }

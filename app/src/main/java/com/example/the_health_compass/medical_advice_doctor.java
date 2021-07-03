@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +18,21 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.the_health_compass.SendNotification.APIService;
+import com.example.the_health_compass.SendNotification.Client;
+import com.example.the_health_compass.SendNotification.Data;
+import com.example.the_health_compass.SendNotification.MyResponse;
+import com.example.the_health_compass.SendNotification.NotificationSender;
+import com.example.the_health_compass.SendNotification.Token;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -32,6 +47,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class medical_advice_doctor extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
@@ -40,6 +59,9 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
     String UserNameX, UserEmailX, UserIDX,User;
     ArrayList<String> rolev;
     File file;
+
+    String U,T,token;
+    private APIService apiService;
 
     private ArrayList<ListDiagnos> diagnos = new ArrayList<>();
 
@@ -64,12 +86,15 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
         toggle.syncState();
         Intent intent  = getIntent();
         if (intent.hasExtra("Type")){
-            String U = intent.getExtras().getString("User");
-            String T = intent.getExtras().getString("Type");
+            U = intent.getExtras().getString("User");
+            T = intent.getExtras().getString("Type");
+            token = intent.getExtras().getString("Token");
             fullDiagnos(U,T);
         }
         else if (intent.hasExtra("User")) {
-            fullDiagnos(intent.getExtras().getString("User")+"_ID","Sick");
+            String token = intent.getExtras().getString("Token");
+            T = "Sick";
+            fullDiagnos(intent.getExtras().getString("User")+"_ID",T);
         }
 
 
@@ -245,4 +270,46 @@ public class medical_advice_doctor extends AppCompatActivity implements Navigati
         Diagnos.setLayoutManager(mLayoutManager);
         Diagnos.setAdapter(mAdapter);
     }
+/*//    public void Excutenotification(String Type){
+//        //FirebaseApp.initializeApp(itemView.getContext());
+//        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+//        FirebaseDatabase.getInstance().getReference().child("Tokens").child(Type.trim()).child("token").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                String usertoken = snapshot.getValue(String.class);
+//                sendNotifications(usertoken,"أستشارة طبية", "لديك استشارة طبية قيد الأستجابة يمكنك الرد عليها بالضغط على الأشعار",Type);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//        UpdateToken(Type);
+//    }
+//    public void sendNotifications(String usertoken,String title,String message,String user){
+//        Data data = new Data(title,message,user,usertoken);
+//        NotificationSender sender = new NotificationSender(data,usertoken);
+//        apiService.sendNotifcation(sender).enqueue(new Callback<MyResponse>() {
+//            @Override
+//            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+//                if (response.code()==200){
+//                    if (response.body().success!=1){
+//                        Toast.makeText(medical_advice_doctor.this, "Failed",Toast.LENGTH_LONG);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MyResponse> call, Throwable t) {
+//
+//            }
+//        });
+//    }
+//    private void UpdateToken(String Type){
+//        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        String refreshToken = FirebaseInstanceId.getInstance().getToken();
+//        Token token = new Token(refreshToken);
+//        FirebaseDatabase.getInstance().getReference("Tokens").child(Type).setValue(token);
+//    }*/
 }

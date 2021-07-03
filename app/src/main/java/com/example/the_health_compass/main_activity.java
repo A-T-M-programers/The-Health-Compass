@@ -14,10 +14,13 @@ import androidx.core.app.TaskStackBuilder;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.work.Constraints;
 import androidx.work.Data;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
 import android.app.Application;
@@ -38,6 +41,7 @@ import android.os.PersistableBundle;
 import android.provider.DocumentsContract;
 import android.transition.TransitionManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,13 +63,18 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.OpenOption;
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class main_activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+
+    private static final String TAG = "main_activity";
+
     private int counttouch = 0;
     private DrawerLayout drawer;
     private Button open_, btn_Sign_in_3, btn_Sign_up_1;
@@ -108,7 +117,8 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
             }
         }
 
-        getNotification();
+        //getNotification();
+        workManager();
 
     }
 
@@ -220,21 +230,6 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
         startActivity(intent);
     }
 
-    NotificationManager manager;
-    static int notID = 1;
-
-    public void buclick(View view) {
-        NotificationCompat.Builder rold = new NotificationCompat.Builder(this);
-        rold.setContentTitle("Danger");
-        rold.setContentTitle("تم الارسال بنجاح");
-        //rold.setSmallIcon();
-        manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = new Notification();
-        manager.notify(1, rold.build());
-        notID++;
-
-    }
-
     public boolean readXML() {
         rolev = new ArrayList<String>();
         Document dom;
@@ -256,7 +251,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                 User = "Sick";
                 dom = db.parse(file);
                 Element doc = dom.getDocumentElement();
-                UserNameX = getTextValue(UserNameX, doc, "S_Full_Name");
+                UserNameX = getTextValue(UserNameX, doc, "Full_Name");
 
                 if (UserNameX != null) {
                     if (!UserNameX.isEmpty())
@@ -278,7 +273,7 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
                 file = new File(filePath);
                 dom = db.parse(file);
                 Element doc = dom.getDocumentElement();
-                UserNameX = getTextValue(UserNameX, doc, "D_Full_Name");
+                UserNameX = getTextValue(UserNameX, doc, "Full_Name");
                 if (UserNameX != null) {
                     if (!UserNameX.isEmpty())
                         rolev.add(UserNameX);
@@ -326,25 +321,74 @@ public class main_activity extends AppCompatActivity implements NavigationView.O
         ArrayList<Diagnose_S_D> arrayList = new ArrayList<>();
         if (User.equals("Sick")){
             arrayList = new DataAccessLayer().getDiagnos_S_D("Sick_ID",User_ID,"Doctor");
-        }else {
-            arrayList = new DataAccessLayer().getDiagnos_S_D("Doctor_ID",User_ID,"Sick");
+        }else if (User.equals("Doctor")){
+            arrayList = new DataAccessLayer().getDiagnos_S_D("Doctor_ID",User_ID,null);
+            arrayList.addAll(new DataAccessLayer().getDiagnos_S_D("Doctor_ID",User_ID,"Sick"));
+        }
+        else {
+
         }
         for (int i = 0 ; i<arrayList.size();i++) {
             Notifications.showNotification(main_activity.this,"أستشارة طبية","لديك استشارة طبية قيد الأستجابة يمكنك الرد عليها بالضغط على الأشعار",User);
-//            Notification.Builder mBuilder = new Notification.Builder(main_activity.this);
-//            mBuilder.setSmallIcon(R.drawable.ic_accounts);
-//            mBuilder.setContentTitle("أستشارة طبية");
-//            mBuilder.setContentText(arrayList.get(i).getTD_Description());
-//            mBuilder.setAutoCancel(true);
-//            mBuilder.setVisibility(Notification.VISIBILITY_PRIVATE);
-//            Intent intent = new Intent(main_activity.this,medical_advice_doctor.class);
-//            intent.putExtra("User",User+"_ID");
-//            intent.putExtra("Type",User);
-//            PendingIntent pendingIntent = PendingIntent.getActivity(main_activity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-//            mBuilder.setContentIntent(pendingIntent);
-//            Notification notif = mBuilder.build();
-//            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-//            notificationManager.notify(i,notif);
         }
+    }
+    private void workManager() {
+
+
+        // Passing data to our works
+        Data myData = new Data.Builder()
+                .putString("Tile","أستشارة طبية" )
+                .putString("Body", "لديك استشارة طبية قيد الأستجابة يمكنك الرد عليها بالضغط على الأشعار")
+                .putString("User", User)
+                .putString("User_ID", User_ID)
+                .build();
+
+
+        // This gonna run your work right away.
+        // OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(MyJobManager.class).build();
+
+        // Constraints for our work
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+
+//        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(Notifications.TimerWithWorkManager.class)
+//                .setInputData(myData)
+//                .setConstraints(constraints)
+//                .addTag("MY_WORK_MANAGER_TAG_ONE_TIME")
+//                .build();
+
+        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(Notifications.TimerWithWorkManager.class, 0, TimeUnit.SECONDS,0,TimeUnit.SECONDS)
+                .setInputData(myData)
+                .setConstraints(constraints)
+                .addTag("MY_WORK_MANAGER_PERIODIC_TAG")
+                .build();
+
+        // Send our work to be scheduled.
+//        WorkManager.getInstance(this).enqueue(oneTimeWorkRequest);
+        WorkManager.getInstance().enqueue(periodicWorkRequest);
+
+
+        // Canceling our jobs by their Id
+        // Get Id for our jobs (after we enqueue them)
+
+//        UUID oneTimeWorkRequestId = oneTimeWorkRequest.getId();
+//        WorkManager.getInstance().cancelWorkById(oneTimeWorkRequestId);
+
+        UUID periodicWorkRequestId = periodicWorkRequest.getId();
+//        WorkManager.getInstance().cancelWorkById(periodicWorkRequestId);
+
+
+
+        // Get result from work manager
+//        WorkManager.getInstance(this).getWorkInfoByIdLiveData(oneTimeWorkRequestId).observe(this, new Observer<WorkInfo>() {
+//            @Override
+//            public void onChanged(@Nullable WorkInfo workInfo) {
+//                if (workInfo != null && workInfo.getState().isFinished()){
+//                    String result = workInfo.getOutputData().getString("Tile")+workInfo.getOutputData().getString("Body")+workInfo.getOutputData().getString("User");
+//                    Log.d(TAG, "onChanged: " + result);
+//                }
+//            }
+//        });
     }
 }

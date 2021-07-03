@@ -132,7 +132,7 @@ public class DataAccessLayer {
                 Open();
                 PreparedStatement statement = connect.prepareStatement("EXEC Insert_Sick "+s.ID+",'"+s.S_Full_Name+"'," +
                         "'"+s.Email+"','"+s.Password+"','"+s.S_Location+"','"+s.Subscription+"',"+
-                        "'"+s.Check_Email+"','"+s.Blocking+"','"+s.Personal_Image+"'," +
+                        "'"+s.Check_Email+"','"+s.Blocking+"','"+s.Personal_Image+"','" +s.Creat_Date+"',"+
                         "'"+s.S_Gender+"'");
                 int rs = statement.executeUpdate();
                 PreparedStatement statement1 = connect.prepareStatement("select Sick_ID from TBLSick where Sick_Email='"+s.Email+"'");
@@ -587,7 +587,7 @@ public class DataAccessLayer {
             } else {
                 Open();
                 PreparedStatement statement = connect.prepareStatement("EXEc Insert_Diagnose_S_D " + diagnose.getTD_ID() + ",'" + S_ID + "'," +
-                        "'" + Description + "','" + diagnose.getShow_Date() + "','" + diagnose.getShow_Date() + "'," + diagnose.getD_ID()+",'"+"Sick" );
+                        "'" + Description + "','" + diagnose.getShow_Date() + "','" + diagnose.getShow_Date() + "'," + diagnose.getD_ID()+","+"'Sick'" );
                 int rs = statement.executeUpdate();
                 if (rs == 1) {
                     ConnectionResult = "Successfull";

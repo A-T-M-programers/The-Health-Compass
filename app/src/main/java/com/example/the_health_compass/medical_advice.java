@@ -250,9 +250,9 @@ public class medical_advice extends AppCompatActivity implements NavigationView.
 
             Element doc = dom.getDocumentElement();
 
-            User = getTextValue(User, doc, "S_Full_Name");
+            User = getTextValue(User, doc, "Full_Name");
 
-            UserNameX = getTextValue(UserNameX,doc,"S_Full_Name");
+            UserNameX = getTextValue(UserNameX,doc,"Full_Name");
             UserEmailX = getTextValue(UserEmailX,doc,"Email");
 
             if (User != null) {

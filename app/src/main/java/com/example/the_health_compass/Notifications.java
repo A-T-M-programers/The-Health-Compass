@@ -18,6 +18,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import java.util.ArrayList;
+
 public class Notifications {
     private static final int NOTIFICATION_ID = 9000;
     private static final int PENDING_INTENT_ID = 9001;
@@ -175,9 +177,9 @@ public class Notifications {
         return action;
     }
 
-    public class TimerWithWorkManager extends Worker {
+    public static class TimerWithWorkManager extends Worker {
 
-        public TimerWithWorkManager(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+        public TimerWithWorkManager( Context context, WorkerParameters workerParams) {
             super(context, workerParams);
         }
 
@@ -187,7 +189,16 @@ public class Notifications {
             String title = getInputData().getString("Title");
             String body = getInputData().getString("Body");
             String user = getInputData().getString("User");
-            Notifications.showNotification(getApplicationContext(), title, body,user);
+            String user_id = getInputData().getString("User_ID");
+            ArrayList<Diagnose_S_D> arrayList = new ArrayList<>();
+            if (user.equals("Sick")){
+                arrayList = new DataAccessLayer().getDiagnos_S_D("Sick_ID",user_id,"Doctor");
+            }else {
+                arrayList = new DataAccessLayer().getDiagnos_S_D("Doctor_ID",user_id,"Sick");
+            }
+            for (int i = 0 ; i<arrayList.size();i++) {
+                Notifications.showNotification(getApplicationContext(),"أستشارة طبية","لديك استشارة طبية قيد الأستجابة يمكنك الرد عليها بالضغط على الأشعار",user);
+            }
             return Result.success();
         }
     }

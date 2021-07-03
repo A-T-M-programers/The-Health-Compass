@@ -166,11 +166,11 @@ public class sing_up_sick extends AppCompatActivity {
             // create the root element
             Element rootEle = dom.createElement("Sick");
             // create data elements and place them under root
-            e = dom.createElement("S_Full_Name");
+            e = dom.createElement("Full_Name");
             e.appendChild(dom.createTextNode(s.S_Full_Name));
             rootEle.appendChild(e);
 
-            e = dom.createElement("S_Birthday");
+            e = dom.createElement("Birthday");
             e.appendChild(dom.createTextNode(s.S_Birthday));
             rootEle.appendChild(e);
 
@@ -178,7 +178,7 @@ public class sing_up_sick extends AppCompatActivity {
             e.appendChild(dom.createTextNode(s.Age));
             rootEle.appendChild(e);
 
-            e = dom.createElement("S_Gender");
+            e = dom.createElement("Gender");
             e.appendChild(dom.createTextNode(s.S_Gender));
             rootEle.appendChild(e);
 
