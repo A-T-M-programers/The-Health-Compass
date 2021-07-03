@@ -3,6 +3,7 @@ package com.example.the_health_compass;
 import android.media.Image;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -17,6 +18,11 @@ public class Share {
         this.ID = String.valueOf(id);
         this.Password = sick.get("Password");
         this.Phone_Mobile = sick.get("Phone_Mobile");
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        this.Creat_Date = String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day);
         id++;
     }
     public void InputShareDoctor(HashMap<String,String> Doctor,boolean Blocking){
@@ -26,6 +32,11 @@ public class Share {
         this.ID = String.valueOf(id);
         this.Password = Doctor.get("D_Password");
         this.Phone_Mobile = Doctor.get("D_Mobile_Phone");
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        this.Creat_Date = String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day);
         id++;
     }
     public Share(){
