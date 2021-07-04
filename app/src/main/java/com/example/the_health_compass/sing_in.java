@@ -3,9 +3,12 @@ package com.example.the_health_compass;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,8 +21,19 @@ import org.w3c.dom.Element;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Properties;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -35,14 +49,16 @@ import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 
 public class sing_in extends AppCompatActivity {
-    private TextView create_account;
+    private TextView create_account,forgetpassowrd;
     AwesomeValidation awesomeValidation;
     private EditText UserNameOrEmail, Password;
     private Button Sign_In;
     DataAccessLayer dataAccessLayer = new DataAccessLayer();
     AtomicReference<Sick> s = new AtomicReference<Sick>();
     AtomicReference<Doctor> d = new AtomicReference<Doctor>();
-
+    String check;
+    EditText email =null;
+    EditText checkemail = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +78,13 @@ public class sing_in extends AppCompatActivity {
 
         //set control UserName or Email to variable UserNameOrEmail
         UserNameOrEmail = (EditText) findViewById(R.id.ed_user_name_Sign_In);
+        forgetpassowrd = (TextView) findViewById(R.id.tv_forget_password);
+        forgetpassowrd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ForgetPassword();
+            }
+        });
         //set control password to variable Password
         Password = (EditText) findViewById(R.id.ed_password_Sign_In);
         //set control create account to variable create account
@@ -365,6 +388,175 @@ public class sing_in extends AppCompatActivity {
             System.out.println(te.getMessage());
         }*/ finally {
 
+        }
+    }
+    public void ForgetPassword(){
+        String sEmail = "tofikdaowd@gmail.com",sPassword = "1Qa2Ws3Ed4Rf5Tg";
+        email = new EditText(this);
+        checkemail = new EditText(this);
+        check = random();
+        AlertDialog.Builder builder = new AlertDialog.Builder(sing_in.this);
+        builder.setTitle("نسيان كلمة المرور");
+        builder.setMessage("الرجاء أدخال البريد الألكتروني");
+        email.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(email);
+        builder.setCancelable(false);
+        builder.setPositiveButton("مريض", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    Properties properties = new Properties();
+                    properties.put("mail.smtp.auth","true");
+                    properties.put("mail.smtp.starttls.enable","true");
+                    properties.put("mail.smtp.host","smtp.gmail.com");
+                    properties.put("mail.smtp.port","587");
+
+                    Session session = Session.getInstance(properties, new Authenticator() {
+                        @Override
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(sEmail,sPassword);
+                        }
+                    });
+
+                    try {
+
+                        Message message = new MimeMessage(session);
+
+                        message.setFrom(new InternetAddress(sEmail));
+
+                        message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(email.getText().toString().trim()));
+
+                        message.setSubject("التحقق من البريد الالكتروني");
+
+                        message.setText(check);
+
+                        new SendMail().execute(message);
+
+
+                    }catch (MessagingException e){e.printStackTrace();}
+
+                }catch (Exception ignored) {
+                    ignored.printStackTrace();
+                }
+            }
+        });
+        builder.setNegativeButton("طبيب", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    Properties properties = new Properties();
+                    properties.put("mail.smtp.auth","true");
+                    properties.put("mail.smtp.starttls.enable","true");
+                    properties.put("mail.smtp.host","smtp.gmail.com");
+                    properties.put("mail.smtp.port","587");
+
+                    Session session = Session.getInstance(properties, new Authenticator() {
+                        @Override
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(sEmail,sPassword);
+                        }
+                    });
+
+                    try {
+
+                        Message message = new MimeMessage(session);
+
+                        message.setFrom(new InternetAddress(sEmail));
+
+                        message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(email.getText().toString().trim()));
+
+                        message.setSubject("التحقق من البريد الالكتروني");
+
+                        message.setText(check);
+
+                        new SendMail().execute(message);
+
+
+                    }catch (MessagingException e){e.printStackTrace();}
+
+                }catch (Exception ignored) {
+                    ignored.printStackTrace();
+                }
+            }
+        });
+        builder.create();
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+    private String random(){
+        byte[] array = new byte[5]; // length is bounded by 5
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-16"));
+        return generatedString;
+    }
+
+    private class SendMail extends AsyncTask<Message,String,String> {
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(sing_in.this,"Please Wait","Sending Code .......",true,false);
+        }
+
+        @Override
+        protected String doInBackground(Message... messages) {
+            try {
+                Transport.send(messages[0]);
+                return "Success";
+            } catch (MessagingException e) {
+                e.printStackTrace();
+                return "Error";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String se) {
+            super.onPostExecute(se);
+            progressDialog.dismiss();
+            if (se.equals("Success")){
+
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(sing_in.this);
+                builder1.setTitle("نسيان كلمة المرور");
+                builder1.setMessage("ادخل الرمز المرسل بالبريد ");
+                checkemail.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder1.setView(email);
+                builder1.setCancelable(false);
+                builder1.setPositiveButton("مريض", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (check.equals(checkemail.getText().toString())){
+                            String checkemail = dataAccessLayer.check_sick_sign_inbyemail(email.getText().toString(),s);
+                            Check(checkemail);
+                        }
+                        else if (check!=checkemail.getText().toString()){
+                            Toast.makeText(sing_in.this,"الرمز غير مطابق",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+                builder1.setNegativeButton("طبيب", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (check.equals(checkemail.getText().toString())){
+                            String checkemail = dataAccessLayer.check_doctor_sign_inbyemail(email.getText().toString(),d);
+                            Check(checkemail);
+                        }
+                        else if (check!=checkemail.getText().toString()){
+                            Toast.makeText(sing_in.this,"الرمز غير مطابق",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+                builder1.create();
+                AlertDialog alertDialog = builder1.create();
+                alertDialog.show();
+
+//                AlertDialog.Builder builder = new AlertDialog.Builder(sing_in.this);
+//                builder.setCancelable(false);
+//                builder.setTitle(Html.fromHtml("<font color='#509324'>Success</font>"));
+//                builder.setMessage("Mail Send Successfully");
+            }
         }
     }
 }

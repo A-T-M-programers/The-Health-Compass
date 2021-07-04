@@ -337,6 +337,59 @@ public class DataAccessLayer {
     }
 
     // Check Doctor Sign In
+
+    public String check_sick_sign_inbyemail(String Email,AtomicReference<Sick> s) {
+        try {
+            if (connect == null) {
+                ConnectionResult = "Check Your Internet Access!";
+            } else {
+                Open();
+                //Get Information Sick By UserName
+                String query = "select * from TBLSick where Sick_Email='" + Email + "';";
+                Statement stat = connect.createStatement();
+                ResultSet rs = stat.executeQuery(query);
+                if (rs.next()) {
+                    Sick sick = new Sick();
+                    try {
+                        String query1 = "select * from TBLSickAge where Sick_ID=" + rs.getString(1) + ";";
+                        Statement stat1 = connect.createStatement();
+                        ResultSet rs1 = stat1.executeQuery(query1);
+                        sick.ID = rs.getString(1);
+                        sick.S_Full_Name = rs.getString(2);
+                        sick.Email = rs.getString(3);
+                        sick.Password = rs.getString(4);
+                        sick.S_Location = rs.getString(5);
+                        sick.Subscription = rs.getString(6);
+                        sick.Check_Email = rs.getString(7);
+                        sick.Blocking = rs.getBoolean(8);
+                        sick.Personal_Image = rs.getString(9);
+                        sick.Creat_Date = rs.getString(10);
+                        sick.S_Gender = rs.getString(11);
+                        if (rs1.next()) {
+                            sick.S_Birthday = rs1.getString(2);
+                            sick.InputAge();
+                        }
+                        s.set(sick);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    ConnectionResult = "Successfull";
+                    isSucces = true;
+                    connect.close();
+                    return "Sick";
+                } else {
+                    connect.close();
+                    return "Not Found";
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            isSucces = false;
+            ConnectionResult = throwables.getMessage();
+        }
+        return "Faild Access!";
+    }
+
     public String check_doctor_sign_in(String UserName, String
             Password, AtomicReference<Doctor> d) {
         try {
@@ -388,6 +441,58 @@ public class DataAccessLayer {
         }
         return "Faild Access!";
     }
+
+    public String check_doctor_sign_inbyemail(String Email,AtomicReference<Doctor> d) {
+        try {
+            if (connect == null) {
+                ConnectionResult = "Check Your Internet Access!";
+            } else {
+                Open();
+                //Get Information Sick By UserName
+                String query = "select * from TBLDoctor where Doctor_Email='" + Email + "';";
+                Statement stat = connect.createStatement();
+                ResultSet rs = stat.executeQuery(query);
+                if (rs.next()) {
+                    Doctor doctor = new Doctor();
+                    try {
+                        String query1 = "select * from TBLDoctorAge where Doctor_ID =" + rs.getString(1) + ";";
+                        Statement stat1 = connect.createStatement();
+                        ResultSet rs1 = stat1.executeQuery(query1);
+                        doctor.ID = rs.getString(1);
+                        doctor.D_Full_Name = rs.getString(2);
+                        doctor.Email = rs.getString(3);
+                        doctor.Password = rs.getString(4);
+                        doctor.D_Location = rs.getString(5);
+                        doctor.Subscription = rs.getString(6);
+                        doctor.Check_Email = rs.getString(7);
+                        doctor.Blocking = rs.getBoolean(8);
+                        doctor.Personal_Image = rs.getString(9);
+                        doctor.Creat_Date = rs.getString(10);
+                        doctor.D_Gender = rs.getString(11);
+                        if (rs1.next()) {
+                            doctor.setD_Birthday(rs1.getString(2));
+                        }
+                        d.set(doctor);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    ConnectionResult = "Successfull";
+                    isSucces = true;
+                    connect.close();
+                    return "Doctor";
+                } else {
+                    connect.close();
+                    return "Not Found";
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            isSucces = false;
+            ConnectionResult = throwables.getMessage();
+        }
+        return "Faild Access!";
+    }
+
 
     // Get All Doctors Information From Database
     public String getDoctors(ArrayList<ListDoctor> Doctors) {
